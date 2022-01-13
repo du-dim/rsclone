@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from './view/header/Header';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello world!</h1>
-    </div>
+    <Header />
+    // <Main />
+    // <Footer />
   );
 };
 export default App;
