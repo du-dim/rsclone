@@ -4,8 +4,6 @@ import { App } from './App';
 import './index.scss';
 
 ReactDOM.render(
-  <div className='wrapper'>
-    <App />
-  </div>,
+  <App />,
   document.getElementById('root'),
 );

@@ -42,7 +42,8 @@
         "react/prop-types": "off",
         "arrow-body-style": ["error", "always"],
         "react/function-component-definition": "off",
-        "jsx-quotes": ["error", "prefer-single"]
+        "jsx-quotes": ["error", "prefer-single"],
+        "indent": ["error", 2, {"ignoredNodes": ["JSXElement"]}]
         
     },
     "settings": {
