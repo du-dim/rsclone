@@ -1,0 +1,9 @@
+@import '../../sass/variables&mixins.scss';
+@import '../../sass/box.scss';
+
+.footer {
+  flex-shrink: 0;
+  height: 20%;
+  width: 100%;
+  background-color: $main-pink-color;
+}

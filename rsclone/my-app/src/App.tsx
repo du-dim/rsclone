@@ -1,7 +1,7 @@
 import React from 'react';
-import { Main } from './main/Main';
 import { Footer } from './view/footer/Footer';
 import { Header } from './view/header/Header';
+import { Main } from './view/main/Main';
 
 export const App = () => {
   return (
