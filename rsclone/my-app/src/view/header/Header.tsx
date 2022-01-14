@@ -1,11 +1,18 @@
 import React from 'react';
+import { Bonus } from '../components/Bonus';
+import './header.scss';
 
-const Header = () => {
+export const Header = () => {
   return (
-    <div>
-      <h1>Create component</h1>
-    </div>
+    <section className='header'>
+      <div className='container'>
+        <div className='header-content'>
+          <h1 className='h1'>wisely</h1>
+          <div className='header-logo' />
+          <Bonus />
+          <nav className='header-nav' />
+        </div>
+      </div>
+    </section>
   );
 };
-
-export default Header;

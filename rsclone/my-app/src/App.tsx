@@ -1,11 +1,10 @@
 import React from 'react';
-import Header from './view/header/Header';
+import { Header } from './view/header/Header';
 
-const App = () => {
+export const App = () => {
   return (
     <Header />
-    // <Main />
-    // <Footer />
+  // <Main />
+  // <Footer />
   );
 };
-export default App;
