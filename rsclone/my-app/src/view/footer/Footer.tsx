@@ -1,13 +1,12 @@
 import React from 'react';
+import { Footernav } from '../components/Footernav';
 import './footer.scss';
 
 export const Footer = () => {
   return (
     <section className='footer'>
       <div className='container'>
-        <div className='footer-content'>
-          <nav className='footer-nav' />
-        </div>
+        <Footernav />
       </div>
     </section>
   );
