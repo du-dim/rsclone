@@ -3,6 +3,7 @@
         "browser": true,
         "es2021": true
     },
+    "root": true,
     "extends": [
         "plugin:react/recommended",
         "airbnb",
@@ -38,14 +39,11 @@
         "max-len": ["warn", { "code": 80 }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "import/prefer-default-export": "off",
+        "import/prefer-default-export": "off",        
         "react/prop-types": "off",
-        "arrow-body-style": ["error", "always"],
+        "arrow-body-style": "off",
         "react/function-component-definition": "off",
-        "jsx-quotes": ["error", "prefer-single"],
-        "indent": ["error", 2, {"ignoredNodes": ["JSXElement"]}],
-        "linebreak-style": 0
-        
+        "jsx-quotes": ["error", "prefer-single"]        
     },
     "settings": {
         "import/resolver": {
