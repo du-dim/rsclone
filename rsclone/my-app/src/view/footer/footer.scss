@@ -1,0 +1,41 @@
+@import '../../sass/variables&mixins.scss';
+@import '../../sass/box.scss';
+
+.footer {
+  flex-shrink: 0;
+  height: 20%;
+  width: 100%;
+  background-color: $main-pink-color;
+
+  .footer-nav-list {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer-nav-list__item {
+    height: 60px;
+    width: 60px;
+    align-self: center;
+    cursor: pointer;
+  }
+
+  .footer-nav-list__item:first-child {
+    background: url('../../../public/icons/filter.svg') no-repeat;
+  }
+
+  .footer-nav-list__item:nth-child(2) {
+    background: url('../../../public/icons/calculator.svg') no-repeat;
+  }
+
+  .footer-nav-list__item:nth-child(3) {
+    background: url('../../../public/icons/map.svg') no-repeat;
+  }
+
+  .footer-nav-list__item:nth-child(4) {
+    background: url('../../../public/icons/money.svg') no-repeat;
+  }
+
+  .footer-nav-list__item:nth-child(5) {
+    background: url('../../../public/icons/date.svg') no-repeat;
+  }
+}
