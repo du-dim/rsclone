@@ -43,7 +43,8 @@
         "arrow-body-style": ["error", "always"],
         "react/function-component-definition": "off",
         "jsx-quotes": ["error", "prefer-single"],
-        "indent": ["error", 2, {"ignoredNodes": ["JSXElement"]}]
+        "indent": ["error", 2, {"ignoredNodes": ["JSXElement"]}],
+        "linebreak-style": 0
         
     },
     "settings": {
