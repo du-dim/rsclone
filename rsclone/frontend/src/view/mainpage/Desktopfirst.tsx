@@ -5,7 +5,7 @@ export const Desktopfirst = () => {
   return (
     <section className='page-main'>
       <div className='container'>
-        <article className='current-balans'>
+        <article className='current-status'>
           <div className='todo-list'>
             <div className='paperclip' />
             <h3 className='title-list'>ToDo List</h3>
@@ -14,14 +14,14 @@ export const Desktopfirst = () => {
           <div className='todo-list_total'>
             <h2 className='title-balans'>BALANS</h2>
             <div className='current-balans'>
-              <div className='currency'>$</div>
-              <div className='sum'>1000</div>
+              <h2 className='currency'>$</h2>
+              <h2 className='sum'>1000</h2>
             </div>
+            <ul className='todo-list_btn'>
+              <li className='todo-list_btn__plus' />
+              <li className='todo-list_btn__minus' />
+            </ul>
           </div>
-          <ul className='todo-list_btn'>
-            <li className='todo-lost_btn__plus' />
-            <li className='todo-lost_btn__minus' />
-          </ul>
         </article>
       </div>
     </section>
