@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Desktopfirst } from '../mainpage/Desktopfirst';
 import './main.scss';
 
 export const Main = () => {
@@ -11,7 +12,9 @@ export const Main = () => {
   return (
     <section className='main'>
       <div className='container'>
+        <Desktopfirst />
         {!data ? 'Loading...' : data}
+        );
       </div>
     </section>
   );
