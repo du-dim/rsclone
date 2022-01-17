@@ -1,0 +1,100 @@
+@import '../../sass/variables&mixins.scss';
+
+.page-authorization {
+  flex: 1 1 auto;
+  background-color: $whitecolor;
+  font-family: $fontIndieflower;
+}
+
+.authorization-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: $whitecolor;
+  padding: 15px 27px;
+  border-radius: 10px;
+
+  p,
+  button {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .greeting {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+  }
+
+  .sign-title {
+    align-self: start;
+    margin-bottom: 1rem;
+  }
+
+  .social-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    width: 50%;
+    height: 100%;
+    background-color: $main-pink-color;
+    border-radius: 10px;
+  }
+  input[type='text'],
+  input[type='password'] {
+    width: calc(100% - 27px);
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #d9b5ee;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  input::-webkit-input-placeholder,
+  input::-moz-placeholder,
+  input:-ms-input-placeholder,
+  input:focus::-webkit-input-placeholder,
+  input:focus::-moz-placeholder,
+  input:focus:-ms-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  ::-webkit-input-placeholder,
+  ::-moz-placeholder,
+  :-ms-input-placeholder {
+    font-family: 'Indie Flower', cursive;
+    font-size: 13px;
+  }
+
+  .forgot-psw {
+    margin-top: 5px;
+    display: block;
+    margin-right: 0;
+    text-align: right;
+    color: #962ad6;
+    cursor: pointer;
+  }
+  .registerbtn {
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+    color: $whitecolor;
+  }
+  .signup p {
+    margin-bottom: 1rem;
+    color: #8d8d8d;
+  }
+}
