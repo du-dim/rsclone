@@ -8,6 +8,7 @@ export const Calculator = () => {
       <div className='container'>
         <div className='calculator-grid'>
           <div className='output'>
+            1
             <div className='previous-operand' />
             <div className='current-operand' />
           </div>
