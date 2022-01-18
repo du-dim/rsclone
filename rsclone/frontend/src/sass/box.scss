@@ -1,4 +1,23 @@
+@import './variables&mixins.scss';
+
+section {
+  padding: 10px 0 10px 0;
+}
 .container {
-  padding: 20px;
-  max-width: 760px;
+  max-width: 808px;
+  padding: 0 20px 0 20px;
+}
+
+h2 {
+  font-size: $fs50;
+  line-height: 73px;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: $fs40;
+}
+
+h4 {
+  font-size: $fs30;
 }
