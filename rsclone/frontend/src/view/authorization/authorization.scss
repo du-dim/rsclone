@@ -43,11 +43,26 @@
     width: 100%;
   }
 
+  .google::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: url('../../../public/icons/google.svg') no-repeat center;
+  }
+
+  .facebook::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: url('../../../public/icons/Facebook.svg') no-repeat center;
+  }
+
   button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px;
     width: 50%;
     height: 100%;
     background-color: $main-pink-color;
@@ -94,7 +109,10 @@
     color: $whitecolor;
   }
   .signup p {
-    margin-bottom: 1rem;
     color: #8d8d8d;
+  }
+
+  .signup p:first-child {
+    margin-bottom: 1rem;
   }
 }
