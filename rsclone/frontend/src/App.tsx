@@ -3,14 +3,16 @@ import { Footer } from './view/footer/Footer';
 import { Header } from './view/header/Header';
 // import { Main } from './view/main/Main';
 import './index.scss';
-import { Authorization } from './view/authorization/Authorization';
+import { Calculator } from './view/calculator/Calculator';
+// import { Authorization } from './view/authorization/Authorization';
 
 export const App = () => {
   return (
     <div className='wrapper'>
       <Header />
       {/* <Main /> */}
-      <Authorization />
+      {/* <Authorization /> */}
+      <Calculator />
       <Footer />
     </div>
   );
