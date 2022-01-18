@@ -19,12 +19,18 @@
   .btn-pink {
     background-color: #82b3ca;
   }
+
+  .btn-pink:focus,
+  .btn-pink:hover {
+    background-color: #84c6e4;
+  }
   .calculator-grid {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(4, 6rem);
     grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
     gap: 5px;
+    width: 100%;
   }
 
   .span-two {

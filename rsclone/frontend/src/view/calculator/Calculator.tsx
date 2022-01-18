@@ -13,7 +13,7 @@ export const Calculator = () => {
             <div className='current-operand' />
           </div>
           <button className='span-two btn-pink'>AC</button>
-          <button className='btn-pink'>DEL</button>
+          <button className='btn-pink btn-del'>DEL</button>
           <button className='btn-pink'>/</button>
           <button>1</button>
           <button>2</button>
