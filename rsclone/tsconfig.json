@@ -8,9 +8,10 @@
     "moduleResolution": "node",
     "removeComments": true,   
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    
   },
   "include": [
-    "backend"
+    "backend/"
   ], 
 }
