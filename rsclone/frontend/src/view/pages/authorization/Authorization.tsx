@@ -2,21 +2,9 @@
 // import { eventNames } from 'process';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './authorization.scss';
 import axios from 'axios';
-
-export enum Text {
-Wisely = 'Wisely',
-Describe = 'the key to the success of your budget!',
-Signin = 'Sign in',
-Signup = 'Sign up',
-Google = 'Sign with Google',
-Facebook = 'Sign with Facebook',
-Enteremail = 'Enter your username or email address',
-Password = 'Password',
-Forgot = 'Forgot password',
-Noaccount = 'No Account?',
-}
+import './authorization.scss';
+import { Text } from '../../../types/types';
 
 export const Authorization = () => {
   const [form, setForm] = useState({
