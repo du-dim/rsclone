@@ -1,6 +1,6 @@
-@import '../../sass/variables&mixins.scss';
-@import '../../sass/box.scss';
-@import '../../sass/fonts.scss';
+@import "../../../sass/variables&mixins.scss";
+@import "../../../sass/box.scss";
+@import "../../../sass/fonts.scss";
 
 .current-status {
   position: relative;
@@ -28,7 +28,7 @@
     top: 25px;
     width: 50px;
     height: 70px;
-    background: url('../../../public/icons/keep.svg') no-repeat;
+    background: url("../../../../public/icons/keep.svg") no-repeat;
   }
 
   .title-list {
@@ -74,12 +74,12 @@
   .todo-list_btn__plus {
     width: 100px;
     height: 100px;
-    background: url('../../../public/icons/plus.svg') no-repeat;
+    background: url("../../../../public/icons/plus.svg") no-repeat;
   }
 
   .todo-list_btn__minus {
     width: 100px;
     height: 100px;
-    background: url('../../../public/icons/minus.svg') no-repeat;
+    background: url("../../../../public/icons/minus.svg") no-repeat;
   }
 }

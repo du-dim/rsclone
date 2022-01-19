@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+// import { eventNames } from 'process';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './authorization.scss';
+import axios from 'axios';
 
 export enum Text {
 Wisely = 'Wisely',
@@ -14,7 +17,27 @@ Password = 'Password',
 Forgot = 'Forgot password',
 Noaccount = 'No Account?',
 }
+
 export const Authorization = () => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const changeInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    setForm({ ...form, [target.name]: target.value });
+  };
+
+  const login = async () => {
+    try {
+      const data = axios.post('/auth/login', { ...form });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <section className='page-authorization'>
       <div className='container'>
@@ -37,6 +60,7 @@ export const Authorization = () => {
                 placeholder='Username or email address'
                 name='email'
                 required
+                onChange={changeInput}
               />
             </label>
             <label htmlFor='psw'>
@@ -44,17 +68,18 @@ export const Authorization = () => {
               <input
                 type='password'
                 placeholder='Password'
-                name='psw'
+                name='password'
                 required
+                onChange={changeInput}
               />
             </label>
             <input className='forgot-psw' type='submit' value={Text.Forgot} />
           </form>
-          <button type='submit' className='registerbtn'>{Text.Signin}</button>
-          <div className='signup'>
+          <button type='submit' className='registerbtn' onClick={login}>{Text.Signin}</button>
+          <Link to='../auth/register' className='signup'>
             <p>{Text.Noaccount}</p>
             <p>{Text.Signup}</p>
-          </div>
+          </Link>
         </article>
       </div>
     </section>
