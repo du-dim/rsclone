@@ -2,7 +2,10 @@
 import React from 'react';
 import './calculator.scss';
 
+// function reducer (state, action): void{}
+
 export const Calculator = () => {
+  // const [state, dispatch] = useReducer(reducer, {});
   return (
     <section className='calculator'>
       <div className='container'>

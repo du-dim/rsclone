@@ -43,7 +43,9 @@
         "react/prop-types": "off",
         "arrow-body-style": "off",
         "react/function-component-definition": "off",
-        "jsx-quotes": ["error", "prefer-single"]        
+        "jsx-quotes": ["error", "prefer-single"],
+        "linebreak-style": ["error", "windows"],
+        "no-console": "off"        
     },
     "settings": {
         "import/resolver": {
