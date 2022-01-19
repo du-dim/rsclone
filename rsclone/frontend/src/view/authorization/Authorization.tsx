@@ -12,8 +12,11 @@ Facebook = 'Sign with Facebook',
 Enteremail = 'Enter your username or email address',
 Password = 'Password',
 Forgot = 'Forgot password',
+Repeat = 'Repeat password',
 Noaccount = 'No Account?',
+Haveaccount = 'Have you account?',
 }
+
 export const Authorization = () => {
   return (
     <section className='page-authorization'>

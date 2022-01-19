@@ -1,0 +1,26 @@
+@import '../../sass/variables&mixins.scss';
+
+.page-registration {
+  flex: 1 1 auto;
+  background-color: $whitecolor;
+  font-family: $fontIndieflower;
+
+  .greeting {
+    margin-bottom: 2rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+  .signin {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  p {
+    cursor: auto;
+  }
+}

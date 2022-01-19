@@ -3,14 +3,15 @@ import { Footer } from './view/footer/Footer';
 import { Header } from './view/header/Header';
 // import { Main } from './view/main/Main';
 import './index.scss';
-import { Authorization } from './view/authorization/Authorization';
+import { Registration } from './view/registration/Registration';
 
 export const App = () => {
   return (
     <div className='wrapper'>
       <Header />
       {/* <Main /> */}
-      <Authorization />
+      {/* <Authorization /> */}
+      <Registration />
       <Footer />
     </div>
   );
