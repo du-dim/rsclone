@@ -5,7 +5,7 @@ import router from './routes';
 
 const app = express();
 app.use(express.json());
-app.use('/api/auth', router);
+app.use('/auth', router);
 const PORT = config.get<string>('port') || 3001;
 
 const connect = async () => {

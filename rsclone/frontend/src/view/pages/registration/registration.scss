@@ -1,4 +1,4 @@
-@import '../../sass/variables&mixins.scss';
+@import "../../../sass/variables&mixins.scss";
 
 .page-authorization {
   flex: 1 1 auto;
@@ -13,7 +13,7 @@
   background-color: $whitecolor;
   padding: 15px 27px;
   border-radius: 10px;
-
+  a,
   p,
   button {
     font-size: 20px;
@@ -44,19 +44,19 @@
   }
 
   .google::before {
-    content: '';
+    content: "";
     width: 50px;
     height: 50px;
     text-align: center;
-    background: url('../../../public/icons/google.svg') no-repeat center;
+    background: url("../../../../public/icons/google.svg") no-repeat center;
   }
 
   .facebook::before {
-    content: '';
+    content: "";
     width: 50px;
     height: 50px;
     text-align: center;
-    background: url('../../../public/icons/Facebook.svg') no-repeat center;
+    background: url("../../../../public/icons/Facebook.svg") no-repeat center;
   }
 
   button {
@@ -68,8 +68,8 @@
     background-color: $main-pink-color;
     border-radius: 10px;
   }
-  input[type='text'],
-  input[type='password'] {
+  input[type="text"],
+  input[type="password"] {
     width: calc(100% - 27px);
     height: 100%;
     padding: 10px;
@@ -91,7 +91,7 @@
   ::-webkit-input-placeholder,
   ::-moz-placeholder,
   :-ms-input-placeholder {
-    font-family: 'Indie Flower', cursive;
+    font-family: "Indie Flower", cursive;
     font-size: 13px;
   }
 
