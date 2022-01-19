@@ -1,18 +1,14 @@
 import React from 'react';
 import { Footer } from './view/footer/Footer';
 import { Header } from './view/header/Header';
-// import { Main } from './view/main/Main';
-import './index.scss';
-import { Calculator } from './view/calculator/Calculator';
-// import { Authorization } from './view/authorization/Authorization';
+import { useRoutes } from './routes';
 
 export const App = () => {
+  const routes = useRoutes(false);
   return (
     <div className='wrapper'>
       <Header />
-      {/* <Main /> */}
-      {/* <Authorization /> */}
-      <Calculator />
+      {routes}
       <Footer />
     </div>
   );
