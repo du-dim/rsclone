@@ -46,6 +46,7 @@
         "jsx-quotes": ["error", "prefer-single"],
         "linebreak-style": ["error", "windows"],
         "no-console": "off"        
+
     },
     "settings": {
         "import/resolver": {
