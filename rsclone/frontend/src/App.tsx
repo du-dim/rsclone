@@ -4,7 +4,7 @@ import { Header } from './view/header/Header';
 import { useRoutes } from './routes';
 
 export const App = () => {
-  const routes = useRoutes(false);
+  const routes = useRoutes(true);
   return (
     <div className='wrapper'>
       <Header />
