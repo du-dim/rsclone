@@ -1,5 +1,5 @@
-@import '../../sass/variables&mixins.scss';
-@import '../../sass/box.scss';
+@import "../../sass/variables&mixins.scss";
+@import "../../sass/box.scss";
 
 .footer {
   flex-shrink: 0;
@@ -20,22 +20,22 @@
   }
 
   .footer-nav-list__item:first-child {
-    background: url('../../../public/icons/filter.svg') no-repeat;
+    background: url("../../../public/icons/filter.svg") no-repeat;
   }
 
   .footer-nav-list__item:nth-child(2) {
-    background: url('../../../public/icons/calculator.svg') no-repeat;
+    background: url("../../../public/icons/calculator.svg") no-repeat;
   }
 
   .footer-nav-list__item:nth-child(3) {
-    background: url('../../../public/icons/map.svg') no-repeat;
+    background: url("../../../public/icons/map.svg") no-repeat;
   }
 
   .footer-nav-list__item:nth-child(4) {
-    background: url('../../../public/icons/money.svg') no-repeat;
+    background: url("../../../public/icons/money.svg") no-repeat;
   }
 
   .footer-nav-list__item:nth-child(5) {
-    background: url('../../../public/icons/date.svg') no-repeat;
+    background: url("../../../public/icons/date.svg") no-repeat;
   }
 }

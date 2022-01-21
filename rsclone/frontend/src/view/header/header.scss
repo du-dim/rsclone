@@ -1,5 +1,5 @@
-@import '../../sass/variables&mixins.scss';
-@import '../../sass/box.scss';
+@import "../../sass/variables&mixins.scss";
+@import "../../sass/box.scss";
 
 .header {
   height: 20%;
@@ -16,7 +16,7 @@
 .logo {
   height: 50px;
   width: 60px;
-  background: url('../../../public/icons/logo.svg') no-repeat;
+  background: url("../../../public/icons/logo.svg") no-repeat;
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@
 .header-bonus__img {
   height: 30px;
   width: 30px;
-  background: url('../../../public/icons/star.svg') no-repeat;
+  background: url("../../../public/icons/star.svg") no-repeat;
 }
 
 .header-bonus__count {
@@ -43,7 +43,7 @@
 .header-nav {
   width: 64px;
   height: 60px;
-  background: url('../../../public/icons/settings.svg') no-repeat;
+  background: url("../../../public/icons/settings.svg") no-repeat;
   cursor: pointer;
 }
 

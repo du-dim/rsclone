@@ -1,4 +1,4 @@
-enum Text {
+export enum Text {
   Wisely = 'Wisely',
   Describe = 'the key to the success of your budget!',
   Signin = 'Sign in',
@@ -12,5 +12,3 @@ enum Text {
   Noaccount = 'No Account?',
   Haveaccount = 'Have you account?',
 }
-
-export { Text };
