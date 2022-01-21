@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footernav = () => {
   return (
-    <nav className='footer-nav'>
-      <ul className='footer-nav-list'>
-        <li className='footer-nav-list__item img-nav' />
-        <li className='footer-nav-list__item img-nav' />
-        <li className='footer-nav-list__item img-nav' />
-        <li className='footer-nav-list__item img-nav' />
-        <li className='footer-nav-list__item img-nav' />
-      </ul>
-    </nav>
+    <div className='footer-nav'>
+      <div className='footer-nav-list'>
+        <Link to='../sorts' className='footer-nav-list__item img-nav' />
+        <Link to='../calculator' className='footer-nav-list__item img-nav' />
+        <Link to='map' className='footer-nav-list__item img-nav' />
+        <Link to='converter' className='footer-nav-list__item img-nav' />
+        <Link to='schedule' className='footer-nav-list__item img-nav' />
+      </div>
+    </div>
   );
 };
