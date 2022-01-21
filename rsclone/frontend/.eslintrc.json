@@ -44,9 +44,7 @@
         "arrow-body-style": "off",
         "react/function-component-definition": "off",
         "jsx-quotes": ["error", "prefer-single"],
-        "linebreak-style": ["error", "windows"],
-        "no-console": "off"        
-
+        "linebreak-style":"off"       
     },
     "settings": {
         "import/resolver": {

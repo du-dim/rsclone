@@ -19,7 +19,7 @@ export const Registration = () => {
 
   const register = async () => {
     try {
-      const data = axios.post('/auth/register', { ...form });
+      const data = await axios.post('/auth/register', { ...form });
       console.log(data);
     } catch (e) {
       console.log(e);

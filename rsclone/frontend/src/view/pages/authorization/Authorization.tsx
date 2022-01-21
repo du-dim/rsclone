@@ -1,30 +1,43 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-// import { eventNames } from 'process';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import PreLoader from '../../components/loader/Loader';
 import './authorization.scss';
 import { Text } from '../../../types/types';
 
 export const Authorization = () => {
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: '', password: '',
   });
+  const [error, setError] = useState<undefined | string>(undefined);
 
   const changeInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     setForm({ ...form, [target.name]: target.value });
   };
 
-  const login = async () => {
+  const navigate = useNavigate();
+
+  async function fetchPost() {
+    setLoading(true);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...form }),
+    };
     try {
-      const data = axios.post('/auth/login', { ...form });
-      console.log(data);
+      const response = await fetch('/auth/login', requestOptions);
+      const data = await response.json();
+      setLoading(false);
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        navigate('../');
+      } else setError(data.message);
     } catch (e) {
-      console.log(e);
+      setError('Something went wrong');
     }
-  };
+  }
 
   return (
     <section className='page-authorization'>
@@ -61,12 +74,15 @@ export const Authorization = () => {
                 onChange={changeInput}
               />
             </label>
-            <input className='forgot-psw' type='submit' value={Text.Forgot} />
           </form>
-          <button type='submit' className='registerbtn' onClick={login}>{Text.Signin}</button>
+          <div className='loading' style={{ height: '50px' }}>
+            {loading ? (<PreLoader />) : (<p style={{ color: 'red' }}>{!error ? '' : error}</p>)}
+          </div>
+          <button className='btnAuth' type='button' onClick={fetchPost}>{Text.Signin}</button>
           <Link to='../auth/register' className='signup'>
-            <p>{Text.Noaccount}</p>
-            <p>{Text.Signup}</p>
+            <p>
+              {`${Text.Noaccount} ${Text.Signup}`}
+            </p>
           </Link>
         </article>
       </div>

@@ -14,7 +14,7 @@
   background-color: $whitecolor;
   padding: 15px 27px;
   border-radius: 10px;
-
+  a,
   p,
   button {
     font-size: 20px;
@@ -59,7 +59,7 @@
     text-align: center;
     background: url('../../../../public/icons/Facebook.svg') no-repeat center;
   }
-
+  a,
   button {
     display: flex;
     align-items: center;
@@ -104,6 +104,7 @@
     color: #962ad6;
     cursor: pointer;
   }
+  .btnAuth,
   .registerbtn {
     margin-bottom: 1rem;
     padding: 0.7rem;
@@ -111,7 +112,10 @@
     color: $whitecolor;
   }
   .signup {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding-top: 15px;
   }
   .signup p {
     color: #8d8d8d;
