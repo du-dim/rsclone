@@ -5,7 +5,6 @@ import { useRoutes } from './routes';
 
 export const App = () => {
   const isAuth = !!localStorage.getItem('token');
-
   const routes = useRoutes(isAuth);
   if (isAuth) {
     return (
