@@ -2,29 +2,61 @@
 // import { eventNames } from 'process';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Text } from '../../../types/types';
+import Modal from '../../components/modal/Modal';
+import PreLoader from '../../components/loader/Loader';
 import './registration.scss';
 
 export const Registration = () => {
+  const [activeModal, setActiveModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: '', password1: '', password2: '',
   });
+  const [errorModal, setErrorModal] = useState<undefined | string>(undefined);
+  const [messageModal, setMessageModal] = useState<undefined | string>(undefined);
 
   const changeInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     setForm({ ...form, [target.name]: target.value });
   };
 
-  const register = async () => {
-    try {
-      const data = await axios.post('/auth/register', { ...form });
-      console.log(data);
-    } catch (e) {
-      console.log(e);
+  async function fetchPost() {
+    if (form.email.trim() === ''
+      || form.password1.trim() === ''
+      || form.password2.trim() === '') {
+      setActiveModal(true);
+      setErrorModal('Fill in all the fields');
+      setMessageModal(undefined);
+    } else if (form.password1 !== form.password2) {
+      setActiveModal(true);
+      setErrorModal('Passwords don\'t match');
+      setMessageModal(undefined);
+    } else {
+      setLoading(true);
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, password: form.password1 }),
+      };
+      try {
+        const response = await fetch('/auth/register', requestOptions);
+        const data = await response.json();
+        setLoading(false);
+        setActiveModal(true);
+        if (response.ok) {
+          setMessageModal(data.message);
+          setErrorModal(undefined);
+        } else {
+          setMessageModal(undefined);
+          setErrorModal(data.message);
+        }
+      } catch (e) {
+        setErrorModal('Something went wrong');
+        setMessageModal(undefined);
+      }
     }
-  };
+  }
 
   return (
     <section className='page-registration'>
@@ -37,9 +69,9 @@ export const Registration = () => {
           </div>
           <div className='signin'>
             <p>{Text.Haveaccount}</p>
-            <button type='submit' className='registerbtn'>
+            <Link className='registerbtn' to='../auth/login'>
               {Text.Signin}
-            </button>
+            </Link>
           </div>
           <form className='enter-data'>
             <label>
@@ -57,7 +89,7 @@ export const Registration = () => {
               <input
                 type='password'
                 placeholder='Password'
-                name='password'
+                name='password1'
                 required
                 onChange={changeInput}
               />
@@ -67,14 +99,24 @@ export const Registration = () => {
               <input
                 type='password'
                 placeholder='Password'
-                name='password'
+                name='password2'
                 required
+                onChange={changeInput}
               />
             </label>
           </form>
-          <button type='submit' className='registerbtn' onClick={register}>{Text.Signup}</button>
+          <div className='loading' style={{ height: '50px' }}>
+            {loading ? (<PreLoader />) : 'The minimum password length should be six characters'}
+          </div>
+          <button type='submit' className='registerbtn' onClick={fetchPost}>{Text.Signup}</button>
         </article>
       </div>
+      <Modal
+        active={activeModal}
+        setActive={setActiveModal}
+        message={messageModal}
+        error={errorModal}
+      />
     </section>
   );
 };

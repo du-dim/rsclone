@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PreLoader from '../../components/loader/Loader';
 import './authorization.scss';
@@ -32,7 +32,8 @@ export const Authorization = () => {
       setLoading(false);
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        navigate('../');
+        console.log(data.token);
+        navigate('../', { replace: true });
       } else setError(data.message);
     } catch (e) {
       setError('Something went wrong');
