@@ -1,22 +1,5 @@
 @import './sass/nullstyle.scss';
-// @import './view/header/header.scss';
-// @import './view/footer/footer.scss';
-// @import './view/main/main.scss';
 @import './sass/variables&mixins.scss';
 @import './sass/box.scss';
 @import './sass/fonts.scss';
-// @import './view/mainpage/desktopfirst.scss';
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
-.wrapper {
-  margin: 0 auto;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: 768px;
-}
+@import './sass/global.scss';

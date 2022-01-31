@@ -31,9 +31,8 @@ export const Authorization = () => {
       const data = await response.json();
       setLoading(false);
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        console.log(data.token);
-        navigate('../', { replace: true });
+        await localStorage.setItem('token', data.token);
+        navigate('/home');
       } else setError(data.message);
     } catch (e) {
       setError('Something went wrong');
