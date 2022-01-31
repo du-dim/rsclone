@@ -1,23 +1,18 @@
-import React from 'react';
-import { Footer } from './view/footer/Footer';
-import { Header } from './view/header/Header';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Footer } from './view/components/footer/Footer';
+import { Header } from './view/components/header/Header';
 import { useRoutes } from './routes';
 
 export const App = () => {
+  useNavigate();
   const isAuth = !!localStorage.getItem('token');
   const routes = useRoutes(isAuth);
-  if (isAuth) {
-    return (
-      <div className='wrapper'>
-        <Header />
-        {routes}
-        <Footer />
-      </div>
-    );
-  }
   return (
     <div className='wrapper'>
+      {isAuth ? (<Header />) : (<> </>)}
       {routes}
+      {isAuth ? (<Footer />) : (<> </>)}
     </div>
   );
 };

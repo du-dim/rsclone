@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-// import { eventNames } from 'process';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Text } from '../../../types/types';

@@ -1,16 +1,12 @@
 @import "./variables&mixins.scss";
 
 section {
-  padding: 10px 0 10px 0;
-}
-.container {
-  max-width: 808px;
-  padding: 0 20px 0 20px;
+  padding: 10px 0 10px 0;  
 }
 
 h2 {
   font-size: $fs50;
-  line-height: 73px;
+  line-height: $fs50;
 }
 
 h3 {
