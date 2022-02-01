@@ -29,9 +29,8 @@ export const Calculator = () => {
           <button className='btn-num' type='button'>8</button>
           <button className='btn-num' type='button'>9</button>
           <button className='btn-pink' type='button'>-</button>
-          <button className='btn-pink' type='button'>.</button>
           <button className='btn-num' type='button'>0</button>
-          <button className='span-two btn-pink' type='button'>=</button>
+          <button className='span-three btn-pink' type='button'>=</button>
         </div>
       </div>
     </section>
