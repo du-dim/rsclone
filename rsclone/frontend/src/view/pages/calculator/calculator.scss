@@ -1,8 +1,9 @@
 @import '../../../sass/variables&mixins.scss';
+
 .calculator {
   flex: 1 1 auto;
   background-color: $whitecolor;
-  font-family: $fontIndieflower;  
+  font-family: $fontIndieflower;
   height: 80%;
 
   button {
@@ -41,6 +42,10 @@
 
   .span-two {
     grid-column: span 2;
+  }
+
+  .span-three {
+    grid-column: span 3;
   }
 
   .output {
