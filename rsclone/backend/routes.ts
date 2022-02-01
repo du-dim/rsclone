@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { check, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import User from './User';
+import User from './db-collections/User';
 
 interface IBody {
   email: string,
