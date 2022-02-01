@@ -11,4 +11,12 @@ export enum Text {
   Repeat = 'Repeat password',
   Noaccount = 'No Account?',
   Haveaccount = 'Have you account?',
+
+}
+
+export enum Links {
+  rsshool = 'https://rs.school/',
+  Alena = 'https://github.com/KrasAlena',
+  Dima = 'https://github.com/du-dim',
+  Kate = 'https://github.com/shaustruk/'
 }
