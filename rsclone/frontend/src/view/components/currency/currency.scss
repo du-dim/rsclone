@@ -1,0 +1,19 @@
+@import '../../../sass/variables&mixins.scss';
+
+.currency {        
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  cursor: pointer;
+  z-index: 2;    
+  &-type{      
+    font-size: $fs20;     
+    align-self: flex-end;     
+  }
+  &-img {
+    width: 2rem;
+    height: 2rem;
+    background: url('../../../../public/assets/icons/dollars.svg');
+    background-size: cover;      
+  }
+}

@@ -16,6 +16,8 @@ import { Sort } from './view/pages/sort/Sort';
 import { Map } from './view/pages/map/Map';
 import { AddBalans } from './view/pages/addBalans/AddBalans';
 import { SubBalans } from './view/pages/subBalans/SubBalans';
+import { AddCategories } from './view/pages/addCategories/AddCategories';
+import { SubCategories } from './view/pages/subCategories/SubCategories';
 
 export const useRoutes = (isAuth: boolean) => {
   return (
@@ -35,6 +37,8 @@ export const useRoutes = (isAuth: boolean) => {
         <Route path='map' element={<Map />} />
         <Route path='addBalans' element={<AddBalans />} />
         <Route path='subBalans' element={<SubBalans />} />
+        <Route path='addCategories' element={<AddCategories />} />
+        <Route path='subCategories' element={<SubCategories />} />
         <Route path='*' element={<Navigate to='home' />} />
       </Routes>
     ) : (
