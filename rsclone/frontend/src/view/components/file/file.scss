@@ -1,0 +1,19 @@
+@import '../../../sass/variables&mixins.scss';
+
+.label-files {
+  display: flex;
+  flex-direction: row;
+  height: 2.5rem;
+  width: 100%;
+  border-bottom: 2px solid $main-pink-color;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.file {
+  width: 3rem;
+  height: 3rem;
+  background-size: cover;
+  font-family: $fontIndieflower;
+  background: url('../../../../public/assets/icons/attach-mini.svg');
+}
