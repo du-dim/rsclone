@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Calc } from '../../components/calc/Calc';
 import { Note } from '../../components/note/Note';
@@ -31,17 +31,18 @@ export const AddBalans = () => {
   const todayDate = new Date().toLocaleString('en-US', {
     day: '2-digit', weekday: 'short', month: 'long',
   });
+  const [value, setValue] = useState('');
 
   return (
     <section className='section'>
       <h4>{todayDate}</h4>
       <form className='form-enter' action='' id='form-enter-sum'>
         <Currency />
-        <Result />
+        <Result str={value} />
         <Note />
         <File />
       </form>
-      <Calc />
+      <Calc setStr={setValue} />
       <div className='numeric-box'>
         <button className='btn-num__add' type='submit' form='form-enter-sum' value='Submit'>add</button>
         <Link to={linkCategory} className='category-btn'>
