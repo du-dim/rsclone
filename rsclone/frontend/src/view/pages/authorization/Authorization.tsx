@@ -49,10 +49,10 @@ export const Authorization = () => {
             <p className='greeting-message'>{Text.Describe}</p>
           </div>
           <h3 className='sign-title'>{Text.Signin}</h3>
-          <div className='social-btns'>
+          {/* <div className='social-btns'>
             <button className='google' type='button'>{Text.Google}</button>
             <button className='facebook' type='button'>{Text.Facebook}</button>
-          </div>
+          </div> */}
           <form className='enter-data'>
             <label>
               {Text.Enteremail}
@@ -79,9 +79,11 @@ export const Authorization = () => {
             {loading ? (<PreLoader />) : (<p style={{ color: 'red' }}>{!error ? '' : error}</p>)}
           </div>
           <button className='btnAuth' type='button' onClick={fetchPost}>{Text.Signin}</button>
-          <Link to='../auth/register' className='signup'>
+          <Link to='../auth/register' className='signup btnAuth'>
             <p>
-              {`${Text.Noaccount} ${Text.Signup}`}
+              {`${Text.Noaccount}`}
+              <br />
+              {`${Text.Signup}`}
             </p>
           </Link>
         </article>
