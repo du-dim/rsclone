@@ -1,7 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { ICapital } from './Capital';
+import { IUser } from './User';
 
-export interface IExpense extends ICapital {
+export interface IExpense {
+  amount: number,
+  date: Date,
+  user_id: IUser['_id']
   category: string,
   note: string
 }

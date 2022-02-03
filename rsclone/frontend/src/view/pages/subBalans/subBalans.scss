@@ -56,7 +56,7 @@
   height: 100%;
   width: 25%;  
   font-size: $fs20;
-  background-color: $colorgreen;
+  background-color: rgba($color: #f16850, $alpha: 1.0);
   border-radius: 5px;
   &:hover {
     box-shadow: 2px 3px 47px 4px rgba(151, 53, 153, 0.75);
