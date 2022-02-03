@@ -44,7 +44,7 @@ export const SubBalans = () => {
       </form>
       <Calc setStr={setValue} />
       <div className='numeric-box'>
-        <button className='btn-num__add' type='submit' form='form-enter-sum' value='Submit'>add</button>
+        <button className='btn-num__add' type='submit' form='form-enter-sum' value='Submit'>Subtract</button>
         <Link to={linkCategory} className='category-btn'>
           <img className='category-btn__img' src={linkIcon + (!location.state ? 'categorize.svg' : `categories/${funcCategory()}.svg`)} alt='' />
           <span className='category-btn__text'>{!location.state ? 'Choose category' : funcCategory() === 'phone' ? `${funcCategory()}/Internet` : funcCategory()}</span>
