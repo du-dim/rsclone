@@ -20,3 +20,17 @@ export enum Links {
   Dima = 'https://github.com/du-dim',
   Kate = 'https://github.com/shaustruk/'
 }
+
+export interface IBody {
+  amount: number,
+  date: Date,
+  category: string,
+  currency: string,
+  note: string,
+  user_id: string,
+}
+
+export interface ILocal {
+  amount: string,
+  note: string,
+}

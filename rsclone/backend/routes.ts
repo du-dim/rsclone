@@ -3,11 +3,16 @@ import bcrypt from 'bcrypt';
 import { check, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import User from './db-collections/User';
+import { User } from './db-model/User';
 
-interface IBody {
+interface IUser {
+  _id: string,
   email: string,
   password: string
+}
+interface IRes {
+  token: string,
+  user: IUser
 }
 
 const router = Router();
@@ -27,7 +32,7 @@ router.post(
           message: 'The data is incorrect during registration',
         });
       } else {
-        const { email, password } = req.body as IBody;
+        const { email, password } = req.body as IUser;
         const condidate = await User.findOne({ email });
         if (condidate) {
           res.status(400).json({ message: 'Such a user already exists' });
@@ -60,14 +65,12 @@ router.post('/login', async (req: Request, res: Response) => {
           config.get<string>('jwtSecret'),
           { expiresIn: '1h' },
         );
-        res.json({ token });
+        res.json({ token, user } as IRes);
       }
     }
   } catch (e) {
     res.status(500).json({ message: 'Something went wrong' });
   }
 });
-
-router.get('/login', (req: Request, res: Response) => res.sendStatus(200));
 
 export default router;

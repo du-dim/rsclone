@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
-export const Home = () => {
+type IProps = {
+  sum: number,
+}
+
+export const Home = ({ sum }: IProps) => {
   return (
     <section className='page-main'>
       <article className='current-status'>
@@ -15,7 +19,7 @@ export const Home = () => {
           <h2 className='title-balans'>BALANS</h2>
           <div className='current-balans'>
             <div className='currency'>$</div>
-            <div className='sum'>1000</div>
+            <div className='sum'>{sum}</div>
           </div>
           <div className='todo-list_btn'>
             <Link className='todo-list_btn__plus' to='../addBalans' />
