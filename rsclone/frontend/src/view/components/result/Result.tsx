@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './result.scss';
 
 interface IProps {
@@ -7,13 +7,8 @@ interface IProps {
 
 export const Result = ({ str }:IProps) => {
   return (
-    <label className='label-sum' htmlFor='enter-sum'>
-      <input
-        className='input-output'
-        id='enter-sum'
-        type='text'
-        value={str}
-      />
-    </label>
+    <div className='enter-sum'>
+      {str}
+    </div>
   );
 };

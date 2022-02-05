@@ -1,6 +1,6 @@
 @import '../../../sass/variables&mixins.scss';
 
-#enter-sum {
+.enter-sum {
   display: inline-flex;
   align-items: center;
   user-select: none;
@@ -16,6 +16,6 @@
   appearance: textfield;
 }
 
-#enter-sum:focus {
+.enter-sum:focus {
   border: 2px solid #086930;
 }

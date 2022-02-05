@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,7 +6,21 @@ import PreLoader from '../../components/loader/Loader';
 import './authorization.scss';
 import { Text } from '../../../types/types';
 
-export const Authorization = () => {
+interface IUser {
+  _id: string,
+  email: string,
+  password: string
+}
+interface IRes {
+  token: string,
+  user: IUser,
+  message: string | undefined
+}
+
+type IProps = {
+  setId: React.Dispatch<React.SetStateAction<string>>,
+}
+export const Authorization = ({ setId }: IProps) => {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     email: '', password: '',
@@ -28,10 +43,12 @@ export const Authorization = () => {
     };
     try {
       const response = await fetch('/auth/login', requestOptions);
-      const data = await response.json();
+      const data = await response.json() as IRes;
       setLoading(false);
       if (response.ok) {
-        await localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.user._id);
+        setId(data.user._id);
         navigate('/home');
       } else setError(data.message);
     } catch (e) {
