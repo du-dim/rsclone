@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-import { Result } from '../result/Result';
 import './calc.scss';
 
 type IProps = {
