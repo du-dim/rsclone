@@ -2,65 +2,99 @@
 
 .calculator {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: $whitecolor;
-  font-family: $fontIndieflower;
+  font-family: $fontHahdlee;
   height: 80%;
 
+  h3 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
   button {
+    height: 4rem;
+    font-size: 2rem;
+    border: 5px solid #333;
     border-radius: 1rem;
-    font-size: 2.5rem;
-    border: 1px solid #000000;
+    cursor: pointer;
   }
 
-  .btn-num:hover {
-    background-color: #ccdcde;
+  .modifiers button {
+    background-color: #ccc;
   }
 
-  .btn-del {
-    background-color: rgb(158, 28, 28);
-  }
-  .btn-pink {
-    background-color: #82b3ca;
+  .operations button {
+    background-color: orange;
+    max-width: 15rem;
   }
 
-  .btn-pink:hover {
-    background-color: #84c6e4;
+  .digits button {
+    background-color: #efefef;
   }
 
-  .btn-del:hover {
-    background-color: rgb(170, 123, 123);
+  /* All things Grid, Flexbox, Box Alignment */
+  .calculator-grid,
+  .subgrid {
+    display: grid;
   }
 
   .calculator-grid {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(4, 23%);
-    grid-template-rows: minmax(7rem, auto) repeat(5, 20%);
-    gap: 5px;
-    width: 100%;
-  }
-
-  .span-two {
-    grid-column: span 2;
-  }
-
-  .span-three {
-    grid-column: span 3;
-  }
-
-  .output {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    grid-column: 1/-1;
-    padding: 0.75rem;
-    word-wrap: break-word;
-    word-break: break-all;
-    background-color: #1ca3c2;
+    grid-template-areas:
+      'total total total total'
+      'modif modif modif oper'
+      'digit digit digit oper'
+      'digit digit digit oper'
+      'digit digit digit oper'
+      'digit digit digit oper';
+    grid-auto-columns: 1fr;
+    padding: 1rem;
+    background-color: #ffffff;
     border-radius: 1rem;
-    border: 1px solid #000000;
-    color: rgb(245, 236, 236);
+  }
+
+  .show-input {
+    grid-area: total;
+    height: 5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #ccc;
+    border-radius: 1rem;
+  }
+
+  .modifiers {
+    grid-area: modif;
+  }
+
+  .operations {
+    grid-area: oper;
+  }
+
+  .digits {
+    grid-area: digit;
+  }
+
+  .show-input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 2rem;
+  }
+
+  .modifiers {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+
+  .digits {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .digits button {
+    flex: 1 0 26%;
   }
 }
