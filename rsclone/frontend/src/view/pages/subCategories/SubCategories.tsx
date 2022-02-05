@@ -5,10 +5,11 @@ import './subCategories.scss';
 
 type IProps = {
   setName: React.Dispatch<React.SetStateAction<string>>,
+  arrExpense: boolean[],
 }
 
-export const SubCategories = ({ setName }:IProps) => {
-  const categoryArr = ['bills', 'car', 'clothes', 'phone', 'entertainment', 'food', 'gifts', 'health', 'house', 'pets', 'transport', 'sports'];
+export const SubCategories = ({ setName, arrExpense }:IProps) => {
+  const categoryArr = ['bills', 'car', 'clothes', 'phone', 'entertainment', 'food', 'gifts', 'health', 'house', 'pets', 'transport', 'sports'].filter((_, i) => arrExpense[i]);
   const linkBalans = '../subBalans';
   return (
     <div className='page-category'>
