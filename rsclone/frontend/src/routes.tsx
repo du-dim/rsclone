@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Authorization } from './view/pages/authorization/Authorization';
@@ -26,6 +27,11 @@ export const useRoutes = (isAuth: boolean) => {
   const [dataBase, setDataBase] = useState<IBody[]>([]);
   const [income, setIncome] = useState('');
   const [expense, setExpense] = useState('');
+  const storageExpense = localStorage.getItem('activExpense');
+  const storageIncome = localStorage.getItem('activIncome');
+  const [activExpense, setActivExpense] = useState<boolean[]>(storageExpense ? JSON.parse(storageExpense) as boolean[] : Array(12).fill(true));
+  const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(12).fill(true));
+
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
     setUserId(user);
@@ -60,12 +66,29 @@ export const useRoutes = (isAuth: boolean) => {
     setCapital(sum);
   }, [dataBase]);
 
+  useEffect(() => {
+    setActivExpense(activExpense);
+    setActivIncome(activIncome);
+    localStorage.setItem('activExpense', JSON.stringify(activExpense));
+    localStorage.setItem('activIncome', JSON.stringify(activIncome));
+  }, [activExpense, activIncome]);
+
   return (
     isAuth ? (
       <Routes>
         <Route path='home' element={<Home sum={capital} />} />
         <Route path='Accounts' element={<Accounts />} />
-        <Route path='Categories' element={<Categories />} />
+        <Route
+          path='Categories'
+          element={(
+            <Categories
+              arrExpense={activExpense}
+              arrIncome={activIncome}
+              setArrExpense={setActivExpense}
+              setArrIncome={setActivIncome}
+            />
+          )}
+        />
         <Route path='Currencies' element={<Currencies />} />
         <Route path='Peminders' element={<Peminders />} />
         <Route path='Statistics' element={<Statistics />} />
@@ -77,8 +100,8 @@ export const useRoutes = (isAuth: boolean) => {
         <Route path='map' element={<Map />} />
         <Route path='addBalans' element={<AddBalans name={income} setData={setDataBase} />} />
         <Route path='subBalans' element={<SubBalans name={expense} setData={setDataBase} />} />
-        <Route path='addCategories' element={<AddCategories setName={setIncome} />} />
-        <Route path='subCategories' element={<SubCategories setName={setExpense} />} />
+        <Route path='addCategories' element={<AddCategories setName={setIncome} arrIncome={activIncome} />} />
+        <Route path='subCategories' element={<SubCategories setName={setExpense} arrExpense={activExpense} />} />
         <Route path='*' element={<Navigate to='home' />} />
       </Routes>
     ) : (

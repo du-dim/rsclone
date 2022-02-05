@@ -5,10 +5,11 @@ import './addCategories.scss';
 
 type IProps = {
   setName: React.Dispatch<React.SetStateAction<string>>,
+  arrIncome: boolean[],
 }
 
-export const AddCategories = ({ setName }:IProps) => {
-  const categoryArr = ['salary', 'deposits', 'savings', 'gifts', 'lottery'];
+export const AddCategories = ({ setName, arrIncome }:IProps) => {
+  const categoryArr = ['salary', 'deposits', 'savings', 'gifts', 'lottery'].filter((_, i) => arrIncome[i]);
   const linkBalans = '../addBalans';
   return (
     <div className='page-category'>
