@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Todo } from '../../components/todo/Todo';
+// import { Todo } from '../../components/todo/Todo';
 import './home.scss';
 
 type IProps = {
@@ -10,11 +12,13 @@ export const Home = ({ sum }: IProps) => {
   return (
     <section className='page-main'>
       <article className='current-status'>
-        <Link className='todo-list' to='../makechanges'>
+        {/* <Link className='todo-list' to='../makechanges'> */}
+        <div className='todo-list'>
           <div className='paperclip' />
           <h3 className='title-list'>ToDo List</h3>
-          <div className='todo-items' />
-        </Link>
+          <Todo />
+        </div>
+        {/* </Link> */}
         <div className='todo-list_total'>
           <h2 className='title-balans'>BALANS</h2>
           <div className='current-balans'>

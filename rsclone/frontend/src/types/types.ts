@@ -34,3 +34,19 @@ export interface ILocal {
   amount: string,
   note: string,
 }
+
+//* a task
+export interface IToDo {
+  id: number,
+  title: string,
+  completed: boolean,
+}
+
+//* array tasks
+export interface ITodolistProps {
+  items: IToDo[],
+}
+
+export interface ITodoItem extends IToDo {
+
+}
