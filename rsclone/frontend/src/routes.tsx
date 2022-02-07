@@ -30,7 +30,7 @@ export const useRoutes = (isAuth: boolean) => {
   const storageExpense = localStorage.getItem('activExpense');
   const storageIncome = localStorage.getItem('activIncome');
   const [activExpense, setActivExpense] = useState<boolean[]>(storageExpense ? JSON.parse(storageExpense) as boolean[] : Array(12).fill(true));
-  const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(12).fill(true));
+  const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(5).fill(true));
 
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
