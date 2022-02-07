@@ -47,6 +47,6 @@ export interface ITodolistProps {
   items: IToDo[],
 }
 
-export interface ITodoItem extends IToDo {
+// export interface ITodoItem extends IToDo {
 
-}
+// }

@@ -1,0 +1,25 @@
+@import '../../../sass/variables&mixins.scss';
+.todo-box {
+  .todo-box__input {
+    font-family: $fontHahdlee;
+  }
+  .todo-box__input input {
+    margin-bottom: 0.5rem;
+    height: 2rem;
+    width: 20rem;
+    padding: 0.5rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    box-shadow: 4px -4px 4px 0px #00000040 inset;
+  }
+
+  .todo-box__input button {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: 3rem;
+    height: 2rem;
+    font-size: $fs15;
+    background-color: $colorgreen;
+    box-shadow: 4px -4px 4px 0px #00000040 inset;
+  }
+}

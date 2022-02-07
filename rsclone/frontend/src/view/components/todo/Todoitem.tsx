@@ -1,7 +1,7 @@
 import React from 'react';
-import { ITodoItem } from '../../../types/types';
+import { IToDo } from '../../../types/types';
 
-export const Todoitem:React.FC<ITodoItem> = (props) => {
+export const Todoitem:React.FC<IToDo> = (props) => {
   const { id, title, completed } = props;
   return (
     <div>

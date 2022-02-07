@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IToDo } from '../../../types/types';
 import './todo.scss';
 import Todolist from './Todolist';
@@ -8,6 +8,12 @@ export const Todo:React.FC = () => {
   const [valueTask, setValueTask] = useState('');
   //  array for list tasks
   const [todos, setTodos] = useState<IToDo[]>([]);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValueTask(e.target.value);
+  };
 
   // function for add tasks tor array (*toDoList*)
   const addTaskToDo = () => {
@@ -23,10 +29,14 @@ export const Todo:React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
+
   return (
     <div className='todo-box'>
       <div className='todo-box__input'>
-        <input value={valueTask} onChange={(e) => setValueTask(e.currentTarget.value)} />
+        <input value={valueTask} onChange={handleChange} ref={inputRef} />
         <button type='button' onClick={addTaskToDo}>Add</button>
       </div>
       <Todolist items={todos} />

@@ -11,20 +11,21 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  font-family: $fontIndieflower;  
-  height: 100%;  
+  font-family: $fontIndieflower;
+  height: 100%;
 }
 .todo-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  max-width: 100%;
+  width: 30rem;
   height: 60%;
   margin-bottom: 1rem;
   background-color: $yellowcolor;
-  line-height: 44px;
   border: 1px solid #00000040;
   box-shadow: 0px 4px 4px 0px #00000040;
+  font-family: $fontHahdlee;
 
   .paperclip {
     position: absolute;
@@ -53,30 +54,32 @@
   justify-content: space-between;
   width: 100%;
   height: 40%;
-  
+  font-family: $fontHahdlee;
+
   .current-balans {
     display: flex;
     justify-content: center;
-    width: 80%;
+    max-width: 100%;
+    width: 30rem;
     height: 1.5 * $hf-icon;
-    gap: 10px;        
+    gap: 10px;
     background-color: $colorgreen;
     border-radius: 10px;
-    border: 1px solid #00000040;    
+    border: 1px solid #00000040;
     box-shadow: 4px -4px 4px 0px #00000040 inset;
     color: $whitecolor;
 
     .sum,
-    .currency {      
+    .currency {
       align-self: center;
       height: max-content;
-      font-weight: 400;     
-    }    
-    .currency { 
-      font-size: $fs30; 
+      font-weight: 400;
     }
-    .sum { 
-      font-size: $fs40; 
+    .currency {
+      font-size: $fs30;
+    }
+    .sum {
+      font-size: $fs40;
     }
   }
 
@@ -84,13 +87,14 @@
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    width: 70%;
+    max-width: 100%;
+    width: 30rem;
     cursor: pointer;
   }
 
   .todo-list_btn__plus {
     width: 1.5 * $hf-icon;
-    height: 1.5 *  $hf-icon;
+    height: 1.5 * $hf-icon;
     background: url('../../../../public/assets/icons/plus.svg') no-repeat;
     background-size: cover;
   }
@@ -100,5 +104,5 @@
     height: 1.5 * $hf-icon;
     background: url('../../../../public/assets/icons/minus.svg') no-repeat;
     background-size: cover;
-  }  
+  }
 }
