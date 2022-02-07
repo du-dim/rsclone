@@ -1,13 +1,15 @@
 import React from 'react';
-import { IToDo } from '../../../types/types';
+import { IToDo, ITodoItem } from '../../../types/types';
 
-export const Todoitem:React.FC<IToDo> = (props) => {
-  const { id, title, completed } = props;
+export const Todoitem:React.FC<ITodoItem> = (props) => {
+  const {
+    id, title, completed, removeTaskToDo, toggleToDo,
+  } = props;
   return (
-    <div>
+    <div className='todo-box__item'>
       <input type='checkbox' checked={completed} />
       {title}
-      <button type='button'>x</button>
+      <button type='button'>X</button>
     </div>
   );
 };

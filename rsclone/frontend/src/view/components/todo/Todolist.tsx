@@ -10,12 +10,20 @@ import Todoitem from './Todoitem';
 */
 
 const Todolist:React.FC<ITodolistProps> = (props) => {
+  const { items, removeTaskToDo, toggleToDo } = props;
   return (
     <div className='todo-box__output'>
       {
        // eslint-disable-next-line react/destructuring-assignment
        // eslint-disable-next-line react/jsx-props-no-spreading
-       props.items.map((todo) => <Todoitem key={todo.id} {...todo} />)
+      items.map((todo) => (
+        <Todoitem
+          key={todo.id}
+          toggleToDo={toggleToDo}
+          removeTaskToDo={removeTaskToDo}
+          {...todo}
+        />
+      ))
      }
 
     </div>

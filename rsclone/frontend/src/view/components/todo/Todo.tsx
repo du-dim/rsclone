@@ -11,13 +11,9 @@ export const Todo:React.FC = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValueTask(e.target.value);
-  };
-
   // function for add tasks tor array (*toDoList*)
   const addTaskToDo = () => {
-    // check => task add if the task isn't empty only
+  // check => task add if the task isn't empty only
     if (valueTask) {
       setTodos([...todos, {
         id: Date.now(),
@@ -29,6 +25,20 @@ export const Todo:React.FC = () => {
     }
   };
 
+  const removeTaskToDo = (id:number):void => {};
+
+  const toggleToDo = (id:number):void => {};
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValueTask(e.target.value);
+  };
+
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === 'Enter') {
+      addTaskToDo();
+    }
+  };
+
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus();
   }, []);
@@ -36,10 +46,10 @@ export const Todo:React.FC = () => {
   return (
     <div className='todo-box'>
       <div className='todo-box__input'>
-        <input value={valueTask} onChange={handleChange} ref={inputRef} />
+        <input value={valueTask} onChange={handleChange} onKeyDown={handleKeyDown} ref={inputRef} />
         <button type='button' onClick={addTaskToDo}>Add</button>
       </div>
-      <Todolist items={todos} />
+      <Todolist items={todos} removeTaskToDo={removeTaskToDo} toggleToDo={toggleToDo} />
     </div>
   );
 };
