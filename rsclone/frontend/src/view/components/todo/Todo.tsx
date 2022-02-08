@@ -6,11 +6,12 @@ import Todolist from './Todolist';
 export const Todo:React.FC = () => {
   // empty string for add task
   const [valueTask, setValueTask] = useState('');
+
   //  array for list tasks
-  // useState<IToDo[]>([]);
   const [todos, setTodos] = useState<IToDo[]>(() => {
     // get the todos from localstorage
     const savedTodos = localStorage.getItem('todos');
+    console.log(savedTodos);
     // if there are todos stored
     if (savedTodos) {
       // return the parsed JSON object back to a javascript object
