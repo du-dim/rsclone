@@ -1,5 +1,5 @@
 import React from 'react';
-import { IToDo, ITodoItem } from '../../../types/types';
+import { ITodoItem } from '../../../types/types';
 
 export const Todoitem:React.FC<ITodoItem> = (props) => {
   const {
@@ -7,9 +7,11 @@ export const Todoitem:React.FC<ITodoItem> = (props) => {
   } = props;
   return (
     <div className='todo-box__item'>
-      <input type='checkbox' checked={completed} />
+      <input type='checkbox' checked={completed} onChange={() => toggleToDo(id)} />
       {title}
-      <button type='button'>X</button>
+      <button type='button' onClick={() => removeTaskToDo(id)}>
+        X
+      </button>
     </div>
   );
 };

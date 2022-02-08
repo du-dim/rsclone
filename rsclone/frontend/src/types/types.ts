@@ -42,14 +42,14 @@ export interface IToDo {
   completed: boolean,
 }
 
-//* array tasks
-export interface ITodolistProps {
-  items: IToDo[],
+export interface ITodoItem extends IToDo {
   toggleToDo: (id: number) => void,
   removeTaskToDo: (id: number) => void,
 }
 
-export interface ITodoItem extends IToDo {
+//* array tasks
+export interface ITodolistProps {
+  items: IToDo[],
   toggleToDo: (id: number) => void,
   removeTaskToDo: (id: number) => void,
 }
