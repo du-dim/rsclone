@@ -47,14 +47,36 @@
       }     
     }
   }
-  .chart {
+  .chart-link {    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     margin-top: 10px;    
     width: 100%;
-    height: fit-content;    
-    canvas {     
-      // border: 1px rgb(25, 0, 255) solid;         
-    }        
+    height: fit-content;
+    .nav-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 33.33%;      
+      margin-bottom: -10px;   
+      text-decoration: none; 
+      color: black;
+      span {
+        margin-top: -10px;
+      }      
+      &:focus {
+        outline: none; 
+      }   
+    }    
+    .active {
+      background-color: #d1cbcc;         
+      border-radius: 10px 10px 0px 0px;         
+    }
   }
+  
   .category {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
