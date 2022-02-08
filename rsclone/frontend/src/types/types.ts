@@ -23,7 +23,7 @@ export enum Links {
 
 export interface IBody {
   amount: number,
-  date: Date,
+  date: string,
   category: string,
   currency: string,
   note: string,
@@ -33,4 +33,23 @@ export interface IBody {
 export interface ILocal {
   amount: string,
   note: string,
+}
+
+//* a task
+export interface IToDo {
+  id: number,
+  title: string,
+  completed: boolean,
+}
+
+export interface ITodoItem extends IToDo {
+  toggleToDo: (id: number) => void,
+  removeTaskToDo: (id: number) => void,
+}
+
+//* array tasks
+export interface ITodolistProps {
+  items: IToDo[],
+  toggleToDo: (id: number) => void,
+  removeTaskToDo: (id: number) => void,
 }

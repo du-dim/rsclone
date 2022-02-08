@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
