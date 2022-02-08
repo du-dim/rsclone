@@ -1,0 +1,35 @@
+@import '../../../sass/variables&mixins.scss';
+
+.label-files {
+  display: flex;
+  flex-direction: row;
+  height: 3rem;
+  width: 100%;
+  border-bottom: 2px solid $main-pink-color;
+  margin-bottom: 1rem;
+
+  input {
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  input[type='file']:before {
+    width: 100%;
+    content: '';
+    display: inline-block;
+    padding: 0 1rem;
+  }
+
+  input[type='file']::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+}
+
+.file {
+  width: 3rem;
+  height: 3rem;
+  background-size: cover;
+  font-family: $fontIndieflower;
+  padding: 0.5rem;
+  background: url('../../../../public/assets/icons/attach-mini.svg') no-repeat;
+}
