@@ -21,7 +21,8 @@ const Todolist:React.FC<ITodolistProps> = (props) => {
           key={todo.id}
           toggleToDo={toggleToDo}
           removeTaskToDo={removeTaskToDo}
-          {...todo}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {... todo}
         />
       ))
      }

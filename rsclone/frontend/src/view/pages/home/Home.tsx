@@ -9,13 +9,19 @@ type IProps = {
 }
 
 export const Home = ({ sum }: IProps) => {
+  const todayDate = new Date().toLocaleString('en-US', {
+    day: '2-digit', weekday: 'short', month: 'long',
+  });
   return (
     <section className='page-main'>
       <article className='current-status'>
         {/* <Link className='todo-list' to='../makechanges'> */}
         <div className='todo-list'>
           <div className='paperclip' />
-          <h3 className='title-list'>ToDo List</h3>
+          <h2 className='title-list'>ToDo List</h2>
+          <h4>
+            {todayDate}
+          </h4>
           <Todo />
         </div>
         {/* </Link> */}

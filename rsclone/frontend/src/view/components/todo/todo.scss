@@ -3,9 +3,9 @@
   font-family: $fontHahdlee;
 
   input {
-    margin-bottom: 0.5rem;
     height: 2rem;
-    width: 20rem;
+    min-width: 10rem;
+    max-width: 13rem;
     padding: 0.5rem;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
@@ -40,7 +40,8 @@
 
 .todo-box__output {
   padding: 0.5rem;
-  font-family: $fontIndieflower;
+  font-family: $fontCaveat;
+  font-size: $fs20;
 
   .todo-box__item {
     display: flex;
@@ -49,7 +50,7 @@
     align-items: center;
     height: 1rem;
     gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     font-size: $fs20;
   }
   input {

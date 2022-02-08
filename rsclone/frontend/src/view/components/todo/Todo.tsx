@@ -7,24 +7,44 @@ export const Todo:React.FC = () => {
   // empty string for add task
   const [valueTask, setValueTask] = useState('');
   //  array for list tasks
-  const [todos, setTodos] = useState<IToDo[]>([]);
+  // useState<IToDo[]>([]);
+  const [todos, setTodos] = useState<IToDo[]>(() => {
+    // get the todos from localstorage
+    const savedTodos = localStorage.getItem('todos');
+    // if there are todos stored
+    if (savedTodos) {
+      // return the parsed JSON object back to a javascript object
+      return JSON.parse(savedTodos);
+      // otherwise
+    }
+    // return an empty array
+    return [];
+  });
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const maxLentgTask = 30;
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   // function for add tasks tor array (*toDoList*)
-  const addTaskToDo = () => {
-    // check => task add if the task isn't empty only
-    if (valueTask) {
-      setTodos([...todos, {
-        id: Date.now(),
-        title: valueTask,
-        completed: false,
-      }]);
-      // line is cleared after adding task
-      setValueTask('');
+  function addTaskToDo() {
+    if (todos.length < 10) {
+      // check => task add if the task isn't empty only
+      if (valueTask) {
+        setTodos([...todos, {
+          id: Date.now(),
+          title: valueTask.trim(),
+          completed: false,
+        }]);
+        // line is cleared after adding task
+        setValueTask('');
+      }
+    } else {
+      alert('There are 24 hours in a day!Just... be careful, okay?');
     }
-    console.log(setTodos(todos), valueTask);
-  };
+  }
 
   const removeTaskToDo = (id:number):void => {
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -41,16 +61,16 @@ export const Todo:React.FC = () => {
       };
     }));
   };
-
+  // show all changes in input-text
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setValueTask(e.target.value);
   };
 
-  // const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-  //   if (e.key === 'Enter') {
-  //     addTaskToDo();
-  //   }
-  // };
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === 'Enter') {
+      addTaskToDo();
+    }
+  };
 
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus();
@@ -62,9 +82,10 @@ export const Todo:React.FC = () => {
         <input
           value={valueTask}
           onChange={handleChange}
-          // onKeyDown={handleKeyDown}
+          onKeyDown={handleKeyDown}
           ref={inputRef}
           placeholder='What to do?'
+          maxLength={maxLentgTask}
         />
         <button type='button' onClick={addTaskToDo}>Add</button>
       </div>
