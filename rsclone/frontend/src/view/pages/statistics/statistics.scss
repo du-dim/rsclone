@@ -65,14 +65,13 @@
     margin-top: 5px;   
     &__item {      
       height: 30px;
-      border-radius: 2px;
-      border: 0.2rem solid $main-pink-color;  
+      border-radius: 2px;       
       &_text {
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
-        font-family: $fontIndieflower;
+        font-family: $fontHahdlee;        
       }
     }   
   } 

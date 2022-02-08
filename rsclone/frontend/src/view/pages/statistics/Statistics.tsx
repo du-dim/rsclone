@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
+import { IBody } from '../../../types/types';
 import './statistics.scss';
 
 interface IData {
@@ -10,76 +12,116 @@ interface IData {
   endAngle: number,
 }
 
-export const Statistics = () => {
+type IProps = {
+  dataChart: IBody[],
+}
+
+export const Statistics = ({ dataChart }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
-  const expenseArr = ['bills', 'car', 'clothes', 'phone', 'entertainment', 'food', 'gifts', 'health', 'house', 'pets', 'transport', 'sports'];
   const colors = ['#ff867d', '#c4de40', '#65ccaf', '#529bfa', '#ff5c9a', '#44c8d7', '#e6bf6c', '#e8ebed', '#5e6a75', '#d1cbcc', '#ff7e7e', '#a88ae6', '#8483e6', '#40a0ff', '#a7e05c', '#ffbc63', '#ff9b69'];
-  const [dataArr, setDataArr] = useState([10, 10, 10, 20, 56, 40]);
-  const sum = dataArr.reduce((a, b) => a + b);
-  const percent = dataArr.map((el) => (100 * el) / sum);
-  const percentSum = percent.map((el, i, arr) => Array(i + 1).fill(0).map((_, j) => arr[j]).reduce((a, b) => a + b));
-  const endAngle = percentSum.map((el) => (Math.PI * el) / 50);
-  const startAngle = endAngle.map((el, i, arr) => (i === 0 ? Math.PI / 90 : arr[i - 1] + Math.PI / 90));
-  const data = [] as IData[];
-  for (let index = 0; index < dataArr.length; index += 1) {
-    data.push({
-      color: colors[index],
-      amount: dataArr[index],
-      percent: percent[index],
-      startAngle: startAngle[index],
-      endAngle: endAngle[index],
-    });
-  }
-
+  const [categoriesExpense, setCategoriesExpense] = useState<string[]>([]);
+  const [data, setData] = useState<IData[]>([]);
+  const time = new Date().getTime() + 3 * 60 * 60 * 1000;
+  const today = new Date(time).toISOString().split('T')[0];
+  const [dateStart, setDateStart] = useState(new Date(time - 604800000).toISOString().split('T')[0]);
+  const [dateEnd, setDateEnd] = useState(today);
   const width = 300;
   const height = 250;
 
   useEffect(() => {
-    if (canvasRef.current) {
+    const categoriesExpenseEffect = [] as string[];
+    const dataEffect = [] as IData[];
+    const numDataStart = Number(dateStart.replace(/-/g, ''));
+    const numDataEnd = Number(dateEnd.replace(/-/g, ''));
+
+    const dataExpense = dataChart
+      .filter((obj) => obj.amount < 0)
+      .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) <= numDataEnd)
+      .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) >= numDataStart);
+
+    if (dataExpense.length) {
+      dataExpense.forEach((obj) => {
+        if (!categoriesExpenseEffect.length) categoriesExpenseEffect.push(obj.category);
+        if (!categoriesExpenseEffect.includes(obj.category)) categoriesExpenseEffect.push(obj.category);
+      });
+      setCategoriesExpense(categoriesExpenseEffect);
+      const amountExpense = categoriesExpenseEffect.map((cat) => dataExpense.filter((obj) => obj.category === cat).map((el) => Math.abs(el.amount)).reduce((a, b) => a + b));
+      const sumExpense = amountExpense.reduce((a, b) => a + b);
+      const percent = amountExpense.map((el) => (100 * el) / sumExpense);
+      const percentSum = percent.map((el, i, arr) => Array(i + 1).fill(0).map((_, j) => arr[j]).reduce((a, b) => a + b));
+      const endAngle = percentSum.map((el) => (Math.PI * el) / 50);
+      const startAngle = endAngle.map((el, i, arr) => (i === 0 ? Math.PI / 90 : arr[i - 1] + Math.PI / 90));
+      for (let index = 0; index < amountExpense.length; index += 1) {
+        dataEffect.push({
+          color: colors[index],
+          amount: amountExpense[index],
+          percent: percent[index],
+          startAngle: startAngle[index],
+          endAngle: endAngle[index],
+        });
+      }
+      setData(dataEffect);
+      if (canvasRef.current) {
+        canvasCtxRef.current = canvasRef.current.getContext('2d');
+        const ctx = canvasCtxRef.current;
+        ctx?.clearRect(0, 0, width, height);
+        ctx!.font = '30px Arial';
+        const dw = sumExpense.toString().length * 9;
+        ctx!.fillText(`${sumExpense}`, width / 2 - dw, height / 2 + 12, 80);
+        ctx!.lineWidth = 2;
+        ctx!.strokeStyle = '#ffbdd6';
+        ctx!.beginPath();
+        ctx!.arc(width / 2, height / 2, height / 4 - 15, 0, 2 * Math.PI);
+        ctx!.stroke();
+        dataEffect.forEach((el) => {
+          ctx!.lineWidth = 15;
+          ctx!.strokeStyle = el.color;
+          ctx!.beginPath();
+          ctx!.lineWidth = 20;
+          ctx!.arc(width / 2, height / 2, height / 4, el.startAngle, el.endAngle);
+          ctx!.stroke();
+        });
+        dataEffect.forEach((el) => {
+          ctx!.lineWidth = 30;
+          const middle = (el.startAngle + el.endAngle) / 2;
+          ctx!.strokeStyle = el.color;
+          ctx!.beginPath();
+          ctx!.arc(width / 2, height / 2, height / 3, middle, middle + Math.PI / 120);
+          ctx!.stroke();
+        });
+
+        dataEffect.forEach((el, i) => {
+          const middle = (el.startAngle + el.endAngle) / 2;
+          const r = height / 3 + 26;
+          const x = width / 2 + r * Math.cos((middle));
+          const y = height / 2 + r * Math.sin((middle));
+          ctx!.strokeStyle = el.color;
+          ctx!.lineWidth = 2;
+          ctx!.beginPath();
+          ctx!.arc(x, y, 12, 0, 2 * Math.PI);
+          ctx!.stroke();
+          ctx!.font = '14px Arial';
+          if (i < 11) {
+            ctx!.fillText(`${i + 1}`, x - 4, y + 5);
+          } else ctx!.fillText(`${i + 1}`, x - 8, y + 5);
+        });
+      }
+    } else if (canvasRef.current) {
       canvasCtxRef.current = canvasRef.current.getContext('2d');
       const ctx = canvasCtxRef.current;
+      ctx?.clearRect(0, 0, width, height);
       ctx!.font = '30px Arial';
-      ctx!.fillText(`${123}`, width / 2 - 27, height / 2 + 12, 80);
+      ctx!.fillText(`${0}`, width / 2 - 9, height / 2 + 12, 80);
       ctx!.lineWidth = 2;
       ctx!.strokeStyle = '#ffbdd6';
       ctx!.beginPath();
       ctx!.arc(width / 2, height / 2, height / 4 - 15, 0, 2 * Math.PI);
       ctx!.stroke();
-      data.forEach((el) => {
-        ctx!.lineWidth = 15;
-        ctx!.strokeStyle = el.color;
-        ctx!.beginPath();
-        ctx!.lineWidth = 20;
-        ctx!.arc(width / 2, height / 2, height / 4, el.startAngle, el.endAngle);
-        ctx!.stroke();
-      });
-      data.forEach((el) => {
-        ctx!.lineWidth = 30;
-        const middle = (el.startAngle + el.endAngle) / 2;
-        ctx!.strokeStyle = el.color;
-        ctx!.beginPath();
-        ctx!.arc(width / 2, height / 2, height / 3, middle, middle + Math.PI / 120);
-        ctx!.stroke();
-      });
-
-      data.forEach((el, i) => {
-        const middle = (el.startAngle + el.endAngle) / 2;
-        const r = height / 3 + 26;
-        const x = width / 2 + r * Math.cos((middle));
-        const y = height / 2 + r * Math.sin((middle));
-        ctx!.strokeStyle = el.color;
-        ctx!.lineWidth = 2;
-        ctx!.beginPath();
-        ctx!.arc(x, y, 12, 0, 2 * Math.PI);
-        ctx!.stroke();
-        ctx!.font = '14px Arial';
-        if (i < 11) {
-          ctx!.fillText(`${i + 1}`, x - 4, y + 5);
-        } else ctx!.fillText(`${i + 1}`, x - 8, y + 5);
-      });
+      setCategoriesExpense([]);
+      setData([]);
     }
-  }, []);
+  }, [dataChart, dateStart, dateEnd]);
 
   return (
     <div className='page-statistics'>
@@ -88,11 +130,11 @@ export const Statistics = () => {
         <div className='date__field'>
           <div className='date__field_start'>
             <div className='date__field_end title'>Start date</div>
-            <input className='date__field_start input' type='date' name='' id='' />
+            <input className='date__field_start input' type='date' name='' id='' value={dateStart} max={dateEnd} onChange={(e) => setDateStart(e.target.value)} />
           </div>
           <div className='date__field_end'>
             <div className='date__field_end title'>End date</div>
-            <input className='date__field_end input' type='date' name='' id='' />
+            <input className='date__field_end input' type='date' name='' id='' value={dateEnd} min={dateStart} max={today} onChange={(e) => setDateEnd(e.target.value)} />
           </div>
         </div>
       </div>
@@ -100,12 +142,14 @@ export const Statistics = () => {
         <h3>Chart expense</h3>
         <canvas ref={canvasRef} width={width} height={height} />
         <div className='category'>
-          {expenseArr.map((el, index) => (
+          {categoriesExpense.map((el, index) => (
             <div
               className='category__item'
+              style={{ backgroundColor: colors[index] }}
               key={`expense_${el}`}
             >
               <p className='category__item_text'>{`${index + 1}. ${el}`}</p>
+              <p className='category__item_text'>{`${Math.round(data[index].percent)}% -> ${data[index].amount} USD`}</p>
             </div>
           ))}
         </div>
