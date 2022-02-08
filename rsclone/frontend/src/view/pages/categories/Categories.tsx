@@ -16,7 +16,7 @@ export const Categories = ({
   const incomeArr = ['salary', 'deposits', 'savings', 'gifts', 'lottery'];
 
   return (
-    <div className='page'>
+    <div className='page-categories'>
       <div className='categories'>
         <div className='categories__title'>Expense</div>
         {expenseArr.map((el, index) => (

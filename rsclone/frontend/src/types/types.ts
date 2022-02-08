@@ -23,7 +23,7 @@ export enum Links {
 
 export interface IBody {
   amount: number,
-  date: Date,
+  date: string,
   category: string,
   currency: string,
   note: string,
