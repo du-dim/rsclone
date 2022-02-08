@@ -53,3 +53,11 @@ export interface ITodolistProps {
   toggleToDo: (id: number) => void,
   removeTaskToDo: (id: number) => void,
 }
+
+export interface IData {
+  color: string,
+  amount: number,
+  percent: number,
+  startAngle: number,
+  endAngle: number,
+}

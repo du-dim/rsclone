@@ -91,7 +91,7 @@ export const useRoutes = (isAuth: boolean) => {
         />
         <Route path='Currencies' element={<Currencies />} />
         <Route path='Peminders' element={<Peminders />} />
-        <Route path='Statistics' element={<Statistics dataChart={dataBase} />} />
+        <Route path='Statistics/*' element={<Statistics dataChart={dataBase} />} />
         <Route path='Info' element={<Info />} />
         <Route path='calculator' element={<Calculator />} />
         <Route path='converter' element={<Converter />} />
