@@ -10,7 +10,7 @@ export const Footer = () => {
         <Link to='calculator' className='footer__nav_item img-nav' />
         <Link to='map' className='footer__nav_item img-nav' />
         <Link to='converter' className='footer__nav_item img-nav' />
-        <Link to='schedule' className='footer__nav_item img-nav' />
+        <Link to='Statistics/expense' className='footer__nav_item img-nav' />
       </div>
     </section>
   );
