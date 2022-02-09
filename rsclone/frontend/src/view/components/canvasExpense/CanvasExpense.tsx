@@ -15,7 +15,7 @@ export const CanvasExpense = ({
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
-  const colors = ['#ff867d', '#c4de40', '#65ccaf', '#529bfa', '#ff5c9a', '#44c8d7', '#e6bf6c', '#e8ebed', '#5e6a75', '#d1cbcc', '#ff7e7e', '#a88ae6', '#8483e6', '#40a0ff', '#a7e05c', '#ffbc63', '#ff9b69'];
+  const colors = ['#ff867d', '#8ea618', '#65ccaf', '#529bfa', '#ff5c9a', '#44c8d7', '#e6bf6c', '#e8ebed', '#5e6a75', '#d1cbcc', '#ff7e7e', '#a88ae6', '#8483e6', '#40a0ff', '#a7e05c', '#ffbc63', '#ff9b69'];
   const [categoriesExpense, setCategoriesExpense] = useState<string[]>([]);
   const [data, setData] = useState<IData[]>([]);
   const width = 300;
@@ -61,7 +61,7 @@ export const CanvasExpense = ({
         const dw = sumExpense.toString().length * 9;
         ctx!.fillText(`${sumExpense}`, width / 2 - dw, height / 2 + 12, 80);
         ctx!.lineWidth = 2;
-        ctx!.strokeStyle = '#ffbdd6';
+        ctx!.strokeStyle = '#ff7e7e';
         ctx!.beginPath();
         ctx!.arc(width / 2, height / 2, height / 4 - 15, 0, 2 * Math.PI);
         ctx!.stroke();
@@ -105,7 +105,7 @@ export const CanvasExpense = ({
       ctx!.font = '30px Arial';
       ctx!.fillText(`${0}`, width / 2 - 9, height / 2 + 12, 80);
       ctx!.lineWidth = 2;
-      ctx!.strokeStyle = '#ffbdd6';
+      ctx!.strokeStyle = '#ff7e7e';
       ctx!.beginPath();
       ctx!.arc(width / 2, height / 2, height / 4 - 15, 0, 2 * Math.PI);
       ctx!.stroke();
