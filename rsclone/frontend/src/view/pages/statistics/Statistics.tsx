@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { CanvasExpense } from '../../components/canvasExpense/CanvasExpense';
 import { CanvasIncome } from '../../components/canvasIncome/CanvasIncome';
+import { CanvasTotal } from '../../components/canvasTotal/CanvasTotal';
 import { IBody } from '../../../types/types';
 import './statistics.scss';
 
@@ -45,7 +46,7 @@ export const Statistics = ({ dataChart }: IProps) => {
       <Routes>
         <Route path='/expense' element={<CanvasExpense dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
         <Route path='income' element={<CanvasIncome dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
-        <Route path='total' element={<CanvasExpense dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
+        <Route path='total' element={<CanvasTotal dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
       </Routes>
     </div>
   );
