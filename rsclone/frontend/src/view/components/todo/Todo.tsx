@@ -11,7 +11,6 @@ export const Todo:React.FC = () => {
   const [todos, setTodos] = useState<IToDo[]>(() => {
     // get the todos from localstorage
     const savedTodos = localStorage.getItem('todos');
-    console.log(savedTodos);
     // if there are todos stored
     if (savedTodos) {
       // return the parsed JSON object back to a javascript object
@@ -23,7 +22,7 @@ export const Todo:React.FC = () => {
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const maxLentgTask = 30;
+  const maxLentgTask = 25;
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -31,22 +30,22 @@ export const Todo:React.FC = () => {
 
   // function for add tasks tor array (*toDoList*)
   function addTaskToDo() {
-    if (todos.length < 10) {
-      // check => task add if the task isn't empty only
-      if (valueTask) {
-        setTodos([...todos, {
-          id: Date.now(),
-          title: valueTask.trim(),
-          completed: false,
-        }]);
-        // line is cleared after adding task
-        setValueTask('');
-      }
-    } else {
-      alert('There are 24 hours in a day!Just... be careful, okay?');
+    // if (todos.length < 10) {
+    // check => task add if the task isn't empty only
+    if (valueTask) {
+      setTodos([...todos, {
+        id: todos.length,
+        title: valueTask.trim(),
+        completed: false,
+      }]);
+      // line is cleared after adding task
+      setValueTask('');
+    //   }
+    // } else {
+    //   alert('There are 24 hours in a day!Just... be careful, okay?');
+    // }
     }
   }
-
   const removeTaskToDo = (id:number):void => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -81,6 +80,7 @@ export const Todo:React.FC = () => {
     <div className='todo-box'>
       <div className='todo-box__input'>
         <input
+          className='input-task'
           value={valueTask}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
@@ -88,7 +88,7 @@ export const Todo:React.FC = () => {
           placeholder='What to do?'
           maxLength={maxLentgTask}
         />
-        <button type='button' onClick={addTaskToDo}>Add</button>
+        <button className='btn-add' type='button' onClick={addTaskToDo}>Add</button>
       </div>
       <Todolist items={todos} removeTaskToDo={removeTaskToDo} toggleToDo={toggleToDo} />
     </div>
