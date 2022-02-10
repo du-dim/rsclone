@@ -7,11 +7,15 @@ export const Todoitem:React.FC<ITodoItem> = (props) => {
   } = props;
   return (
     <div className='todo-box__item'>
-      <input type='checkbox' checked={completed} onChange={() => toggleToDo(id)} />
-      {title}
-      <button type='button' onClick={() => removeTaskToDo(id)}>
-        X
-      </button>
+      {/* <input type='checkbox' checked={completed} onChange={() => toggleToDo(id)} /> */}
+      <div
+        className='task-item'
+        style={{ textDecoration: !completed ? 'none' : 'line-through' }}
+        onClick={() => toggleToDo(id)}
+      >
+        {title}
+      </div>
+      <button className='delete-btn' type='button' onClick={() => removeTaskToDo(id)} aria-label='delete'>X</button>
     </div>
   );
 };
