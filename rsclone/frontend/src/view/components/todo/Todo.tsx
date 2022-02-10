@@ -34,7 +34,7 @@ export const Todo:React.FC = () => {
     // check => task add if the task isn't empty only
     if (valueTask) {
       setTodos([...todos, {
-        id: todos.length,
+        id: Date.now(),
         title: valueTask.trim(),
         completed: false,
       }]);
