@@ -35,7 +35,7 @@ export const CanvasTotal = ({
       const maxY = Math.max.apply(null, amountLimit);
       const minY = Math.min.apply(null, amountLimit);
       const fieldY = maxY - minY;
-      const data = amountLimit.map((el, i) => [setepX * i, ((heightCanv - 200) * (el - minY)) / fieldY]);
+      const data = amountLimit.map((el, i) => [setepX * i, ((heightCanv - 300) * (el - minY)) / fieldY]);
 
       if (canvasRef.current) {
         canvasCtxRef.current = canvasRef.current.getContext('2d');
@@ -68,17 +68,17 @@ export const CanvasTotal = ({
         ctx!.lineWidth = 3;
         for (let index = 1; index < 7; index += 1) {
           ctx!.strokeStyle = '#7b858f';
-          ctx!.moveTo(50, 100 + index * 100);
-          ctx!.lineTo(widthCanv - 50, 100 + index * 100);
+          ctx!.moveTo(50, 50 + index * 100);
+          ctx!.lineTo(widthCanv - 50, 50 + index * 100);
         }
         ctx!.stroke();
 
         ctx!.beginPath();
         ctx!.strokeStyle = '#3881e1';
         ctx!.lineWidth = 8;
-        ctx!.moveTo(data[0][0] + 50, heightCanv - 100 - data[0][1]);
+        ctx!.moveTo(data[0][0] + 50, heightCanv - 150 - data[0][1]);
         data.forEach((d) => {
-          ctx!.lineTo(d[0] + 50, heightCanv - 100 - d[1]);
+          ctx!.lineTo(d[0] + 50, heightCanv - 150 - d[1]);
         });
         ctx!.stroke();
 
@@ -86,8 +86,8 @@ export const CanvasTotal = ({
           ctx!.beginPath();
           ctx!.lineWidth = 4;
           ctx!.strokeStyle = dataTotal[i][2] < 0 ? '#ffbdd6' : '#5fe380';
-          ctx!.moveTo(d[0] + 50, heightCanv - 100);
-          ctx!.lineTo(d[0] + 50, heightCanv - 100 - d[1]);
+          ctx!.moveTo(d[0] + 50, heightCanv - 150);
+          ctx!.lineTo(d[0] + 50, heightCanv - 150 - d[1]);
           ctx!.stroke();
         });
 
@@ -95,7 +95,7 @@ export const CanvasTotal = ({
           ctx!.beginPath();
           ctx!.lineWidth = 10;
           ctx!.strokeStyle = dataTotal[i][2] < 0 ? '#f31167' : '#319c4c';
-          ctx!.arc(d[0] + 50, heightCanv - 100 - d[1], 6, 0, 2 * Math.PI);
+          ctx!.arc(d[0] + 50, heightCanv - 150 - d[1], 6, 0, 2 * Math.PI);
           ctx!.stroke();
         });
       }
