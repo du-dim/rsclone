@@ -21,6 +21,9 @@ export enum Links {
   Kate = 'https://github.com/shaustruk/'
 }
 
+export enum Converter {
+
+}
 export interface IBody {
   amount: number,
   date: string,
