@@ -1,14 +1,20 @@
 @import '../../../sass/variables&mixins.scss';
-.chart {
+.chart-total {
   width: 100%;
   background-color: #d1cbcc;  
   border-radius: 10px 10px 10px 10px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  height: max-content;
+  height: max-content;  
   &_title {
+    width: 100%;
+    text-align: start;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    color: #3881e1;
   }              
+}
+canvas {
+  // border: 1px red solid;
 }
