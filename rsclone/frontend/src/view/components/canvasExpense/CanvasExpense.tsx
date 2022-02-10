@@ -15,11 +15,11 @@ export const CanvasExpense = ({
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
-  const colors = ['#ff867d', '#8ea618', '#65ccaf', '#529bfa', '#ff5c9a', '#44c8d7', '#e6bf6c', '#e8ebed', '#5e6a75', '#d1cbcc', '#ff7e7e', '#a88ae6', '#8483e6', '#40a0ff', '#a7e05c', '#ffbc63', '#ff9b69'];
+  const colors = ['#ff867d', '#8ea618', '#65ccaf', '#529bfa', '#ff5c9a', '#44c8d7', '#b37f10', '#ffffff', '#5e6a75', '#d1cbcc', '#ff7e7e', '#a88ae6', '#8483e6', '#40a0ff', '#a7e05c', '#ffbc63', '#ff9b69'];
   const [categoriesExpense, setCategoriesExpense] = useState<string[]>([]);
   const [data, setData] = useState<IData[]>([]);
-  const width = 300;
-  const height = 250;
+  const width = 320;
+  const height = 320;
   useEffect(() => {
     const categoriesExpenseEffect = [] as string[];
     const dataEffect = [] as IData[];
@@ -58,7 +58,7 @@ export const CanvasExpense = ({
         const ctx = canvasCtxRef.current;
         ctx?.clearRect(0, 0, width, height);
         ctx!.font = '30px Arial';
-        const dw = sumExpense.toString().length * 9;
+        const dw = sumExpense.toString().length * 8.5;
         ctx!.fillText(`${sumExpense}`, width / 2 - dw, height / 2 + 12, 80);
         ctx!.lineWidth = 2;
         ctx!.strokeStyle = '#ff7e7e';
@@ -74,7 +74,7 @@ export const CanvasExpense = ({
           ctx!.stroke();
         });
         dataEffect.forEach((el) => {
-          ctx!.lineWidth = 30;
+          ctx!.lineWidth = 32;
           const middle = (el.startAngle + el.endAngle) / 2;
           ctx!.strokeStyle = el.color;
           ctx!.beginPath();
