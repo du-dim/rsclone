@@ -13,8 +13,11 @@
     margin-top: 10px;
     font-size: 16px;
     color: #3881e1;
-  }              
-}
-canvas {
-  // border: 1px red solid;
+  }  
+  
+  canvas {
+    border: 1px red solid;
+    width: 100%; 
+    height: 60vw;
+  }
 }
