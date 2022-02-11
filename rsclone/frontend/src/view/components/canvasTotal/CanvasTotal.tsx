@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
-import { IBody, IData } from '../../../types/types';
+import { IBody } from '../../../types/types';
 import './canvasTotal.scss';
 
 type IProps = {
@@ -26,6 +26,20 @@ export const CanvasTotal = ({
     balans: 0,
     note: '',
   });
+  const [arrow, setArrow] = useState(0);
+
+  function arrowLeft() {
+    setArrow(arrow - 1);
+  }
+
+  function arrowRight() {
+    setArrow(arrow + 1);
+  }
+
+  function touchEvent(e:React.TouchEvent<HTMLCanvasElement>) {
+    setTouchX(e.touches[0].clientX);
+    setArrow(0);
+  }
 
   useEffect(() => {
     const dataCapital = dataChart.map((obj) => obj.amount);
@@ -34,8 +48,14 @@ export const CanvasTotal = ({
 
     const numDateStart = Number(dateStart.replace(/-/g, ''));
     const numDateEnd = Number(dateEnd.replace(/-/g, ''));
-    const dataTotal = newData.filter((obj) => obj[0] <= numDateEnd).filter((obj) => obj[0] >= numDateStart);
-
+    const dataBefore = newData.filter((obj) => obj[0] < numDateStart);
+    const dataBetween = newData.filter((obj) => obj[0] <= numDateEnd).filter((obj) => obj[0] >= numDateStart);
+    let dataTotal: number[][];
+    if (dataBefore.length) {
+      dataTotal = [dataBefore[dataBefore.length - 1]].concat(dataBetween);
+    } else {
+      dataTotal = [[0, 0, 0, 0]].concat(dataBetween);
+    }
     const amountLimit = dataTotal.map((obj) => obj[1]);
     const maxY = Math.max.apply(null, amountLimit);
     const minY = Math.min.apply(null, amountLimit);
@@ -43,18 +63,38 @@ export const CanvasTotal = ({
     if (dataTotal.length > 1) {
       if (canvasRef.current) {
         canvasCtxRef.current = canvasRef.current.getContext('2d');
+
         const canvas = canvasRef.current.getBoundingClientRect();
         const { width } = canvas;
         const { height } = canvas;
         const { left } = canvas;
         const { right } = canvas;
-        const lineX = touchX * 4 - left * 4;
-
         const widthCanv = width * 4;
         const heightCanv = height * 4;
-        const dh = heightCanv / 8;
+        let lineX: number;
+
         const stepX = (widthCanv - 100) / (dataTotal.length - 1);
+
+        if (touchX <= (left + 12.5)) {
+          lineX = 51;
+          setTouchX(left + 12.55);
+        } else if (touchX >= (right - 12.5)) {
+          lineX = widthCanv - 51;
+          setTouchX(right - 12.55);
+        } else {
+          lineX = touchX * 4 - left * 4 + arrow * stepX;
+        }
+
+        const dh = heightCanv / 8;
         const data = amountLimit.map((el, i) => [stepX * i + 50, heightCanv - 1.5 * dh - ((heightCanv - 3 * dh) * (el - minY)) / fieldY]);
+        if (lineX > data[data.length - 1][0]) {
+          setArrow(arrow - 1);
+          lineX -= stepX;
+        }
+        if (lineX < data[0][0]) {
+          setArrow(arrow + 1);
+          lineX += stepX;
+        }
 
         canvasRef.current.style.width = `${width}px`;
         canvasRef.current.style.height = `${height}px`;
@@ -67,11 +107,11 @@ export const CanvasTotal = ({
         ctx!.fillText('Expense', widthCanv / 2 + 180, (3 * dh) / 4);
         ctx!.fillText('Income', widthCanv / 2 - 250, (3 * dh) / 4);
 
-        ctx!.font = '50px Patrick Hand';
+        ctx!.font = '60px Patrick Hand';
         ctx!.fillStyle = '#3881e1';
-        ctx!.fillText(`Start: ${amountLimit[0]} USD`, 50, heightCanv - dh / 2);
-        const dws = 6 * amountLimit[amountLimit.length - 1].toString().length;
-        ctx!.fillText(`End: ${amountLimit[amountLimit.length - 1]} USD`, widthCanv - 300 - dws, heightCanv - dh / 2);
+        ctx!.fillText(`Start: ${amountLimit[1]} USD`, 50, heightCanv - dh / 3);
+        const dws = 12 * amountLimit[amountLimit.length - 1].toString().length;
+        ctx!.fillText(`End: ${amountLimit[amountLimit.length - 1]} USD`, widthCanv - 300 - dws, heightCanv - dh / 3);
 
         ctx!.fillStyle = '#f31167';
         ctx!.fillRect(widthCanv / 2 + 80, dh / 2, 80, 30);
@@ -101,7 +141,7 @@ export const CanvasTotal = ({
 
         if (touchX > (left + 12.5) && touchX < (right - 12.5)) {
           ctx!.beginPath();
-          ctx!.strokeStyle = '#8c7266';
+          ctx!.strokeStyle = '#352f2f';
           ctx!.lineWidth = 8;
           ctx!.moveTo(lineX, dh);
           ctx!.lineTo(lineX, heightCanv - dh);
@@ -130,7 +170,7 @@ export const CanvasTotal = ({
 
           ctx!.beginPath();
           ctx!.lineWidth = 8;
-          ctx!.strokeStyle = '#8c7266';
+          ctx!.strokeStyle = '#352f2f';
           ctx!.arc(lineX, lineY, 16, 0, 2 * Math.PI);
           ctx!.stroke();
         }
@@ -153,15 +193,23 @@ export const CanvasTotal = ({
         });
       }
     }
-  }, [dataChart, dateStart, dateEnd, touchX]);
+  }, [dataChart, dateStart, dateEnd, touchX, arrow]);
   return (
     <div className='chart-total'>
       <div className='chart-total_title'>Chart Balans</div>
       <canvas
         ref={canvasRef}
-        onTouchMove={(e) => setTouchX(e.touches[0].clientX)}
-        onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+        onTouchMove={(e) => touchEvent(e)}
+        onTouchStart={(e) => touchEvent(e)}
       />
+      <div className='chart-total__arrow'>
+        <div className='chart-total__arrow_btn' onClick={() => arrowLeft()}>
+          <img src='/assets/icons/arrow-left.svg' alt='left' />
+        </div>
+        <div className='chart-total__arrow_btn' onClick={() => arrowRight()}>
+          <img src='/assets/icons/arrow-right.svg' alt='right' />
+        </div>
+      </div>
       <div className='title'>Operation Details</div>
       <div className='chart-total__info'>
         <div className='chart-total__info_item'>
