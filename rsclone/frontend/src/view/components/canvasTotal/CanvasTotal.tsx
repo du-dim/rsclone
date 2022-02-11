@@ -16,10 +16,21 @@ export const CanvasTotal = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
   const [touchX, setTouchX] = useState(0);
+  const [details, setDetails] = useState({
+    num: 0,
+    date: '',
+    type: '',
+    category: '',
+    amount: 0,
+    currency: '',
+    balans: 0,
+    note: '',
+  });
+
   useEffect(() => {
     const dataCapital = dataChart.map((obj) => obj.amount);
     const capitalLimit = dataCapital.map((el, i, arr) => Array(i + 1).fill(0).map((_, j) => arr[j]).reduce((a, b) => a + b));
-    const newData = dataChart.map((obj, i) => [Number(obj.date.split('T')[0].replace(/-/g, '')), capitalLimit[i], obj.amount]);
+    const newData = dataChart.map((obj, i) => [Number(obj.date.split('T')[0].replace(/-/g, '')), capitalLimit[i], obj.amount, i]);
 
     const numDateStart = Number(dateStart.replace(/-/g, ''));
     const numDateEnd = Number(dateEnd.replace(/-/g, ''));
@@ -52,14 +63,15 @@ export const CanvasTotal = ({
         const ctx = canvasCtxRef.current;
         ctx?.clearRect(0, 0, widthCanv, heightCanv);
 
-        ctx!.font = '60px Arial';
+        ctx!.font = '60px Patrick Hand';
         ctx!.fillText('Expense', widthCanv / 2 + 180, (3 * dh) / 4);
         ctx!.fillText('Income', widthCanv / 2 - 250, (3 * dh) / 4);
 
-        ctx!.font = '50px Arial';
+        ctx!.font = '50px Patrick Hand';
         ctx!.fillStyle = '#3881e1';
         ctx!.fillText(`Start: ${amountLimit[0]} USD`, 50, heightCanv - dh / 2);
-        ctx!.fillText(`End: ${amountLimit[amountLimit.length - 1]} USD`, widthCanv / 2 + 150, heightCanv - dh / 2);
+        const dws = 6 * amountLimit[amountLimit.length - 1].toString().length;
+        ctx!.fillText(`End: ${amountLimit[amountLimit.length - 1]} USD`, widthCanv - 300 - dws, heightCanv - dh / 2);
 
         ctx!.fillStyle = '#f31167';
         ctx!.fillRect(widthCanv / 2 + 80, dh / 2, 80, 30);
@@ -96,6 +108,18 @@ export const CanvasTotal = ({
           ctx!.stroke();
           ctx!.beginPath();
           const indexP = Math.ceil((lineX - 50) / stepX) - 1;
+          const index = dataTotal[indexP + 1][3];
+          setDetails({
+            num: indexP + 1,
+            date: dataChart[index].date.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}:\d{2}).(\d{3}Z)/, '$3-$2-$1/$4'),
+            type: dataTotal[indexP + 1][2] < 0 ? 'expense' : 'income',
+            category: dataChart[index].category,
+            amount: dataChart[index].amount,
+            currency: dataChart[index].currency,
+            balans: dataTotal[indexP + 1][1],
+            note: dataChart[index].note,
+          });
+
           const lineY = ((data[indexP + 1][1] - data[indexP][1]) * (lineX - data[indexP][0])) / stepX + data[indexP][1];
 
           ctx!.beginPath();
@@ -122,7 +146,7 @@ export const CanvasTotal = ({
 
         data.forEach((d, i) => {
           ctx!.beginPath();
-          ctx!.lineWidth = 10;
+          ctx!.lineWidth = 12;
           ctx!.strokeStyle = dataTotal[i][2] < 0 ? '#f31167' : '#319c4c';
           ctx!.arc(d[0], d[1], 6, 0, 2 * Math.PI);
           ctx!.stroke();
@@ -132,12 +156,42 @@ export const CanvasTotal = ({
   }, [dataChart, dateStart, dateEnd, touchX]);
   return (
     <div className='chart-total'>
-      <div className='chart-total_title'>Chart Capital</div>
+      <div className='chart-total_title'>Chart Balans</div>
       <canvas
         ref={canvasRef}
         onTouchMove={(e) => setTouchX(e.touches[0].clientX)}
         onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
       />
+      <div className='title'>Operation Details</div>
+      <div className='chart-total__info'>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>{`№${!details.num ? '' : details.num}`}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>1. Date/Time:</div>
+          <div className='chart-total__info_item-context'>{details.date}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>2. Type:</div>
+          <div className='chart-total__info_item-context'>{details.type}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>3. Category:</div>
+          <div className='chart-total__info_item-context'>{details.category}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>4. Transaction amount:</div>
+          <div className='chart-total__info_item-context'>{!details.num ? '' : `${details.amount} ${details.currency}`}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>5. Total balans:</div>
+          <div className='chart-total__info_item-context'>{!details.num ? '' : `${details.balans}USD`}</div>
+        </div>
+        <div className='chart-total__info_item'>
+          <div className='chart-total__info_item-title'>6. Note:</div>
+          <div className='chart-total__info_item-context'>{details.note === '-' ? '' : details.note}</div>
+        </div>
+      </div>
     </div>
   );
 };
