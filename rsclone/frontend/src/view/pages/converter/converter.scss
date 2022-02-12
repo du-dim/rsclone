@@ -21,9 +21,11 @@
   }
 
   .currency-row {
-    height: 2rem;
+    height: 100%;
   }
+
   .currency-input {
+    display: inline-block;
     width: 70%;
     height: 100%;
     border: 0.3rem solid $main-pink-color;
@@ -32,12 +34,21 @@
   }
 
   .currency-select {
+    display: inline-block;
     height: 100%;
     margin-left: 0.5rem;
     border: 0.3rem solid $main-pink-color;
     border-radius: 0.3em;
+    cursor: pointer;
   }
 
+  .user-convert__box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
   .equals {
     font-weight: bold;
     font-size: 2rem;
@@ -46,7 +57,33 @@
   .user-convert {
     margin-bottom: 2rem;
     padding: 0.25rem;
-
     font-size: 1.5rem;
+  }
+
+  .live-convert__title,
+  .user-convert__title {
+    margin-bottom: 1.5rem;
+  }
+  .list-curriency {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .item-curriency {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 0.2rem solid $main-pink-color;
+  }
+
+  .value {
+    font-size: $fs20;
+  }
+
+  .symbol {
+    color: $main-pink-color;
   }
 }
