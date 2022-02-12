@@ -1,23 +1,29 @@
 @import '../../../sass/variables&mixins.scss';
 
 .converter {
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: $whitecolor;
   font-family: $fontIndieflower;
-  height: 80%;
   text-align: center;
+  height: 80%;
+
+  .converter-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
 
   .date {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   h3 {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .currency-row {
@@ -55,14 +61,14 @@
   }
 
   .user-convert {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     padding: 0.25rem;
     font-size: 1.5rem;
   }
 
   .live-convert__title,
   .user-convert__title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
   }
   .list-curriency {
     display: flex;

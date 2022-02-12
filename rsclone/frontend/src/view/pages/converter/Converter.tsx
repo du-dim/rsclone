@@ -1,9 +1,26 @@
 /* eslint-disable dot-notation */
-import React, { EventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Currencyrow from '../../components/converter/Currencyrow';
-import { Liveconvert } from '../../components/converter/Liveconvert';
+import { CUrrencyRowBYN } from '../../components/converter/CUrrencyRowBYN';
 // import { Userconvert } from '../../components/converter/Userconvert';
 import './converter.scss';
+
+const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
+
+const todayDate = new Date().toLocaleString('en-US', {
+  day: '2-digit', weekday: 'short', month: 'long',
+});
+
+let COURSE = 1;
+
+const bynObj = [{
+  Cur_ID: 400,
+  Date: '2022-02-12T00:00:00',
+  Cur_Abbreviation: 'BYN',
+  Cur_Scale: 1,
+  Cur_Name: 'Беларусский рубль',
+  Cur_OfficialRate: 1.0,
+}];
 
 export interface ICurrent {
   Cur_Abbreviation: string,
@@ -12,15 +29,13 @@ export interface ICurrent {
   // Date:string,
   // Cur_Scale:number,
   // Cur_Name:string,
-   }
-let usdCourse:number;
+  }
+interface IObjForGetCourse {
+  Cur_Abbreviation: string,
+  Cur_OfficialRate: number,
+}
+
 export const Converter:React.FC = () => {
-  const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
-
-  const todayDate = new Date().toLocaleString('en-US', {
-    day: '2-digit', weekday: 'short', month: 'long',
-  });
-
   let prepareData:ICurrent[] = [];
   const arrCurrencyName:string[] = [];
   const arrCurrencyValue:number[] = [];
@@ -28,7 +43,7 @@ export const Converter:React.FC = () => {
   const [currencyOptions, setCurrencyOptions] = useState<string[]>([]);
   const [fromCurrency, setFromCurrency] = useState<string>('');
   const [toCurrency, setToCurrency] = useState<string>('');
-  const [exchangeRate, setExchangeRate] = useState<number>();
+  const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [amount, setAmount] = useState<number>(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState<boolean>(true);
 
@@ -41,65 +56,75 @@ export const Converter:React.FC = () => {
   let toAmount:number;
   let fromAmount:number;
   if (amountInFromCurrency) {
-    fromAmount = amount;
-    toAmount = amount * exchangeRate;
+    fromAmount = Number(amount.toFixed(4));
+    toAmount = Number(amount.toFixed(4)) * exchangeRate;
   } else {
-    toAmount = amount;
-    fromAmount = amount / exchangeRate;
+    toAmount = Number(amount.toFixed(4));
+    fromAmount = Number(amount.toFixed(4)) / exchangeRate;
   }
 
   useEffect(() => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
-        prepareData = data.concat([{
-          // Cur_ID: 400,
-          // Date: '2022-02-12T00:00:00',
-          Cur_Abbreviation: 'BYN',
-          // Cur_Scale: 1,
-          // Cur_Name: 'Беларусский рубль',
-          Cur_OfficialRate: 1.0,
-        }]);
+        prepareData = data.concat(bynObj);
+
         prepareData.forEach((el) => {
-          const obj:ICurrent = {
+          const obj:IObjForGetCourse = {
             Cur_Abbreviation: el.Cur_Abbreviation,
             Cur_OfficialRate: el.Cur_OfficialRate,
           };
           arrCurrencyRates.push(obj);
           return arrCurrencyRates;
         });
+
         arrCurrencyRates.forEach((element) => {
           arrCurrencyName.push(element.Cur_Abbreviation);
           arrCurrencyValue.push(element.Cur_OfficialRate);
         });
         setCurrencyOptions(arrCurrencyName);
 
-        const indexBYN = arrCurrencyName.indexOf('BYN');
-        const indexUSD = arrCurrencyName.indexOf('USD');
-        const indexEUR = arrCurrencyName.indexOf('EUR');
-        const indexRUS = arrCurrencyName.indexOf('RUS');
+        /* cyrrency on page */
         setCourseUSD(arrCurrencyRates[arrCurrencyName.indexOf('USD')].Cur_OfficialRate);
         setCourseRUB(arrCurrencyRates[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate);
         setCourseEUR(arrCurrencyRates[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate);
         setCourseUAH((arrCurrencyRates[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10);
         setCoursePLN((arrCurrencyRates[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10);
+        /*-----------*/
 
-        const firstCurrency = arrCurrencyName[indexUSD];
+        const firstCurrency = arrCurrencyName[arrCurrencyName.indexOf('USD')];
         setFromCurrency(firstCurrency);
-        setToCurrency(arrCurrencyName[arrCurrencyName.indexOf('BYN')]);
-        setExchangeRate(arrCurrencyValue[indexUSD]);
+        setToCurrency(arrCurrencyName[arrCurrencyName.indexOf('USD')]);
+        setExchangeRate(arrCurrencyValue[arrCurrencyName.indexOf('USD')]);
       });
   }, []);
 
-  const handleFromAmountChange:React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setAmount(e.target);
+  useEffect(() => {
+    if (fromCurrency != null && toCurrency != null) {
+      fetch(BASE_URL)
+        .then((res) => res.json())
+        .then((data:ICurrent[]) => {
+          prepareData = data.concat(bynObj);
+
+          prepareData.forEach((currency) => {
+            if (currency.Cur_Abbreviation === fromCurrency) {
+              COURSE = currency.Cur_OfficialRate;
+            }
+            setExchangeRate(COURSE);
+          });
+        });
+    }
+  }, [fromCurrency, toCurrency]);
+
+  const handleFromAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    setAmount(Number(e.currentTarget.value));
     setAmountInFromCurrency(true);
   };
 
-  function handleToAmountChange(e) {
-    setAmount(e.target.value);
+  const handleToAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    setAmount(Number(e.currentTarget.value));
     setAmountInFromCurrency(false);
-  }
+  };
   return (
     <section className='converter'>
       <div className='container'>
@@ -116,10 +141,16 @@ export const Converter:React.FC = () => {
                 onChangeAmount={handleFromAmountChange}
               />
               <div className='equals'>=</div>
-              <Currencyrow
+              {/* <Currencyrow
                 currencyOptions={currencyOptions}
                 selectedCurrency={toCurrency}
                 onChangeCurrency={(e) => setToCurrency(e.target.value)}
+                amount={toAmount}
+                onChangeAmount={handleToAmountChange}
+              /> */}
+              <CUrrencyRowBYN
+                onChangeCurrency={(e) => setToCurrency(e.target.value)}
+                selectedCurrency={toCurrency}
                 amount={toAmount}
                 onChangeAmount={handleToAmountChange}
               />
