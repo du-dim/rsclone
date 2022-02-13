@@ -7,7 +7,7 @@ type IProps = {
 }
 
 export const Calc = ({ setStr }:IProps) => {
-  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', 'DEL', '=', '/'];
+  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '.', 'DEL', '/', '=', 'Clear'];
   const [result, setResult] = useState('');
 
   const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -15,10 +15,20 @@ export const Calc = ({ setStr }:IProps) => {
     setStr(result.concat(e.currentTarget?.name));
   };
 
-  const clear = () => {
+  const del = () => {
     setResult('');
     setStr('');
   };
+
+  const clearString = ():void => {
+    if (result !== 'invalid format') {
+      setResult(result.substring(0, result.length - 1));
+      setStr(result.substring(0, result.length - 1));
+    } else {
+      del();
+    }
+  };
+
   const calc = () => {
     try {
       /* eslint-disable no-eval */
@@ -29,16 +39,17 @@ export const Calc = ({ setStr }:IProps) => {
       setStr('invalid format');
     }
   };
-
   return (
     <div className='numeric-area'>
       {btnArr.map((el) => (
         <button
           key={el}
           name={el}
-          className={el === 'DEL' ? 'btn-num btn-num__del' : el === '=' ? 'btn-num btn-num__calc' : 'btn-num'}
+          className={el === 'DEL' ? 'btn-num btn-num__del'
+            : el === '=' ? 'btn-num btn-num__calc'
+              : el === 'Сlear' ? 'btn-num btn__clear' : 'btn-num'}
           type='button'
-          onClick={el === '=' ? calc : el === 'DEL' ? clear : handleClick}
+          onClick={el === '=' ? calc : el === 'DEL' ? del : el === 'Clear' ? clearString : handleClick}
         >
           {el}
         </button>

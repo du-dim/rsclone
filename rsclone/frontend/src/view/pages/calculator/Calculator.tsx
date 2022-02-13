@@ -68,7 +68,8 @@ export const Calculator = () => {
                       : String(eval(data)),
                   );
                 } catch (error) {
-                  console.log('calculator-error');
+                  setData('Sorry!');
+                  setData('');
                 }
               }}
             >
