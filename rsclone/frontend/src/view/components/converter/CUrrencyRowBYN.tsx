@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface IProps {
+  name:string,
   selectedCurrency: string,
   onChangeCurrency:React.ChangeEventHandler<HTMLSelectElement>,
   onChangeAmount:React.ChangeEventHandler<HTMLInputElement>,
@@ -9,6 +10,7 @@ interface IProps {
 
 const BYN = 'BYN';
 export const CUrrencyRowBYN = ({
+  name,
   selectedCurrency,
   onChangeCurrency,
   amount,
@@ -23,6 +25,7 @@ export const CUrrencyRowBYN = ({
         ))} */}
         <option value='BYN' key={BYN}>{BYN}</option>
       </select>
+      <div className='name'>{name}</div>
     </div>
   );
 };

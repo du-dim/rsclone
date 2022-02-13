@@ -12,15 +12,16 @@ const todayDate = new Date().toLocaleString('en-US', {
 });
 
 let COURSE = 1;
+let NAME = 'USD';
 
-const bynObj = [{
+const bynObj = {
   Cur_ID: 400,
   Date: '2022-02-12T00:00:00',
   Cur_Abbreviation: 'BYN',
   Cur_Scale: 1,
   Cur_Name: 'Беларусский рубль',
   Cur_OfficialRate: 1.0,
-}];
+};
 
 export interface ICurrent {
   Cur_Abbreviation: string,
@@ -41,6 +42,7 @@ export const Converter:React.FC = () => {
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [amount, setAmount] = useState<number>(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState<boolean>(true);
+  const [nameCurrency, setnameCurrency] = useState<string>('');
 
   const [courseUSD, setCourseUSD] = useState<number>();
   const [courseEUR, setCourseEUR] = useState<number>();
@@ -68,13 +70,13 @@ export const Converter:React.FC = () => {
           arrCurrencyValue.push(element.Cur_OfficialRate);
         });
         setCurrencyOptions(arrCurrencyName);
-
         /* cyrrency on page */
         setCourseUSD(prepareData[arrCurrencyName.indexOf('USD')].Cur_OfficialRate);
         setCourseRUB(prepareData[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate);
         setCourseEUR(prepareData[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate);
         setCourseUAH((prepareData[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10);
         setCoursePLN((prepareData[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10);
+
         /*-----------*/
 
         const firstCurrency = arrCurrencyName[arrCurrencyName.indexOf('USD')];
@@ -94,8 +96,10 @@ export const Converter:React.FC = () => {
           prepareData.forEach((currency) => {
             if (currency.Cur_Abbreviation === fromCurrency) {
               COURSE = currency.Cur_OfficialRate;
+              NAME = currency.Cur_Name;
             }
             setExchangeRate(COURSE);
+            setnameCurrency(NAME);
           });
         });
     }
@@ -124,6 +128,7 @@ export const Converter:React.FC = () => {
                 onChangeCurrency={(e) => setFromCurrency(e.target.value)}
                 amount={fromAmount}
                 onChangeAmount={handleFromAmountChange}
+                name={nameCurrency}
               />
               <div className='equals'>=</div>
               {/* <Currencyrow
@@ -138,6 +143,7 @@ export const Converter:React.FC = () => {
                 selectedCurrency={toCurrency}
                 amount={toAmount}
                 onChangeAmount={handleToAmountChange}
+                name={bynObj.Cur_Name}
               />
             </div>
           </div>

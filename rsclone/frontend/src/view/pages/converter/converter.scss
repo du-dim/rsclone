@@ -20,6 +20,13 @@
     margin-bottom: 0.5rem;
   }
 
+  .name {
+    display: flex;
+    justify-content: right;
+    font-size: 1rem;
+    color: $main-pink-color;
+  }
+
   h3 {
     display: flex;
     justify-content: center;
@@ -35,7 +42,7 @@
     width: 70%;
     height: 100%;
     border: 0.3rem solid $main-pink-color;
-    border-radius: 0.3em;
+    border-radius: 0.5em;
     font-size: 1.5rem;
   }
 
@@ -43,8 +50,9 @@
     display: inline-block;
     height: 100%;
     margin-left: 0.5rem;
+    margin-bottom: 1rem;
     border: 0.3rem solid $main-pink-color;
-    border-radius: 0.3em;
+    border-radius: 0.5rem;
     cursor: pointer;
   }
 
@@ -53,8 +61,10 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0.5rem;
     gap: 0.5rem;
   }
+
   .equals {
     font-weight: bold;
     font-size: 2rem;
