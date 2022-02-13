@@ -7,7 +7,7 @@ import { Home } from './view/pages/home/Home';
 import { Accounts } from './view/pages/accounts/Accounts';
 import { Categories } from './view/pages/categories/Categories';
 import { Currencies } from './view/pages/currencies/Currencies';
-import { Peminders } from './view/pages/peminders/Peminders';
+import { Banks } from './view/pages/banks/Banks';
 import { Statistics } from './view/pages/statistics/Statistics';
 import { Info } from './view/pages/info/Info';
 import { Calculator } from './view/pages/calculator/Calculator';
@@ -90,7 +90,7 @@ export const useRoutes = (isAuth: boolean) => {
           )}
         />
         <Route path='Currencies' element={<Currencies />} />
-        <Route path='Peminders' element={<Peminders />} />
+        <Route path='Banks' element={<Banks />} />
         <Route path='Statistics/*' element={<Statistics dataChart={dataBase} />} />
         <Route path='Info' element={<Info />} />
         <Route path='calculator' element={<Calculator />} />
