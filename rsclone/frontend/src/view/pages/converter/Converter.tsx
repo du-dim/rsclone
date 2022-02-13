@@ -25,21 +25,16 @@ const bynObj = [{
 export interface ICurrent {
   Cur_Abbreviation: string,
   Cur_OfficialRate: number,
-  // Cur_ID: number,
-  // Date:string,
-  // Cur_Scale:number,
-  // Cur_Name:string,
+  Cur_ID: number,
+  Date:string,
+  Cur_Scale:number,
+  Cur_Name:string,
   }
-interface IObjForGetCourse {
-  Cur_Abbreviation: string,
-  Cur_OfficialRate: number,
-}
 
 export const Converter:React.FC = () => {
   let prepareData:ICurrent[] = [];
   const arrCurrencyName:string[] = [];
   const arrCurrencyValue:number[] = [];
-  const arrCurrencyRates:ICurrent[] = [];
   const [currencyOptions, setCurrencyOptions] = useState<string[]>([]);
   const [fromCurrency, setFromCurrency] = useState<string>('');
   const [toCurrency, setToCurrency] = useState<string>('');
@@ -68,28 +63,18 @@ export const Converter:React.FC = () => {
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
         prepareData = data.concat(bynObj);
-
-        prepareData.forEach((el) => {
-          const obj:IObjForGetCourse = {
-            Cur_Abbreviation: el.Cur_Abbreviation,
-            Cur_OfficialRate: el.Cur_OfficialRate,
-          };
-          arrCurrencyRates.push(obj);
-          return arrCurrencyRates;
-        });
-
-        arrCurrencyRates.forEach((element) => {
+        prepareData.forEach((element) => {
           arrCurrencyName.push(element.Cur_Abbreviation);
           arrCurrencyValue.push(element.Cur_OfficialRate);
         });
         setCurrencyOptions(arrCurrencyName);
 
         /* cyrrency on page */
-        setCourseUSD(arrCurrencyRates[arrCurrencyName.indexOf('USD')].Cur_OfficialRate);
-        setCourseRUB(arrCurrencyRates[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate);
-        setCourseEUR(arrCurrencyRates[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate);
-        setCourseUAH((arrCurrencyRates[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10);
-        setCoursePLN((arrCurrencyRates[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10);
+        setCourseUSD(prepareData[arrCurrencyName.indexOf('USD')].Cur_OfficialRate);
+        setCourseRUB(prepareData[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate);
+        setCourseEUR(prepareData[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate);
+        setCourseUAH((prepareData[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10);
+        setCoursePLN((prepareData[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10);
         /*-----------*/
 
         const firstCurrency = arrCurrencyName[arrCurrencyName.indexOf('USD')];
