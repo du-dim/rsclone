@@ -53,11 +53,11 @@ export const Converter:React.FC = () => {
   let toAmount:number;
   let fromAmount:number;
   if (amountInFromCurrency) {
-    fromAmount = Number(amount.toFixed(4));
-    toAmount = Number(amount.toFixed(4)) * exchangeRate;
+    fromAmount = +amount.toFixed(4);
+    toAmount = +amount.toFixed(4) * exchangeRate;
   } else {
-    toAmount = Number(amount.toFixed(4));
-    fromAmount = Number(amount.toFixed(4)) / exchangeRate;
+    toAmount = +amount.toFixed(4);
+    fromAmount = +amount.toFixed(4) / exchangeRate;
   }
 
   useEffect(() => {
@@ -67,15 +67,16 @@ export const Converter:React.FC = () => {
         prepareData = data.concat(bynObj);
         prepareData.forEach((element) => {
           arrCurrencyName.push(element.Cur_Abbreviation);
-          arrCurrencyValue.push(element.Cur_OfficialRate);
+          arrCurrencyValue.push(element.Cur_OfficialRate / element.Cur_Scale);
         });
         setCurrencyOptions(arrCurrencyName);
         /* cyrrency on page */
-        setCourseUSD(prepareData[arrCurrencyName.indexOf('USD')].Cur_OfficialRate);
-        setCourseRUB(prepareData[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate);
-        setCourseEUR(prepareData[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate);
-        setCourseUAH((prepareData[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10);
-        setCoursePLN((prepareData[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10);
+
+        setCourseUSD(+((prepareData[arrCurrencyName.indexOf('USD')].Cur_OfficialRate)).toFixed(4));
+        setCourseRUB(+((prepareData[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate) / 100).toFixed(4));
+        setCourseEUR(+((prepareData[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate)).toFixed(4));
+        setCourseUAH(+((prepareData[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10).toFixed(4));
+        setCoursePLN(+((prepareData[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10).toFixed(4));
 
         /*-----------*/
 
@@ -95,7 +96,7 @@ export const Converter:React.FC = () => {
 
           prepareData.forEach((currency) => {
             if (currency.Cur_Abbreviation === fromCurrency) {
-              COURSE = currency.Cur_OfficialRate;
+              COURSE = currency.Cur_OfficialRate / currency.Cur_Scale;
               NAME = currency.Cur_Name;
             }
             setExchangeRate(COURSE);
@@ -106,12 +107,12 @@ export const Converter:React.FC = () => {
   }, [fromCurrency, toCurrency]);
 
   const handleFromAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    setAmount(Number(e.currentTarget.value));
+    setAmount(+(+e.currentTarget.value).toFixed(4));
     setAmountInFromCurrency(true);
   };
 
   const handleToAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    setAmount(Number(e.currentTarget.value));
+    setAmount(+(+e.currentTarget.value).toFixed(4));
     setAmountInFromCurrency(false);
   };
   return (
