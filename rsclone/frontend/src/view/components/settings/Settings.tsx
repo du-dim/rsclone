@@ -8,14 +8,14 @@ type IRight = {
 }
 
 export const Settings = ({ active, setActive }:IRight) => {
-  const arrSettings = ['Categories', 'Accounts', 'Currencies', 'Peminders', 'Info'];
+  const arrSettings = ['Categories', 'Accounts', 'Currencies', 'Banks', 'Info'];
   const linkIcon = 'assets/icons/settings/';
   return (
     <div className='settings-container' style={{ display: active ? 'block' : 'none' }} onClick={() => setActive(false)}>
       <div className='settings' style={{ right: active ? '0' : '-50%' }}>
         {arrSettings.map((el) => (
           <Link key={el} className='settings__block' to={`../${el}`}>
-            <img className='settings__block_img' src={`${linkIcon + el}.svg`} alt='' />
+            <img className='settings__block_img' src={`/${linkIcon + el}.svg`} alt='' />
             <p className='settings__block_text'>{el}</p>
           </Link>
         ))}
