@@ -7,7 +7,7 @@ type IProps = {
 }
 
 export const Calc = ({ setStr }:IProps) => {
-  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '.', 'DEL', '=', '/', 'Clear'];
+  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '.', 'DEL', '/', '=', 'Clear'];
   const [result, setResult] = useState('');
 
   const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
