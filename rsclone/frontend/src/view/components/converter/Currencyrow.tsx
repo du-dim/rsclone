@@ -3,6 +3,7 @@
 import React from 'react';
 
 interface IProps {
+  name:string,
   currencyOptions: string[],
   selectedCurrency: string,
   onChangeCurrency:React.ChangeEventHandler<HTMLSelectElement>,
@@ -11,6 +12,7 @@ interface IProps {
 }
 export default function Currencyrow(
   {
+    name,
     currencyOptions, selectedCurrency,
     onChangeCurrency, amount,
     onChangeAmount,
@@ -24,6 +26,7 @@ export default function Currencyrow(
           <option value={option} key={option}>{option}</option>
         ))}
       </select>
+      <div className='name'>{name}</div>
     </div>
   );
 }
