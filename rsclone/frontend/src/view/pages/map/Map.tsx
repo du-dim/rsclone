@@ -22,8 +22,16 @@ export const Map = () => {
     width: '100%',
     height: '100%',
   });
+
   return (
-    <div className='page'>
+    <div className='page-map'>
+      <div className='description'>
+        <div>Bank branch Belgazprombank</div>
+        <div>Address:</div>
+        <div>Сurrency:</div>
+        <div>Contacts:</div>
+        <div>Open until:</div>
+      </div>
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/mapbox/streets-v9'
@@ -33,7 +41,6 @@ export const Map = () => {
         <Marker latitude={53.9089} longitude={27.5600}>
           <img src='assets/icons/marker/user.png' alt='' />
         </Marker>
-
       </ReactMapGL>
     </div>
   );

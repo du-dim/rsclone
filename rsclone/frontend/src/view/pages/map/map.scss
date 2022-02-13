@@ -1,3 +1,10 @@
-.page {
+@import '../../../sass/variables&mixins.scss';
+.page-map {  
   height: 80%;
+  .description {
+    position: absolute;
+    width: 100%;
+    background-color: $whitecolor;
+    z-index: 2;
+  }
 }
