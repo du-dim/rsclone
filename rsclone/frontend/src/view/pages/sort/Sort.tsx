@@ -1,16 +1,17 @@
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { SortDates } from '../../components/sortdates/SortDates';
 import './sort.scss';
 
 export const Sort = () => {
   return (
-    <section className='calculator'>
+    <section className='sortes'>
       <div className='container'>
-        <h3>Sort</h3>
+        <h3 className='sortes-title'>Sort</h3>
         <nav className='chart-link'>
-          <NavLink to='/Sorts/dates' className='nav-link'><span>Date</span></NavLink>
-          <NavLink to='/Sorts/categoties-expense' className='nav-link'><span>Expense</span></NavLink>
-          <NavLink to='/Sorts/categoties-income' className='nav-link'><span>Income</span></NavLink>
+          <NavLink to='/sorts/dates' className='nav-link'><span>Date</span></NavLink>
+          <NavLink to='/sorts/categoties-expense' className='nav-link'><span>Expense</span></NavLink>
+          <NavLink to='/sorts/categoties-income' className='nav-link'><span>Income</span></NavLink>
         </nav>
         <Routes>
           <Route path='/dates' element={<SortDates />} />
