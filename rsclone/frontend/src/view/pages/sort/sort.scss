@@ -4,21 +4,60 @@
   height: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #fff9e6;
   font-family: $fontIndieflower;
   letter-spacing: 2px;
+}
+
+.page-sortes-date {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
   .sortes-title {
     margin-bottom: 1rem;
     font-size: $fs30;
   }
 
-  .nav-link {
+  .list-links {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100%;
     font-size: $fs30;
+    color: $pink-dark;
+  }
+
+  .list-links__item {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 1rem;
+  }
+
+  .list-links__item:active {
+    color: $main-pink-color;
+  }
+
+  .list-links__item_expences {
+    color: rgb(212, 38, 38);
+  }
+
+  .list-links__item_incomes {
+    color: $colorgreen;
+  }
+
+  .list-links .active {
+    text-decoration: underline;
+    text-shadow: 0 0 3px;
+  }
+
+  .list-links span:hover {
+    text-shadow: 0 0 3px;
   }
 }
