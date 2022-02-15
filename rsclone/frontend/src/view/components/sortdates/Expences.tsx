@@ -9,6 +9,7 @@ type IProps = {
 }
 
 export const Expences = ({ dateStart, dateEnd, dataInfo }: IProps) => {
+  console.log(dataInfo);
   const numDateStart = Number(dateStart.replace(/-/g, ''));
   const numDateEnd = Number(dateEnd.replace(/-/g, ''));
   const dataIntroExpences = dataInfo
@@ -17,12 +18,15 @@ export const Expences = ({ dateStart, dateEnd, dataInfo }: IProps) => {
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
   return (
     <article className='sortes-route sortes__expences'>
-      <h3 className='sourtes__title'>List of expenses</h3>
+      <h3 className='sourtes__title'>List of expences</h3>
       <div className='list-expences'>
         {dataIntroExpences.map((position) => (
           <ul className='list-expences__item' key={dataIntroExpences.indexOf(position)}>
-            <li className='list-expences__item_number'>{dataIntroExpences.indexOf(position) + 1}</li>
-            <li className='list-expences__item_date'>{position.date.slice(0, 10)}</li>
+            {/* <li className='list-expences__item_number'>{dataIntroExpences.indexOf(position) + 1}</li> */}
+            <li className='list-expences__item_date'>
+              {(position.date.slice(0, 10))
+                .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
+            </li>
             <li className='list-expences__item_title'>{position.category}</li>
             <li className='list-expences__item_amount'>
               {position.amount}

@@ -21,10 +21,14 @@ export const All = ({ dateStart, dateEnd, dataInfo }: IProps) => {
       <div className='list-all'>
         {dataIntroAllOperations.map((position) => (
           <ul className='list-all__item' key={dataIntroAllOperations.indexOf(position)}>
-            <li className='list-all__item_number'>{dataIntroAllOperations.indexOf(position) + 1}</li>
-            <li className='list-all__item_date'>{position.date.slice(0, 10)}</li>
-            <li className='list-all__item_title'>{position.category}</li>
-            <li className='list-all__item_amount'>
+            {/* <li className='list-all__item_number'>{dataIntroAllOperations.indexOf(position) + 1}</li> */}
+            <li className='list-all__item_date'>
+              {(position.date.slice(0, 10))
+                .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
+
+            </li>
+            <li className=''>{position.category}</li>
+            <li className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
               {position.amount }
               $
             </li>

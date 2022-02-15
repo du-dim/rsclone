@@ -30,7 +30,7 @@ export const Sort = ({ dataInfo }: IProps) => {
     <section className='sortes'>
       <div className='container'>
         <div className='page-sortes-date'>
-          <h3 className='h3'>{todayDate}</h3>
+          <h3 className='date-title'>{todayDate}</h3>
           <h3 className='sortes-title'>Accounting</h3>
           <div className='date-box'>
             <div className='date-box__start'>

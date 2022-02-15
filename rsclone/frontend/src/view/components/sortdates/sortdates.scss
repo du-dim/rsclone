@@ -36,9 +36,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.2rem;
+  padding: 0.5rem;
   height: 100%;
   overflow: hidden;
+  background-color: #ecd8ea80;
   border-radius: 1rem;
 
   .list-expences,
@@ -49,40 +50,53 @@
     align-items: flex-start;
     gap: 0.2rem;
     padding: 0.5rem;
-    max-width: 50rem;
-    height: 20em;
+    width: 100%;
+    height: 22em;
     overflow: auto;
-    background-color: #54195e0f;
+    background-color: #ecd8ea80;
     border-radius: 1rem;
+    cursor: pointer;
   }
 
   .list-revenue__item,
   .list-expences__item,
   .list-all__item {
     display: flex;
+    justify-content: space-between;
     gap: 1rem;
     gap: 0.5rem;
     padding: 0.2rem;
     font-size: $fs15;
     width: 100%;
-    border: 1px solid $gold;
-    border-radius: 1rem;
+    border: 0.2rem solid rgb(174, 174, 201);
   }
 
-  .list-revenue__item {
-    .list-revenue__item_amount {
-      color: $colorgreen;
-    }
+  .list-all__item li,
+  .list-expences__item li,
+  .list-revenue__item li {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
   }
 
-  .list-expences__item {
-    .list-expences__item_amount {
-      color: red;
-    }
+  .list-revenue__item_amount,
+  .green-active {
+    color: $colorgreen;
+  }
+
+  .list-expences__item_amount,
+  .red-active {
+    color: rgb(189, 64, 64);
   }
 }
 
 @media (max-width: 360px) {
+  .sortes {
+    padding: 0.5rem;
+  }
+  .date-title {
+    font-size: $fs20;
+  }
   .date-box {
     flex-direction: column;
     align-items: center;
@@ -92,12 +106,6 @@
     }
 
     .date-box__title {
-      font-size: $fs15;
-    }
-  }
-  .sortes-route {
-    .sourtes__title {
-      color: $pink-dark;
       font-size: $fs15;
     }
   }

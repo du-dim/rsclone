@@ -15,7 +15,7 @@
 .page-sortes-date {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 100%;
 
   .sortes-title {
@@ -73,6 +73,11 @@
     .page-sortes-date {
       .sortes-title {
         margin-bottom: 0.5rem;
+        font-size: $fs20;
+      }
+
+      .sortes-title {
+        margin-bottom: 0.2rem;
         font-size: $fs20;
       }
 

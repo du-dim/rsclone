@@ -21,8 +21,12 @@ export const Incomes = ({ dateStart, dateEnd, dataInfo }: IProps) => {
       <div className='list-revenue'>
         {dataIntroIncomes.map((position) => (
           <ul className='list-revenue__item' key={dataIntroIncomes.indexOf(position)}>
-            <li className='list-revenue__item_number'>{dataIntroIncomes.indexOf(position) + 1}</li>
-            <li className='list-revenue__item_date'>{position.date.slice(0, 10)}</li>
+            {/* <li className='list-revenue__item_number'>{dataIntroIncomes.indexOf(position) + 1}</li> */}
+            <li className='list-revenue__item_date'>
+              {(position.date.slice(0, 10))
+                .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
+
+            </li>
             <li className='list-revenue__item_title'>{position.category}</li>
             <li className='list-revenue__item_amount'>
               {position.amount}
