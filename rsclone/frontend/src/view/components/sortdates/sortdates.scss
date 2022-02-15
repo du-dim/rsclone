@@ -90,7 +90,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 415px) {
   .sortes {
     padding: 0.5rem;
   }
@@ -107,6 +107,13 @@
 
     .date-box__title {
       font-size: $fs15;
+    }
+  }
+  .sortes-route {
+    .list-expences,
+    .list-all,
+    .list-revenue {
+      max-height: 18em;
     }
   }
 }
