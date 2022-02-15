@@ -15,7 +15,8 @@
 .page-sortes-date {
   display: flex;
   flex-direction: column;
-  position: relative;
+  justify-content: center;
+  height: 100%;
 
   .sortes-title {
     margin-bottom: 1rem;
@@ -26,8 +27,9 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 2rem;
     min-width: 100%;
     font-size: $fs30;
     color: $pink-dark;
@@ -37,7 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: start;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .list-links__item:active {
@@ -59,5 +61,24 @@
 
   .list-links span:hover {
     text-shadow: 0 0 3px;
+  }
+}
+@media (max-width: 360px) {
+  .sortes {
+    .sortes-title {
+      margin-bottom: 0.5rem;
+      font-size: $fs20;
+    }
+
+    .page-sortes-date {
+      .sortes-title {
+        margin-bottom: 0.5rem;
+        font-size: $fs20;
+      }
+
+      .list-links span {
+        font-size: $fs15;
+      }
+    }
   }
 }

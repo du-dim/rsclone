@@ -31,7 +31,6 @@ export const CanvasIncome = ({
       .filter((obj) => obj.amount > 0)
       .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
       .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
-    console.log(dataIncome);
     if (dataIncome.length) {
       dataIncome.forEach((obj) => {
         if (!categoriesIncomeEffect.length) categoriesIncomeEffect.push(obj.category);
