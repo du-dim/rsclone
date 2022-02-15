@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import {
   Routes, Route, NavLink, useNavigate,
@@ -30,11 +30,28 @@ export const Statistics = ({ dataChart }: IProps) => {
         <div className='date__field'>
           <div className='date__field_start'>
             <div className='date__field_end title'>Start date</div>
-            <input className='date__field_start input' type='date' name='' id='' value={dateStart} max={dateEnd} onChange={(e) => setDateStart(e.target.value)} />
+            <input
+              className='date__field_start input'
+              type='date'
+              name=''
+              id=''
+              value={dateStart}
+              max={dateEnd}
+              onChange={(e) => setDateStart(e.target.value)}
+            />
           </div>
           <div className='date__field_end'>
             <div className='date__field_end title'>End date</div>
-            <input className='date__field_end input' type='date' name='' id='' value={dateEnd} min={dateStart} max={today} onChange={(e) => setDateEnd(e.target.value)} />
+            <input
+              className='date__field_end input'
+              type='date'
+              name=''
+              id=''
+              value={dateEnd}
+              min={dateStart}
+              max={today}
+              onChange={(e) => setDateEnd(e.target.value)}
+            />
           </div>
         </div>
       </div>
@@ -44,9 +61,36 @@ export const Statistics = ({ dataChart }: IProps) => {
         <NavLink to='/Statistics/income' className='nav-link'><span>Income</span></NavLink>
       </nav>
       <Routes>
-        <Route path='/expense' element={<CanvasExpense dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
-        <Route path='income' element={<CanvasIncome dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
-        <Route path='total' element={<CanvasTotal dataChart={dataChart} dateStart={dateStart} dateEnd={dateEnd} />} />
+        <Route
+          path='/expense'
+          element={(
+            <CanvasExpense
+              dataChart={dataChart}
+              dateStart={dateStart}
+              dateEnd={dateEnd}
+            />
+)}
+        />
+        <Route
+          path='income'
+          element={(
+            <CanvasIncome
+              dataChart={dataChart}
+              dateStart={dateStart}
+              dateEnd={dateEnd}
+            />
+)}
+        />
+        <Route
+          path='total'
+          element={(
+            <CanvasTotal
+              dataChart={dataChart}
+              dateStart={dateStart}
+              dateEnd={dateEnd}
+            />
+)}
+        />
       </Routes>
     </div>
   );

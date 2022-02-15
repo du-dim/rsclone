@@ -96,7 +96,7 @@ export const useRoutes = (isAuth: boolean) => {
         <Route path='calculator' element={<Calculator />} />
         <Route path='converter' element={<Converter />} />
         <Route path='schedule' element={<Schedule />} />
-        <Route path='sorts/*' element={<Sort />} />
+        <Route path='sorts/*' element={<Sort dataInfo={dataBase} />} />
         <Route path='map' element={<Map />} />
         <Route path='addBalans' element={<AddBalans name={income} setData={setDataBase} />} />
         <Route path='subBalans' element={<SubBalans name={expense} setData={setDataBase} />} />

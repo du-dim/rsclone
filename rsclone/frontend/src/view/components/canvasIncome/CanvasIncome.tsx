@@ -20,6 +20,7 @@ export const CanvasIncome = ({
   const [data, setData] = useState<IData[]>([]);
   const width = 320;
   const height = 320;
+  console.log(data);
   useEffect(() => {
     const categoriesIncomeEffect = [] as string[];
     const dataEffect = [] as IData[];
@@ -30,7 +31,7 @@ export const CanvasIncome = ({
       .filter((obj) => obj.amount > 0)
       .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
       .filter((obj) => Number(obj.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
-
+    console.log(dataIncome);
     if (dataIncome.length) {
       dataIncome.forEach((obj) => {
         if (!categoriesIncomeEffect.length) categoriesIncomeEffect.push(obj.category);
