@@ -7,7 +7,7 @@ type IProps = {
 }
 
 export const Calc = ({ setStr }:IProps) => {
-  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '.', 'DEL', '/', '=', 'Clear'];
+  const btnArr = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '.', 'DEL', '/', '=', '<-'];
   const [result, setResult] = useState('');
 
   const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -45,11 +45,18 @@ export const Calc = ({ setStr }:IProps) => {
         <button
           key={el}
           name={el}
-          className={el === 'DEL' ? 'btn-num btn-num__del'
-            : el === '=' ? 'btn-num btn-num__calc'
-              : el === 'Сlear' ? 'btn-num btn__clear' : 'btn-num'}
+          className={
+            el === 'DEL' ? 'btn-num btn-num__del'
+              : el === '<-' ? 'btn-num btn-num__clear'
+                : el === '=' ? 'btn-num btn-num__calc'
+                  : el === '+' ? 'btn-num btn-oper'
+                    : el === '-' ? 'btn-num btn-oper'
+                      : el === '*' ? 'btn-num btn-oper'
+                        : el === '/' ? 'btn-num btn-oper'
+                          : 'btn-num btn-digit'
+}
           type='button'
-          onClick={el === '=' ? calc : el === 'DEL' ? del : el === 'Clear' ? clearString : handleClick}
+          onClick={el === '=' ? calc : el === 'DEL' ? del : el === '<-' ? clearString : handleClick}
         >
           {el}
         </button>
