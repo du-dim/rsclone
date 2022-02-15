@@ -7,6 +7,7 @@ import { IBody } from '../../../types/types';
 import { All } from '../../components/sortdates/All';
 import { Expences } from '../../components/sortdates/Expences';
 import { Incomes } from '../../components/sortdates/Incomes';
+import { ModalSorts } from '../../components/sortdates/ModalSorts';
 import './sort.scss';
 
 type IProps = {
@@ -14,6 +15,8 @@ type IProps = {
 }
 
 export const Sort = ({ dataInfo }: IProps) => {
+  const [modalActive, setModalActive] = useState(true);
+
   const todayDate = new Date().toLocaleString('en-US', {
     day: '2-digit', weekday: 'short', month: 'long',
   });
@@ -109,6 +112,7 @@ export const Sort = ({ dataInfo }: IProps) => {
             <Route path='incomes' element={<Incomes dataInfo={dataInfo} dateEnd={dateEnd} dateStart={dateStart} />} />
           </Routes>
         </div>
+        <ModalSorts modalActive={modalActive} setModalActive={setModalActive} />
       </div>
     </section>
   );

@@ -9,7 +9,6 @@ type IProps = {
 }
 
 export const Expences = ({ dateStart, dateEnd, dataInfo }: IProps) => {
-  console.log(dataInfo);
   const numDateStart = Number(dateStart.replace(/-/g, ''));
   const numDateEnd = Number(dateEnd.replace(/-/g, ''));
   const dataIntroExpences = dataInfo
