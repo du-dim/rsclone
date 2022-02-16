@@ -116,7 +116,7 @@ export const Converter:React.FC = () => {
     setAmountInFromCurrency(false);
   };
   return (
-    <section className='converter'>
+    <section className='converter-page'>
       <div className='container'>
         <article className='converter-content'>
           <h2 className='date'>{todayDate}</h2>
