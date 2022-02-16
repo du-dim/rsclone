@@ -78,6 +78,17 @@
     justify-content: space-between;
     align-items: stretch;
   }
+  .list-all__item_btn {
+    background: url('../../../../public/assets/icons/btnclick.svg') no-repeat;
+    width: 2rem;
+    height: 1rem;
+  }
+
+  .date-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.3rem;
+  }
 
   .list-revenue__item_amount,
   .green-active {

@@ -31,6 +31,7 @@ export interface IBody {
   currency: string,
   note: string,
   user_id: string,
+  _id: string,
 }
 
 export interface ILocal {
