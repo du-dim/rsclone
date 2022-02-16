@@ -2,6 +2,8 @@
 
 .date-box {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 
@@ -42,6 +44,9 @@
   background-color: #ecd8ea80;
   border-radius: 1rem;
 
+  .sourtes__title {
+    font-size: $fs20;
+  }
   .list-expences,
   .list-all,
   .list-revenue {
@@ -109,9 +114,6 @@
     font-size: $fs20;
   }
   .date-box {
-    flex-direction: column;
-    align-items: center;
-
     .input {
       font-size: $fs15;
     }

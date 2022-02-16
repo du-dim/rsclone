@@ -18,9 +18,18 @@
   align-items: center;
   height: 100%;
 
-  .sortes-title {
-    margin-bottom: 1rem;
-    font-size: $fs30;
+  .info-box {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .info-box__search {
+    display: flex;
+    flex-direction: column;
+    height: 3rem;
+    max-width: 10rem;
+    border-radius: 1rem;
+    border: 0.2rem solid $main-pink-color;
   }
 
   .list-links {
