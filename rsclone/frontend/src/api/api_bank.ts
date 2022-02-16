@@ -2,7 +2,7 @@
 export const API_ALFABANK_INFO = '';
 export const API_ALFABANK_BRANCH = 'https://developerhub.alfabank.by:8273/partner/1.0.1/public/banks?type=by&search=ALFABY2X';
 
-export const API_BELAGROPROMBANK_BRANCH_ATM_INFO = ' https://belapb.by/ExBanks.php';
+export const API_BELAGROPROMBANK_BRANCH_ATM_INFO = 'https://belapb.by/ExBanks.php';
 export const API_BELAGROPROMBANK_CURRENCY = 'https://belapb.by/CashConvRatesDaily.php?ondate=02/10/2022';
 
 // https://belarusbank.by/ru/33139/forDevelopers/api
