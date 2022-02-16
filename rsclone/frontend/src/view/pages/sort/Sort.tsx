@@ -28,13 +28,15 @@ export const Sort = ({ dataInfo }: IProps) => {
     navigate('/sorts/all');
   }, []);
 
+  const [valueSearch, setValueSearch] = useState<string>('');
+
   return (
     <section className='sortes'>
       <div className='container'>
         <div className='page-sortes-date'>
           <h3 className='date-title'>{todayDate}</h3>
           <h3 className='sortes-title'>Accounting</h3>
-          <input className='info-box__search' type='text' onChange={(event) => console.log(event.target.value)} />
+          <input className='info-box__search' type='text' onChange={(event) => setValueSearch(event.target.value)} />
           <div className='date-box'>
             <div className='date-box__start'>
               <h3 className='date-box__title'>From</h3>
@@ -100,6 +102,7 @@ export const Sort = ({ dataInfo }: IProps) => {
                   dataInfo={dataInfo}
                   dateEnd={dateEnd}
                   dateStart={dateStart}
+                  valueSearch={valueSearch}
                 />
 )}
             />
@@ -110,6 +113,7 @@ export const Sort = ({ dataInfo }: IProps) => {
                   dataInfo={dataInfo}
                   dateEnd={dateEnd}
                   dateStart={dateStart}
+                  valueSearch={valueSearch}
                 />
 )}
             />
@@ -120,6 +124,7 @@ export const Sort = ({ dataInfo }: IProps) => {
                   dataInfo={dataInfo}
                   dateEnd={dateEnd}
                   dateStart={dateStart}
+                  valueSearch={valueSearch}
                 />
 )}
             />

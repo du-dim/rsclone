@@ -8,16 +8,16 @@ type IProps = {
   dataInfo: IBody[],
   dateStart: string,
   dateEnd: string,
+  valueSearch:string,
   }
 
 export const Incomes = ({
-  dateStart, dateEnd, dataInfo,
+  dateStart, dateEnd, dataInfo, valueSearch,
 }: IProps) => {
   const [modalActive, setModalActive] = useState(false);
   const turnModal = () => {
     setModalActive(true);
   };
-
   const [activeItem, setActiveItem] = useState<IBody>();
 
   const numDateStart = Number(dateStart.replace(/-/g, ''));
@@ -26,11 +26,17 @@ export const Incomes = ({
     .filter((operation) => operation.amount > 0)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
+
+  const filterSearch = dataIntroIncomes.filter((item) => {
+    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
+      || (((String(item.amount)).includes(valueSearch))));
+  });
+
   return (
     <article className='sortes-route sortes__revenue'>
       <h3 className='sourtes__title'>List of revenues</h3>
       <div className='list-revenue'>
-        {dataIntroIncomes.map((position) => (
+        {filterSearch.map((position) => (
           <div className='list-revenue__item' key={dataIntroIncomes.indexOf(position)}>
             {/* <li className='list-revenue__item_number'>{dataIntroIncomes.indexOf(position) + 1}</li> */}
             <div className='date-info'>

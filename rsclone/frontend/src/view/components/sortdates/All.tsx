@@ -9,11 +9,12 @@ type IProps = {
   dataInfo: IBody[];
   dateStart: string;
   dateEnd: string;
+  valueSearch: string,
 
 };
 
 export const All = ({
-  dateStart, dateEnd, dataInfo,
+  dateStart, dateEnd, dataInfo, valueSearch,
 }: IProps) => {
   const [modalActive, setModalActive] = useState(false);
   const turnModal = () => {
@@ -28,11 +29,17 @@ export const All = ({
     .filter((operation) => operation.amount)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
+
+  const filterSearch = dataIntroAllOperations.filter((item) => {
+    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
+      || (((String(item.amount)).includes(valueSearch))));
+  });
+
   return (
     <article className='sortes-route sortes__all'>
       <h3 className='sourtes__title'>List of revenues and expenses</h3>
       <div className='list-all'>
-        {dataIntroAllOperations.map((position) => (
+        {filterSearch.map((position) => (
           <div className='list-all__item' key={dataIntroAllOperations.indexOf(position)}>
             {/* <li className='list-all__item_number'>{dataIntroAllOperations.indexOf(position) + 1}</li> */}
             <div className='date-info'>

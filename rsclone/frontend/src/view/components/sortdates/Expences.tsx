@@ -8,10 +8,11 @@ type IProps = {
   dataInfo: IBody[],
   dateStart: string,
   dateEnd: string,
+  valueSearch: string,
 }
 
 export const Expences = ({
-  dateStart, dateEnd, dataInfo,
+  dateStart, dateEnd, dataInfo, valueSearch,
 }: IProps) => {
   const [modalActive, setModalActive] = useState(false);
 
@@ -25,11 +26,15 @@ export const Expences = ({
     .filter((operation) => operation.amount < 0)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
+  const filterSearch = dataIntroExpences.filter((item) => {
+    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
+    || (((String(item.amount)).includes(valueSearch))));
+  });
   return (
     <article className='sortes-route sortes__expences'>
       <h3 className='sourtes__title'>List of expences</h3>
       <div className='list-expences'>
-        {dataIntroExpences.map((position) => (
+        {filterSearch.map((position) => (
           <div className='list-expences__item' key={dataIntroExpences.indexOf(position)}>
             {/* <li className='list-expences__item_number'>{dataIntroExpences.indexOf(position) + 1}</li> */}
             <div className='date-info'>
