@@ -20,7 +20,6 @@ export const CanvasIncome = ({
   const [data, setData] = useState<IData[]>([]);
   const width = 320;
   const height = 320;
-  console.log(data);
   useEffect(() => {
     const categoriesIncomeEffect = [] as string[];
     const dataEffect = [] as IData[];
@@ -57,9 +56,9 @@ export const CanvasIncome = ({
         canvasCtxRef.current = canvasRef.current.getContext('2d');
         const ctx = canvasCtxRef.current;
         ctx?.clearRect(0, 0, width, height);
-        ctx!.font = '30px Arial';
-        const dw = sumIncome.toString().length * 9;
-        ctx!.fillText(`${sumIncome}`, width / 2 - dw, height / 2 + 12, 80);
+        ctx!.font = '30px Indie Flower';
+        const dw = sumIncome.toFixed(2).toString().length * 6;
+        ctx!.fillText(`${sumIncome.toFixed(2)}`, width / 2 - dw, height / 2 + 12, 160);
         ctx!.lineWidth = 2;
         ctx!.strokeStyle = '#ff7e7e';
         ctx!.beginPath();
@@ -78,7 +77,7 @@ export const CanvasIncome = ({
           const middle = (el.startAngle + el.endAngle) / 2;
           ctx!.strokeStyle = el.color;
           ctx!.beginPath();
-          ctx!.arc(width / 2, height / 2, height / 3, middle, middle + Math.PI / 120);
+          ctx!.arc(width / 2, height / 2, height / 3 - 2, middle, middle + Math.PI / 120);
           ctx!.stroke();
         });
 
