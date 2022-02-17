@@ -1,0 +1,21 @@
+@import '../../../sass/variables&mixins.scss';
+
+.enter-sum {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  padding: 1.5rem;
+  height: 2rem;
+  width: 20rem;
+  margin-bottom: 1rem;
+  border: 2px solid $main-pink-color;
+  border-radius: 1rem;
+  font-size: $fs30;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+.enter-sum:focus {
+  border: 2px solid #086930;
+}

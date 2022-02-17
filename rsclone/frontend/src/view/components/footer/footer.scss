@@ -1,0 +1,51 @@
+@import '../../../sass/variables&mixins.scss';
+@import '../../../sass/box.scss';
+
+.footer {
+  display: flex;
+  height: 10%;
+  width: 100%;
+  background-color: $main-pink-color;
+  align-items: center;
+  justify-content: center;
+
+  &__nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    &_item {
+      height: $hf-icon;
+      width: $hf-icon;
+      align-self: center;
+      cursor: pointer;
+    }
+
+    &_item:first-child {
+      background: url('../../../../public/assets/icons/filter.svg') no-repeat;
+      background-size: cover;
+    }
+
+    &_item:nth-child(2) {
+      background: url('../../../../public/assets/icons/calculator.svg')
+        no-repeat;
+      background-size: cover;
+    }
+
+    &_item:nth-child(3) {
+      background: url('../../../../public/assets/icons/map.svg') no-repeat;
+      background-size: cover;
+    }
+
+    &_item:nth-child(4) {
+      background: url('../../../../public/assets/icons/money.svg') no-repeat;
+      background-size: cover;
+    }
+
+    &_item:nth-child(5) {
+      background: url('../../../../public/assets/icons/statistics.svg')
+        no-repeat;
+      background-size: cover;
+    }
+  }
+}

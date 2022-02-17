@@ -1,0 +1,77 @@
+@import '../../../sass/variables&mixins.scss';
+
+.authors-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 80vh;
+  padding: 1rem;
+
+  h3 {
+    margin-bottom: 2rem;
+    font-family: $fontHahdlee;
+  }
+
+  .red,
+  h3 {
+    color: rgb(115, 172, 199);
+  }
+
+  .list-authors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: $fontHahdlee;
+  }
+
+  .link-school,
+  .list-authors__item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: $fs30;
+  }
+
+  .list-authors__item:nth-child(3) {
+    margin-bottom: 2rem;
+  }
+  .name,
+  .info-project__title {
+    margin-bottom: 0.5rem;
+    color: $pink-dark;
+    font-size: $fs20;
+  }
+  .team-lide {
+    font-size: $fs30;
+    color: $colorgreen;
+  }
+
+  .describe,
+  .info-project__describe {
+    padding: 0.5rem;
+    width: 20rem;
+    border-radius: 1rem;
+    background-color: rgb(115, 172, 199);
+    font-size: $fs15;
+    font-family: $fontHahdlee;
+  }
+
+  .info,
+  .info-project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-project {
+    margin-bottom: 2rem;
+  }
+
+  .info-project__title {
+    color: red;
+  }
+}

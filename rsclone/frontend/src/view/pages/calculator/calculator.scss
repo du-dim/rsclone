@@ -1,0 +1,101 @@
+@import '../../../sass/variables&mixins.scss';
+
+.calculator {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $whitecolor;
+  font-family: $fontIndieflower;
+  height: 80%;
+
+  h3 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: $fs30;
+  }
+
+  button {
+    height: 4rem;
+    font-size: 2rem;
+    border: 5px solid #333;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+
+  .modifiers button {
+    background-color: #ccc;
+  }
+
+  .operations button {
+    background-color: orange;
+    max-width: 15rem;
+  }
+
+  .digits button {
+    background-color: #efefef;
+  }
+
+  /* All things Grid, Flexbox, Box Alignment */
+  .calculator-grid,
+  .subgrid {
+    display: grid;
+  }
+
+  .calculator-grid {
+    grid-template-areas:
+      'total total total total'
+      'modif modif modif oper'
+      'digit digit digit oper'
+      'digit digit digit oper'
+      'digit digit digit oper'
+      'digit digit digit oper';
+    grid-auto-columns: 1fr;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+  }
+
+  .show-input {
+    grid-area: total;
+    height: 5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #ccc;
+    border-radius: 1rem;
+  }
+
+  .modifiers {
+    grid-area: modif;
+  }
+
+  .operations {
+    grid-area: oper;
+  }
+
+  .digits {
+    grid-area: digit;
+  }
+
+  .show-input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 2rem;
+  }
+
+  .modifiers {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+
+  .digits {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .digits button {
+    flex: 1 0 26%;
+  }
+}

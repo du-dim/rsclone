@@ -1,0 +1,39 @@
+@import "../../../sass/variables&mixins.scss";
+.settings-container {   
+  position: absolute;    
+  width: 100%;
+  height: 100%;  
+  background-color: rgba($color: #000000, $alpha: 0.0); 
+  overflow: hidden;
+  z-index: 3;  
+}
+.settings {  
+  position: absolute;  
+  top: 10%;  
+  display: flex; 
+  height: calc(100vh - 160px);   
+  background-color: #ffffff;
+  flex-direction: column;
+  align-items:center;
+  justify-content: space-evenly;    
+  width: 50%;
+  height: 80%;   
+  border: 1px rgb(209, 206, 206) solid;
+  transition: 0.5s;
+  &__block {    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;  
+    
+    &_img {
+      display: block;
+      object-fit: cover;     
+      width: $hf-icon;
+      height: $hf-icon;      
+    }
+    &_text {
+      font-size: 20px;      
+    }
+  }  
+}

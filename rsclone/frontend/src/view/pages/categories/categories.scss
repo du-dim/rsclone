@@ -1,0 +1,46 @@
+@import '../../../sass/variables&mixins.scss';
+.page-categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 80%;  
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: $whitecolor;
+  .categories {
+    display: flex;
+    flex-direction: column;    
+    width: 47%;
+    height: 100%;    
+    row-gap: 5px;
+    &__title {
+      align-self: center;
+      font-size: $fs20;
+      font-family: $fontIndieflower;
+    }
+    &__item {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      width: 100%;
+      height: 7%;  
+      border-radius: 1rem;
+      border: 0.2rem solid $main-pink-color;    
+      &_img {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+        margin-right: 5px;
+      }
+      &_text {
+        display: flex;
+        align-items: center;
+        font-size: $fs20;
+        font-family: $fontIndieflower;        
+      }
+    }   
+  } 
+  .active {
+    background-color: rgba($color: #81b485, $alpha: 0.5);
+  }
+}

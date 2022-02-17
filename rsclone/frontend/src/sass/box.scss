@@ -1,0 +1,19 @@
+@import './variables&mixins.scss';
+
+section {
+  padding: 1.5rem;
+}
+
+h2 {
+  font-size: $fs30;
+  line-height: $fs30;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: $fs25;
+}
+
+h4 {
+  font-size: $fs30;
+}

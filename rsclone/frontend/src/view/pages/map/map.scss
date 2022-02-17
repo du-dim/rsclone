@@ -1,0 +1,18 @@
+@import '../../../sass/variables&mixins.scss';
+.page-map {  
+  height: 80%;
+  .description {
+    position: absolute;
+    width: 100%;
+    background-color: #fff9e6;   
+    z-index: 2;    
+    height: fit-content;
+    &__item {      
+      font-family: $fontIndieflower;
+      color: rgb(3, 3, 3);
+      font-size: 14px;
+      line-height: 20px;
+      padding-left: 10px;
+    }
+  }  
+}
