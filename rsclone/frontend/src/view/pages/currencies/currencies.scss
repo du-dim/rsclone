@@ -1,4 +1,10 @@
 @import '../../../sass/variables&mixins.scss';
+
 .currencies-page {
+  display: flex;
+  flex-direction: column;
+  background-color: $whitecolor;
+  font-family: $fontIndieflower;
+  text-align: center;
   height: 80%;
 }

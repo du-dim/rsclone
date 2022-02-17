@@ -32,7 +32,7 @@ export const Expences = ({
   });
   return (
     <article className='sortes-route sortes__expences'>
-      <h3 className='sourtes__title'>List of expences</h3>
+      <h3 className='sourtes__title'>List of expenses</h3>
       <div className='list-expences'>
         {filterSearch.map((position) => (
           <div className='list-expences__item' key={dataIntroExpences.indexOf(position)}>

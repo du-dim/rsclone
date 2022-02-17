@@ -71,7 +71,7 @@ export const Sort = ({ dataInfo }: IProps) => {
                   to='/sorts/expences'
                   className='list-links__item list-links__item_expences'
                 >
-                  <span>Expences</span>
+                  <span>Expenses</span>
                 </NavLink>
               </li>
               <li>

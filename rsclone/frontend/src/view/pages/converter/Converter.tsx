@@ -67,7 +67,6 @@ export const Converter:React.FC = () => {
         prepareData = data.concat(bynObj);
         prepareData.forEach((element) => {
           arrCurrencyName.push(element.Cur_Abbreviation);
-          arrCurrencyValue.push(element.Cur_OfficialRate / element.Cur_Scale);
         });
         setCurrencyOptions(arrCurrencyName);
         /* cyrrency on page */
@@ -92,7 +91,7 @@ export const Converter:React.FC = () => {
       fetch(BASE_URL)
         .then((res) => res.json())
         .then((data:ICurrent[]) => {
-          prepareData = data.concat(bynObj);
+          prepareData = data.concat(bynObj); // add BYN to data
 
           prepareData.forEach((currency) => {
             if (currency.Cur_Abbreviation === fromCurrency) {
