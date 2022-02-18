@@ -11,7 +11,7 @@ import { Banks } from './view/pages/banks/Banks';
 import { Statistics } from './view/pages/statistics/Statistics';
 import { Info } from './view/pages/info/Info';
 import { Calculator } from './view/pages/calculator/Calculator';
-import { Converter } from './view/pages/converter/Converter';
+import { Converter, ICurrent } from './view/pages/converter/Converter';
 import { Schedule } from './view/pages/schedule/Schedule';
 import { Sort } from './view/pages/sort/Sort';
 import { Map } from './view/pages/map/Map';
@@ -31,6 +31,17 @@ export const useRoutes = (isAuth: boolean) => {
   const storageIncome = localStorage.getItem('activIncome');
   const [activExpense, setActivExpense] = useState<boolean[]>(storageExpense ? JSON.parse(storageExpense) as boolean[] : Array(12).fill(true));
   const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(5).fill(true));
+  const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([]);
+
+  const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
+
+  useEffect(() => {
+    fetch(BASE_URL)
+      .then((res) => res.json())
+      .then((data:ICurrent[]) => {
+        setDataCurrency(data);
+      });
+  }, []);
 
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
@@ -89,7 +100,7 @@ export const useRoutes = (isAuth: boolean) => {
             />
           )}
         />
-        <Route path='Currencies' element={<Currencies />} />
+        <Route path='Currency' element={<Currencies dataCurrency={dataCurrency} />} />
         <Route path='Banks' element={<Banks />} />
         <Route path='Statistics/*' element={<Statistics dataChart={dataBase} />} />
         <Route path='Info' element={<Info />} />

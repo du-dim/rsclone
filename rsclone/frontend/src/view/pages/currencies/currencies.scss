@@ -5,6 +5,35 @@
   flex-direction: column;
   background-color: $whitecolor;
   font-family: $fontIndieflower;
-  text-align: center;
   height: 80%;
+}
+
+.currencies-content__title {
+  margin-bottom: 0.5rem;
+}
+.instruction-title {
+  margin-bottom: 0.5rem;
+  color: $main-pink-color;
+}
+
+.currencies-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-currency {
+  display: flex;
+  justify-content: center;
+}
+
+.list-currency {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+
+  .item-currency {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
