@@ -32,7 +32,12 @@ export const Sort = ({ dataInfo }: IProps) => {
       <div className='container'>
         <div className='page-sortes-date'>
           <h3 className='sortes-title'>Accounting</h3>
-          <input className='info-box__search' type='search' placeholder='Search' onChange={(event) => setValueSearch(event.target.value)} />
+          <input
+            className='info-box__search'
+            type='search'
+            placeholder='Search'
+            onChange={(event) => setValueSearch(event.target.value)}
+          />
           <div className='date-box'>
             <div className='date-box__start'>
               <h3 className='date-box__title'>From</h3>
