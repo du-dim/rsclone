@@ -1,32 +1,32 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
+import { ICurrent } from '../../pages/converter/Converter';
 
 interface IProps {
-  name:string,
-  currencyOptions: string[],
-  selectedCurrency: string,
-  onChangeCurrency:React.ChangeEventHandler<HTMLSelectElement>,
-  onChangeAmount:React.ChangeEventHandler<HTMLInputElement>,
-  amount: number;
+  // name:string,
+  dataCurrency: ICurrent[],
+  // arrCurencyName: string[],
+  // onChangeCurrency:React.ChangeEventHandler<HTMLSelectElement>,
+  // onChangeAmount:React.ChangeEventHandler<HTMLInputElement>,
+  // amount: number;
 }
-export default function Currencyrow(
-  {
-    name,
-    currencyOptions, selectedCurrency,
-    onChangeCurrency, amount,
-    onChangeAmount,
-  }:IProps,
-) {
+export const Currencyrow = ({ dataCurrency }:IProps) => {
+//   name,
+//   dataCurrencyAll, selectedCurrency,
+//   onChangeCurrency, amount,
+//   onChangeAmount,
+// }:IProps,
+// }
   return (
     <div className='currency-row'>
-      <input className='currency-input' type='number' value={amount} onChange={onChangeAmount} />
-      <select className='currency-select' value={selectedCurrency} onChange={onChangeCurrency}>
-        {currencyOptions.map((option) => (
-          <option value={option} key={option}>{option}</option>
+      <input className='currency-input' type='number' />
+      <select className='currency-select'>
+        {dataCurrency.map((el) => (
+          <option className='currency-option' key={el.Cur_ID}>{el.Cur_Abbreviation}</option>
         ))}
       </select>
-      <div className='name'>{name}</div>
+      <div className='name' />
     </div>
   );
-}
+};
