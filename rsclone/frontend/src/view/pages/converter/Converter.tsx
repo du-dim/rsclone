@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable dot-notation */
 import React, { useEffect, useState } from 'react';
 import { Currencyrow } from '../../components/converter/Currencyrow';
@@ -27,9 +28,9 @@ export interface ICurrent {
 
 export const Converter = () => {
   const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([]);
-  const [fromCurrency, setFromCurrency] = useState<string>('');
-  const [toCurrency, setToCurrency] = useState<string>('');
-  const [exchangeRate, setExchangeRate] = useState<number>(1);
+  const [fromCurrency, setFromCurrency] = useState<string>(''); // BYN default in option from
+  const [toCurrency, setToCurrency] = useState<string>(''); // USD default in option to
+  const [exchangeRate, setExchangeRate] = useState<number>(1); // course USD
   const [amount, setAmount] = useState<number>(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
@@ -39,8 +40,6 @@ export const Converter = () => {
   const [courseUAH, setCourseUAH] = useState<number>();
   const [coursePLN, setCoursePLN] = useState<number>();
 
-  console.log(exchangeRate);
-
   useEffect(() => {
     fetch(BASE_URL)
       .then((res) => res.json())
@@ -49,9 +48,9 @@ export const Converter = () => {
         setDataCurrency(dataIntro);
 
         const firstValueCurrency = dataIntro[dataIntro.length - 1].Cur_Abbreviation;
-        setFromCurrency(dataIntro[5].Cur_Abbreviation);// BYN default in option from
-        setToCurrency(firstValueCurrency); // USD default in option to
-        setExchangeRate(dataIntro[5].Cur_OfficialRate); // course USD
+        setFromCurrency(dataIntro[5].Cur_Abbreviation);// from usd default
+        setToCurrency(firstValueCurrency); // to byn default
+        setExchangeRate(dataIntro[5].Cur_OfficialRate);
 
         setCourseUSD(+((dataIntro[5].Cur_OfficialRate) / dataIntro[5].Cur_Scale).toFixed(4));
         setCourseRUB(+((dataIntro[17].Cur_OfficialRate) / dataIntro[17].Cur_Scale).toFixed(4));
@@ -80,10 +79,17 @@ export const Converter = () => {
     toAmount = amount;
     fromAmount = amount / exchangeRate;
   }
-
-  /* cyrrency on page */
-
-  /*-----------*/
+  console.log(fromCurrency, fromAmount, exchangeRate, toCurrency, toAmount, amountInFromCurrency);
+  useEffect(() => {
+    if (fromCurrency != null && toCurrency != null) {
+      fetch(BASE_URL)
+        .then((res) => res.json())
+        .then((data:ICurrent[]) => {
+          const dataValue:ICurrent[] = [...data, ...[bynObj]];
+          // setExchangeRate(???????????????????????); //??????????????
+        });
+    }
+  }, [fromCurrency, toCurrency]);
 
   return (
     <section className='converter-page'>
