@@ -7,9 +7,9 @@
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #fff9e6;
+  background-color: $whitecolor;
   font-family: $fontIndieflower;
-  letter-spacing: 2px;
+  letter-spacing: 2px;  
 }
 
 .page-sortes-date {
@@ -27,9 +27,13 @@
     display: flex;
     flex-direction: column;
     height: 3rem;
-    max-width: 10rem;
+    min-width: 13rem;
     border-radius: 1rem;
     border: 0.2rem solid $main-pink-color;
+    padding-left: 1rem;    
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   .list-links {
@@ -42,6 +46,8 @@
     min-width: 100%;
     font-size: $fs30;
     color: $pink-dark;
+    margin-top: 10px;
+
   }
 
   .list-links__item {
@@ -71,23 +77,24 @@
   .list-links span:hover {
     text-shadow: 0 0 3px;
   }
+  
 }
 @media (max-width: 360px) {
   .sortes {
     .sortes-title {
       margin-bottom: 0.5rem;
-      font-size: $fs20;
+      font-size: $fs30;
     }
 
     .page-sortes-date {
       .sortes-title {
         margin-bottom: 0.5rem;
-        font-size: $fs20;
+        font-size: $fs30;
       }
 
       .sortes-title {
         margin-bottom: 0.2rem;
-        font-size: $fs20;
+        font-size: $fs30;
       }
 
       .list-links span {

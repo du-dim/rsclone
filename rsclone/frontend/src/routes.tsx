@@ -89,7 +89,7 @@ export const useRoutes = (isAuth: boolean) => {
             />
           )}
         />
-        <Route path='Currencies' element={<Currencies />} />
+        <Route path='Currency' element={<Currencies />} />
         <Route path='Banks' element={<Banks />} />
         <Route path='Statistics/*' element={<Statistics dataChart={dataBase} />} />
         <Route path='Info' element={<Info />} />
