@@ -54,7 +54,7 @@ export const Incomes = ({
             </div>
             <div className='list-revenue__item_title'>{position.category}</div>
             <div className='list-revenue__item_amount'>
-              {position.amount}
+              {Number((position.amount).toFixed(2))}
               $
             </div>
           </div>

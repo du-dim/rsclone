@@ -3,16 +3,31 @@
 
 .footer {
   display: flex;
-  height: 10%;
-  width: 100%;
-  background-color: $main-pink-color;
-  align-items: center;
   justify-content: center;
+  height: 11%;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: $main-pink-color;
+  font-family: $fontIndieflower;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px 0 20px;
+  }
+
+  &__info-project {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 
   &__nav {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 0.5em;
 
     &_item {
       height: $hf-icon;
@@ -46,6 +61,53 @@
       background: url('../../../../public/assets/icons/statistics.svg')
         no-repeat;
       background-size: cover;
+    }
+  }
+
+  .list-authors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+
+    &__item {
+      &_name {
+        padding: 0.2rem;
+        color: $pink-dark;
+      }
+
+      &_team-lead {
+        padding: 0.2rem;
+        color: $whitecolor;
+      }
+
+      &_name:hover,
+      &_team-lead:hover,
+      &_rs-school:hover {
+        transition-delay: ease-in-out;
+        border: 1px solid $pink-dark;
+        border-radius: 1rem;
+        box-shadow: 0px -1px 10px 2px rgba(71, 34, 80, 0.2) inset;
+      }
+    }
+  }
+}
+
+@media (max-width: 415px) {
+  .footer {
+    &__nav {
+      &_item {
+        height: $hf-icon30;
+        width: $hf-icon30;
+      }
+    }
+  }
+  .list-authors {
+    &__item {
+      font-size: 10px;
+      &_team-lead {
+        font-size: $fs15;
+      }
     }
   }
 }

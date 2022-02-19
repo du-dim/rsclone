@@ -7,10 +7,11 @@
   justify-content: space-around;
   height: 80vh;
   padding: 1rem;
+  font-family: $fontIndieflower;
 
   h3 {
     margin-bottom: 2rem;
-    font-family: $fontHahdlee;
+    font-family: $fontIndieflower;
   }
 
   .red,
@@ -22,7 +23,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: $fontHahdlee;
   }
 
   .link-school,
