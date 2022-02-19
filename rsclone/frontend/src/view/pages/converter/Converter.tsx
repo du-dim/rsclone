@@ -27,56 +27,61 @@ export interface ICurrent {
 
 export const Converter = () => {
   const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([]);
+  const [fromCurrency, setFromCurrency] = useState<string>('');
+  const [toCurrency, setToCurrency] = useState<string>('');
+  const [exchangeRate, setExchangeRate] = useState<number>(1);
+  const [amount, setAmount] = useState<number>(1);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+
+  const [courseUSD, setCourseUSD] = useState<number>();
+  const [courseEUR, setCourseEUR] = useState<number>();
+  const [courseRUS, setCourseRUB] = useState<number>();
+  const [courseUAH, setCourseUAH] = useState<number>();
+  const [coursePLN, setCoursePLN] = useState<number>();
+
+  console.log(exchangeRate);
 
   useEffect(() => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
-        setDataCurrency([...[bynObj], ...data]);
+        const dataIntro = [...data, ...[bynObj]];
+        setDataCurrency(dataIntro);
+
+        const firstValueCurrency = dataIntro[dataIntro.length - 1].Cur_Abbreviation;
+        setFromCurrency(dataIntro[5].Cur_Abbreviation);// BYN default in option from
+        setToCurrency(firstValueCurrency); // USD default in option to
+        setExchangeRate(dataIntro[5].Cur_OfficialRate); // course USD
+
+        setCourseUSD(+((dataIntro[5].Cur_OfficialRate) / dataIntro[5].Cur_Scale).toFixed(4));
+        setCourseRUB(+((dataIntro[17].Cur_OfficialRate) / dataIntro[17].Cur_Scale).toFixed(4));
+        setCourseEUR(+((dataIntro[6].Cur_OfficialRate) / dataIntro[6].Cur_Scale).toFixed(4));
+        setCourseUAH(+((dataIntro[3].Cur_OfficialRate) / dataIntro[3].Cur_Scale).toFixed(4));
+        setCoursePLN(+((dataIntro[7].Cur_OfficialRate) / dataIntro[7].Cur_Scale).toFixed(4));
       });
   }, []);
 
-  console.log(dataCurrency);
-  // const dataCurrencyAll:ICurrent[] = [...dataCurrency];
-  // dataCurrencyAll.unshift(bynObj);
+  const handleFromAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    setAmount(Number(e.currentTarget.value));
+    setAmountInFromCurrency(true);
+  };
 
-  // const [fromCurrency, setFromCurrency] = useState<string>('');
-  // const [toCurrency, setToCurrency] = useState<string>('');
-  // const objUSD = dataCurrencyAll.filter((el) => el.Cur_Abbreviation === 'USD');
+  const handleToAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    setAmount(Number(e.currentTarget.value));
+    setAmountInFromCurrency(false);
+  };
 
-  // const USD = objUSD.map((el) => el.Cur_Abbreviation);
-  // console.log(USD[0]);
-
-  // const arrCurrencyValue:number[] = [];
-  // const [currencyOptions, setCurrencyOptions] = useState<string[]>([]);
-  // const [exchangeRate, setExchangeRate] = useState<number>(1);
-  // const [amount, setAmount] = useState<number>(1);
-  // const [amountInFromCurrency, setAmountInFromCurrency] = useState<boolean>(true);
-  // const [nameCurrency, setnameCurrency] = useState<string>('');
-
-  // const [courseUSD, setCourseUSD] = useState<number>();
-  // const [courseEUR, setCourseEUR] = useState<number>();
-  // const [courseRUS, setCourseRUB] = useState<number>();
-  // const [courseUAH, setCourseUAH] = useState<number>();
-  // const [coursePLN, setCoursePLN] = useState<number>();
-
-  // let toAmount:number;
-  // let fromAmount:number;
-  // if (amountInFromCurrency) {
-  //   fromAmount = +amount.toFixed(4);
-  //   toAmount = +amount.toFixed(4) * exchangeRate;
-  // } else {
-  //   toAmount = +amount.toFixed(4);
-  //   fromAmount = +amount.toFixed(4) / exchangeRate;
-  // }
+  let toAmount:number;
+  let fromAmount:number;
+  if (amountInFromCurrency) {
+    fromAmount = amount;
+    toAmount = amount * exchangeRate;
+  } else {
+    toAmount = amount;
+    fromAmount = amount / exchangeRate;
+  }
 
   /* cyrrency on page */
-
-  // setCourseUSD(+((prepareData[arrCurrencyName.indexOf('USD')].Cur_OfficialRate)).toFixed(4));
-  // setCourseRUB(+((prepareData[arrCurrencyName.indexOf('RUB')].Cur_OfficialRate) / 100).toFixed(4));
-  // setCourseEUR(+((prepareData[arrCurrencyName.indexOf('EUR')].Cur_OfficialRate)).toFixed(4));
-  // setCourseUAH(+((prepareData[arrCurrencyName.indexOf('UAH')].Cur_OfficialRate) / 10).toFixed(4));
-  // setCoursePLN(+((prepareData[arrCurrencyName.indexOf('PLN')].Cur_OfficialRate) / 10).toFixed(4));
 
   /*-----------*/
 
@@ -90,17 +95,25 @@ export const Converter = () => {
             <div className='user-convert__box'>
               <Currencyrow
                 dataCurrency={dataCurrency}
+                selectedCurrency={fromCurrency}
+                onChangeCurrency={(e) => (setFromCurrency(e.target.value))}
+                amount={fromAmount}
+                onChangeAmount={handleFromAmountChange}
               />
               <div className='equals'>=</div>
               <Currencyrow
                 dataCurrency={dataCurrency}
+                selectedCurrency={toCurrency}
+                onChangeCurrency={(e) => (setToCurrency(e.target.value))}
+                amount={toAmount}
+                onChangeAmount={handleToAmountChange}
               />
             </div>
           </div>
           <div className='live-convert'>
             <h2 className='live-convert__title'>Live Exchange Rates</h2>
             <h3 className='live-convert__title'>(BYN)</h3>
-            {/* <ul className='list-curriency'>
+            <ul className='list-curriency'>
               <li className='item-curriency'>
                 <h3 className='symbol'>USD</h3>
                 <div className='value'>{courseUSD}</div>
@@ -121,7 +134,7 @@ export const Converter = () => {
                 <h3 className='symbol'>PLN</h3>
                 <div className='value'>{coursePLN}</div>
               </li>
-            </ul> */}
+            </ul>
           </div>
         </article>
       </div>
