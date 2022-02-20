@@ -13,6 +13,7 @@ export interface IBalans {
   PLN: number,
   GBP: number,
   CNY: number,
+  BYN: number,
 }
 
 const balans: Schema = new Schema({
@@ -29,6 +30,7 @@ const balans: Schema = new Schema({
   PLN: { type: Number, required: true },
   GBP: { type: Number, required: true },
   CNY: { type: Number, required: true },
+  BYN: { type: Number, required: true },
 });
 
 export const Balans = model<IBalans>('Balans', balans);

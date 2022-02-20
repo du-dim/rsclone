@@ -19,7 +19,7 @@ import { AddBalans } from './view/pages/addBalans/AddBalans';
 import { SubBalans } from './view/pages/subBalans/SubBalans';
 import { AddCategories } from './view/pages/addCategories/AddCategories';
 import { SubCategories } from './view/pages/subCategories/SubCategories';
-import { IBody, ICurrent } from './types/types';
+import { IBody, ICurrent, TCurrency } from './types/types';
 
 export const useRoutes = (isAuth: boolean) => {
   const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
@@ -32,6 +32,7 @@ export const useRoutes = (isAuth: boolean) => {
   const storageIncome = localStorage.getItem('activIncome');
   const [activExpense, setActivExpense] = useState<boolean[]>(storageExpense ? JSON.parse(storageExpense) as boolean[] : Array(12).fill(true));
   const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(5).fill(true));
+  const [currency, setCurrency] = useState<TCurrency>('BYN');
 
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
@@ -57,6 +58,10 @@ export const useRoutes = (isAuth: boolean) => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem('saveCurrency')) {
+      const saveCurrency = localStorage.getItem('saveCurrency') as TCurrency;
+      setCurrency(saveCurrency);
+    }
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
@@ -71,9 +76,9 @@ export const useRoutes = (isAuth: boolean) => {
   useEffect(() => {
     setExpense('');
     setIncome('');
-    const sum = dataBase.length > 0 ? dataBase.map((data) => data.amount).reduce((a, b) => a + b) : 0;
-    setCapital(sum);
-  }, [dataBase]);
+    const sum = dataBase.length > 0 ? dataBase.map((data) => data.amount * (data[data.currency] / data[currency])).reduce((a, b) => a + b) : 0;
+    setCapital(Math.round(sum * 100) / 100);
+  }, [dataBase, currency]);
 
   useEffect(() => {
     setActivExpense(activExpense);
@@ -85,7 +90,7 @@ export const useRoutes = (isAuth: boolean) => {
   return (
     isAuth ? (
       <Routes>
-        <Route path='home' element={<Home sum={capital} />} />
+        <Route path='home' element={<Home sum={capital} currency={currency} />} />
         <Route path='Accounts' element={<Accounts />} />
         <Route
           path='Categories'
@@ -98,7 +103,7 @@ export const useRoutes = (isAuth: boolean) => {
             />
           )}
         />
-        <Route path='Currency' element={<Currencies />} />
+        <Route path='Currency' element={<Currencies setCurrency={setCurrency} />} />
         <Route path='Banks' element={<Banks />} />
         <Route path='Statistics/*' element={<Statistics dataChart={dataBase} />} />
         <Route path='Info' element={<Info />} />
