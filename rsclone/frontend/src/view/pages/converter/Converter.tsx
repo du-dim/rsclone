@@ -6,9 +6,8 @@ import { Currencyrow } from '../../components/сurrencyrow/Currencyrow';
 import { Today } from '../../components/data/Today';
 import { InputConverter } from '../../components/inputConverter/InputConverter';
 import { Rate } from '../../components/rate/Rate';
+import { ICurrent } from '../../../types/types';
 import './converter.scss';
-
-const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
 
 const bynObj = {
   Cur_ID: 400,
@@ -18,16 +17,6 @@ const bynObj = {
   Cur_Name: 'Беларусский рубль',
   Cur_OfficialRate: 1.0,
 };
-
-export interface ICurrent {
-  Cur_Abbreviation: string,
-  Cur_OfficialRate: number,
-  Cur_ID: number,
-  Date:string,
-  Cur_Scale:number,
-  Cur_Name:string,
-  }
-
 export const Converter = () => {
   const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN', 'GBP', 'CNY'];
   const [arrRate, setRate] = useState<number[]>([]);
@@ -40,14 +29,13 @@ export const Converter = () => {
   const [focusSecond, setFocusSecond] = useState(false);
 
   useEffect(() => {
-    fetch(BASE_URL)
-      .then((res) => res.json())
-      .then((data:ICurrent[]) => {
-        const dataIntro = [bynObj, ...data];
-        setDataCurrency(dataIntro);
-        const rates = arrCurrency.map((el) => data.find((obj) => obj.Cur_Abbreviation === el)) as ICurrent[];
-        setRate(rates.map((obj) => Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000));
-      });
+    const dataStorege = sessionStorage.getItem('dataCurrency');
+    if (dataStorege) {
+      const dataIntro = [bynObj, ...JSON.parse(dataStorege)];
+      setDataCurrency(dataIntro);
+      const rates = arrCurrency.map((el) => JSON.parse(dataStorege).find((obj: ICurrent) => obj.Cur_Abbreviation === el)) as ICurrent[];
+      setRate(rates.map((obj) => Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000));
+    }
   }, []);
 
   useEffect(() => {

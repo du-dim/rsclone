@@ -19,9 +19,10 @@ import { AddBalans } from './view/pages/addBalans/AddBalans';
 import { SubBalans } from './view/pages/subBalans/SubBalans';
 import { AddCategories } from './view/pages/addCategories/AddCategories';
 import { SubCategories } from './view/pages/subCategories/SubCategories';
-import { IBody } from './types/types';
+import { IBody, ICurrent } from './types/types';
 
 export const useRoutes = (isAuth: boolean) => {
+  const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
   const [capital, setCapital] = useState(0);
   const [userId, setUserId] = useState('');
   const [dataBase, setDataBase] = useState<IBody[]>([]);
@@ -54,6 +55,14 @@ export const useRoutes = (isAuth: boolean) => {
       }
     } else console.log('none');
   };
+
+  useEffect(() => {
+    fetch(BASE_URL)
+      .then((res) => res.json())
+      .then((data:ICurrent[]) => {
+        sessionStorage.setItem('dataCurrency', JSON.stringify(data));
+      });
+  }, []);
 
   useEffect(() => {
     dataBalans();

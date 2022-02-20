@@ -6,6 +6,13 @@ export interface IBalans {
   category: string,
   note: string,
   user_id: Schema.Types.ObjectId,
+  USD: number,
+  EUR: number,
+  RUB: number,
+  UAH: number,
+  PLN: number,
+  GBP: number,
+  CNY: number,
 }
 
 const balans: Schema = new Schema({
@@ -15,6 +22,13 @@ const balans: Schema = new Schema({
   category: { type: String, required: true },
   note: { type: String, required: true },
   user_id: { type: String, required: true },
+  USD: { type: Number, required: true },
+  EUR: { type: Number, required: true },
+  RUB: { type: Number, required: true },
+  UAH: { type: Number, required: true },
+  PLN: { type: Number, required: true },
+  GBP: { type: Number, required: true },
+  CNY: { type: Number, required: true },
 });
 
 export const Balans = model<IBalans>('Balans', balans);

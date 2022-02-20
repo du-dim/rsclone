@@ -8,13 +8,17 @@ import { Note } from '../../components/note/Note';
 import { Result } from '../../components/result/Result';
 import { File } from '../../components/file/File';
 import { Currency } from '../../components/currency/Currency';
-import { IBody } from '../../../types/types';
+import { IBody, ICurrent } from '../../../types/types';
+import { bynObj } from '../../../data/const';
 import './addBalans.scss';
 
 export interface IDATE {
   year: string,
   month: string,
   day: string
+}
+export interface ICurrentRate {
+  [key: string] : number
 }
 
 type IProps = {
@@ -23,10 +27,12 @@ type IProps = {
 }
 
 export const AddBalans = ({ name, setData }:IProps) => {
+  const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN', 'GBP', 'CNY'];
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
   const [value, setValue] = useState('');
   const [noteValue, setNoteValue] = useState('');
+  const [objRate, setObjRate] = useState<ICurrentRate[]>([]);
   const linkCategory = '../addCategories';
   const linkIcon = 'assets/icons/';
   const time = new Date().getTime() + 3 * 60 * 60 * 1000;
@@ -34,12 +40,17 @@ export const AddBalans = ({ name, setData }:IProps) => {
     day: '2-digit', weekday: 'short', month: 'long',
   });
   const form = {
-    amount: 0, currency: 'USD', date: new Date(time).toISOString(), category: '-', note: '', user_id: '-',
+    amount: 0, currency: 'USD', date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0,
   };
 
   useEffect(() => {
     const amountLocal = localStorage.getItem('amount') ? localStorage.getItem('amount') as string : '';
     const noteLocal = localStorage.getItem('note') ? localStorage.getItem('note') as string : '';
+    const dataStorage = sessionStorage.getItem('dataCurrency');
+    const dataCurrency = dataStorage ? JSON.parse(dataStorage) as ICurrent[] : [bynObj];
+    const currentRate = dataCurrency.filter((obj) => arrCurrency.includes(obj.Cur_Abbreviation));
+    const map = currentRate.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
+    setObjRate(Object.fromEntries(map));
     setValue(amountLocal);
     setNoteValue(noteLocal);
   }, []);
@@ -57,11 +68,12 @@ export const AddBalans = ({ name, setData }:IProps) => {
         body: JSON.stringify({
           ...form,
           amount: Number(value),
-          currency: 'USD',
+          currency: localStorage.getItem('saveCurrency') ? localStorage.getItem('saveCurrency') : 'BYN',
           date: new Date(time).toISOString(),
           note: noteValue === '' ? '-' : noteValue,
           user_id: userId,
           category: name,
+          ...objRate,
         }),
       };
       try {

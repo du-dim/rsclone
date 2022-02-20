@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import { ICurrent } from '../../pages/converter/Converter';
+import { ICurrent } from '../../../types/types';
 
 interface IProps {
   dataCurrency: ICurrent[],
