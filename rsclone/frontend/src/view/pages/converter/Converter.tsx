@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable dot-notation */
 import React, { useEffect, useState } from 'react';
-import { Currencyrow } from '../../components/converter/Currencyrow';
+import { Currencyrow } from '../../components/сurrencyrow/Currencyrow';
 import { Today } from '../../components/data/Today';
-// import { Userconvert } from '../../components/converter/Userconvert';
+import { InputConverter } from '../../components/inputConverter/InputConverter';
+import { Rate } from '../../components/rate/Rate';
 import './converter.scss';
 
 const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
@@ -27,69 +29,54 @@ export interface ICurrent {
   }
 
 export const Converter = () => {
-  const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([]);
-  const [fromCurrency, setFromCurrency] = useState<string>(''); // BYN default in option from
-  const [toCurrency, setToCurrency] = useState<string>(''); // USD default in option to
-  const [exchangeRate, setExchangeRate] = useState<number>(1); // course USD
-  const [amount, setAmount] = useState<number>(1);
-  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
-
-  const [courseUSD, setCourseUSD] = useState<number>();
-  const [courseEUR, setCourseEUR] = useState<number>();
-  const [courseRUS, setCourseRUB] = useState<number>();
-  const [courseUAH, setCourseUAH] = useState<number>();
-  const [coursePLN, setCoursePLN] = useState<number>();
+  const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN'];
+  const [arrRate, setRate] = useState<number[]>([]);
+  const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([bynObj]);
+  const [currencyFirst, setCurrencyFirst] = useState('BYN');
+  const [currencySecond, setCurrencySecond] = useState('BYN');
+  const [amountFirst, setAmountFirst] = useState(1);
+  const [amountSecond, setAmountSecond] = useState(1);
+  const [focusFirst, setFocusFirst] = useState(false);
+  const [focusSecond, setFocusSecond] = useState(false);
 
   useEffect(() => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
-        const dataIntro = [...data, ...[bynObj]];
+        const dataIntro = [bynObj, ...data];
         setDataCurrency(dataIntro);
-
-        const firstValueCurrency = dataIntro[dataIntro.length - 1].Cur_Abbreviation;
-        setFromCurrency(dataIntro[5].Cur_Abbreviation);// from usd default
-        setToCurrency(firstValueCurrency); // to byn default
-        setExchangeRate(dataIntro[5].Cur_OfficialRate);
-
-        setCourseUSD(+((dataIntro[5].Cur_OfficialRate) / dataIntro[5].Cur_Scale).toFixed(4));
-        setCourseRUB(+((dataIntro[17].Cur_OfficialRate) / dataIntro[17].Cur_Scale).toFixed(4));
-        setCourseEUR(+((dataIntro[6].Cur_OfficialRate) / dataIntro[6].Cur_Scale).toFixed(4));
-        setCourseUAH(+((dataIntro[3].Cur_OfficialRate) / dataIntro[3].Cur_Scale).toFixed(4));
-        setCoursePLN(+((dataIntro[7].Cur_OfficialRate) / dataIntro[7].Cur_Scale).toFixed(4));
+        const rates = arrCurrency.map((el) => data.find((obj) => obj.Cur_Abbreviation === el)) as ICurrent[];
+        setRate(rates.map((obj) => Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000));
       });
   }, []);
 
-  const handleFromAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    setAmount(Number(e.currentTarget.value));
-    setAmountInFromCurrency(true);
-  };
-
-  const handleToAmountChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    setAmount(Number(e.currentTarget.value));
-    setAmountInFromCurrency(false);
-  };
-
-  let toAmount:number;
-  let fromAmount:number;
-  if (amountInFromCurrency) {
-    fromAmount = amount;
-    toAmount = amount * exchangeRate;
-  } else {
-    toAmount = amount;
-    fromAmount = amount / exchangeRate;
-  }
-  console.log(fromCurrency, fromAmount, exchangeRate, toCurrency, toAmount, amountInFromCurrency);
   useEffect(() => {
-    if (fromCurrency != null && toCurrency != null) {
-      fetch(BASE_URL)
-        .then((res) => res.json())
-        .then((data:ICurrent[]) => {
-          const dataValue:ICurrent[] = [...data, ...[bynObj]];
-          // setExchangeRate(???????????????????????); //??????????????
-        });
+    if (!focusFirst && focusSecond) {
+      const dataFirst = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencyFirst)[0];
+      const dataSecond = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencySecond)[0];
+      setAmountFirst(Math.round((amountSecond * dataSecond.Cur_OfficialRate * dataFirst.Cur_Scale * 10000) / (dataFirst.Cur_OfficialRate * dataSecond.Cur_Scale)) / 10000);
     }
-  }, [fromCurrency, toCurrency]);
+  }, [amountSecond]);
+
+  useEffect(() => {
+    if (!focusSecond && focusFirst) {
+      const dataFirst = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencyFirst)[0];
+      const dataSecond = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencySecond)[0];
+      setAmountSecond(Math.round((amountFirst * dataFirst.Cur_OfficialRate * dataSecond.Cur_Scale * 10000) / (dataSecond.Cur_OfficialRate * dataFirst.Cur_Scale)) / 10000);
+    }
+  }, [amountFirst]);
+
+  useEffect(() => {
+    const dataFirst = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencyFirst)[0];
+    const dataSecond = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencySecond)[0];
+    setAmountSecond(Math.round((amountFirst * dataFirst.Cur_OfficialRate * dataSecond.Cur_Scale * 10000) / (dataSecond.Cur_OfficialRate * dataFirst.Cur_Scale)) / 10000);
+  }, [currencySecond]);
+
+  useEffect(() => {
+    const dataFirst = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencyFirst)[0];
+    const dataSecond = dataCurrency.filter((obj) => obj.Cur_Abbreviation === currencySecond)[0];
+    setAmountFirst(Math.round((amountSecond * dataSecond.Cur_OfficialRate * dataFirst.Cur_Scale * 10000) / (dataFirst.Cur_OfficialRate * dataSecond.Cur_Scale)) / 10000);
+  }, [currencyFirst]);
 
   return (
     <section className='converter-page'>
@@ -99,48 +86,37 @@ export const Converter = () => {
           <div className='user-convert'>
             <h2 className='user-convert__title'>Converter</h2>
             <div className='user-convert__box'>
-              <Currencyrow
-                dataCurrency={dataCurrency}
-                selectedCurrency={fromCurrency}
-                onChangeCurrency={(e) => (setFromCurrency(e.target.value))}
-                amount={fromAmount}
-                onChangeAmount={handleFromAmountChange}
-              />
+              <div className='currency-row'>
+                <InputConverter
+                  amount={amountFirst}
+                  setAmount={setAmountFirst}
+                  setFocus={setFocusFirst}
+                />
+                <Currencyrow
+                  dataCurrency={dataCurrency}
+                  setCurrency={setCurrencyFirst}
+                />
+              </div>
               <div className='equals'>=</div>
-              <Currencyrow
-                dataCurrency={dataCurrency}
-                selectedCurrency={toCurrency}
-                onChangeCurrency={(e) => (setToCurrency(e.target.value))}
-                amount={toAmount}
-                onChangeAmount={handleToAmountChange}
-              />
+              <div className='currency-row'>
+                <InputConverter
+                  amount={amountSecond}
+                  setAmount={setAmountSecond}
+                  setFocus={setFocusSecond}
+                />
+                <Currencyrow
+                  dataCurrency={dataCurrency}
+                  setCurrency={setCurrencySecond}
+                />
+              </div>
             </div>
           </div>
           <div className='live-convert'>
             <h2 className='live-convert__title'>Live Exchange Rates</h2>
             <h3 className='live-convert__title'>(BYN)</h3>
-            <ul className='list-curriency'>
-              <li className='item-curriency'>
-                <h3 className='symbol'>USD</h3>
-                <div className='value'>{courseUSD}</div>
-              </li>
-              <li className='item-curriency'>
-                <h3 className='symbol'>EUR</h3>
-                <div className='value'>{courseEUR}</div>
-              </li>
-              <li className='item-curriency'>
-                <h3 className='symbol'>RUB</h3>
-                <div className='value'>{courseRUS}</div>
-              </li>
-              <li className='item-curriency'>
-                <h3 className='symbol'>UAH</h3>
-                <div className='value'>{courseUAH}</div>
-              </li>
-              <li className='item-curriency'>
-                <h3 className='symbol'>PLN</h3>
-                <div className='value'>{coursePLN}</div>
-              </li>
-            </ul>
+            <div className='list-curriency'>
+              {arrCurrency.map((el, i) => <Rate name={el} value={arrRate[i]} />)}
+            </div>
           </div>
         </article>
       </div>
