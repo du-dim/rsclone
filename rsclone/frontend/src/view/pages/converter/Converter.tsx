@@ -80,45 +80,41 @@ export const Converter = () => {
 
   return (
     <section className='converter-page'>
-      <div className='container'>
-        <article className='converter-content'>
-          <Today />
-          <div className='user-convert'>
-            <h2 className='user-convert__title'>Converter</h2>
-            <div className='user-convert__box'>
-              <div className='currency-row'>
-                <InputConverter
-                  amount={amountFirst}
-                  setAmount={setAmountFirst}
-                  setFocus={setFocusFirst}
-                />
-                <Currencyrow
-                  dataCurrency={dataCurrency}
-                  setCurrency={setCurrencyFirst}
-                />
-              </div>
-              <div className='equals'>=</div>
-              <div className='currency-row'>
-                <InputConverter
-                  amount={amountSecond}
-                  setAmount={setAmountSecond}
-                  setFocus={setFocusSecond}
-                />
-                <Currencyrow
-                  dataCurrency={dataCurrency}
-                  setCurrency={setCurrencySecond}
-                />
-              </div>
-            </div>
+      <Today />
+      <div className='user-convert'>
+        <h2 className='user-convert__title'>Converter</h2>
+        <div className='user-convert__box'>
+          <div className='currency-row'>
+            <InputConverter
+              amount={amountFirst}
+              setAmount={setAmountFirst}
+              setFocus={setFocusFirst}
+            />
+            <Currencyrow
+              dataCurrency={dataCurrency}
+              setCurrency={setCurrencyFirst}
+            />
           </div>
-          <div className='live-convert'>
-            <h2 className='live-convert__title'>Live Exchange Rates</h2>
-            <h3 className='live-convert__title'>(BYN)</h3>
-            <div className='list-curriency'>
-              {arrCurrency.map((el, i) => <Rate name={el} value={arrRate[i]} />)}
-            </div>
+          <div className='equals'>=</div>
+          <div className='currency-row'>
+            <InputConverter
+              amount={amountSecond}
+              setAmount={setAmountSecond}
+              setFocus={setFocusSecond}
+            />
+            <Currencyrow
+              dataCurrency={dataCurrency}
+              setCurrency={setCurrencySecond}
+            />
           </div>
-        </article>
+        </div>
+      </div>
+      <div className='live-convert'>
+        <h2 className='live-convert__title'>Live Exchange Rates</h2>
+        <h3 className='live-convert__title'>(BYN)</h3>
+        <div className='list-curriency'>
+          {arrCurrency.map((el, i) => <Rate name={el} value={arrRate[i]} key={el} />)}
+        </div>
       </div>
     </section>
   );
