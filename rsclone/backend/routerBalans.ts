@@ -9,6 +9,13 @@ interface IBody {
   category: string,
   note: string,
   user_id: string,
+  USD: number,
+  EUR: number,
+  RUB: number,
+  UAH: number,
+  PLN: number,
+  GBP: number,
+  CNY: number,
 }
 
 const routerBalans = Router();
@@ -16,10 +23,10 @@ const routerBalans = Router();
 routerBalans.post('/balans', async (req: Request, res: Response) => {
   try {
     const {
-      amount, currency, date, category, note, user_id,
+      amount, currency, date, category, note, user_id, USD, EUR, RUB, UAH, PLN, GBP, CNY,
     } = req.body as IBody;
     const balans = new Balans({
-      amount, currency, date, category, note, user_id,
+      amount, currency, date, category, note, user_id, USD, EUR, RUB, UAH, PLN, GBP, CNY,
     });
     await balans.save();
     const balansUser = await Balans.find({ user_id });

@@ -21,9 +21,15 @@ export enum Links {
   Kate = 'https://github.com/shaustruk/'
 }
 
-export enum Converter {
-
+export interface ICurrent {
+  Cur_Abbreviation: string,
+  Cur_OfficialRate: number,
+  Cur_ID: number,
+  Date:string,
+  Cur_Scale:number,
+  Cur_Name:string,
 }
+
 export interface IBody {
   amount: number,
   date: string,
@@ -32,6 +38,13 @@ export interface IBody {
   note: string,
   user_id: string,
   _id: string,
+  USD: number,
+  EUR: number,
+  RUB: number,
+  UAH: number,
+  PLN: number,
+  GBP: number,
+  CNY: number,
 }
 
 export interface ILocal {

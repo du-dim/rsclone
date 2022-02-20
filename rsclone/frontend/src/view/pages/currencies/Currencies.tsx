@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { ICurrent } from '../converter/Converter';
+import { ICurrent } from '../../../types/types';
 import './currencies.scss';
 
-const BASE_URL = 'https://www.nbrb.by/api/exrates/rates?periodicity=0';
-const bynObj = {
-  Cur_ID: 400,
-  Date: '2022-02-12T00:00:00',
-  Cur_Abbreviation: 'BYN',
-  Cur_Scale: 1,
-  Cur_Name: 'Беларусский рубль',
-  Cur_OfficialRate: 1.0,
-};
 export const Currencies = () => {
+  const bynObj = {
+    Cur_ID: 400,
+    Date: '2022-02-12T00:00:00',
+    Cur_Abbreviation: 'BYN',
+    Cur_Scale: 1,
+    Cur_Name: 'Беларусский рубль',
+    Cur_OfficialRate: 1.0,
+  };
   const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN', 'GBP', 'CNY'];
   const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([bynObj]);
   const [classActiv, setClassActiv] = useState([true]);
@@ -22,16 +21,15 @@ export const Currencies = () => {
   };
 
   useEffect(() => {
-    fetch(BASE_URL)
-      .then((res) => res.json())
-      .then((data:ICurrent[]) => {
-        const datafilter = data.filter((obj) => arrCurrency.includes(obj.Cur_Abbreviation));
-        setDataCurrency([bynObj, ...datafilter]);
-        if (localStorage.getItem('saveCurrency')) {
-          const save = localStorage.getItem('saveCurrency');
-          setClassActiv([bynObj, ...datafilter].map((e) => (e.Cur_Abbreviation === save)));
-        }
-      });
+    const dataStorege = sessionStorage.getItem('dataCurrency');
+    if (dataStorege) {
+      const datafilter = JSON.parse(dataStorege).filter((obj:ICurrent) => arrCurrency.includes(obj.Cur_Abbreviation));
+      setDataCurrency([bynObj, ...datafilter]);
+      if (localStorage.getItem('saveCurrency')) {
+        const save = localStorage.getItem('saveCurrency');
+        setClassActiv([bynObj, ...datafilter].map((e) => (e.Cur_Abbreviation === save)));
+      }
+    }
   }, []);
 
   return (

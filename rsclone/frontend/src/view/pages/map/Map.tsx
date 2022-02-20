@@ -5,10 +5,10 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-import dataBelarusbankATM from '../../../api/dataBelarusbankATM.json';
-import dataBelarusbankBranch from '../../../api/dataBelarusbankBranch.json';
-import dataBelarusbankInfo from '../../../api/dataBelarusbankInfo.json';
-import dataBelapb from '../../../api/dataBelapb.json';
+import dataBelarusbankATM from '../../../data/dataBelarusbankATM.json';
+import dataBelarusbankBranch from '../../../data/dataBelarusbankBranch.json';
+import dataBelarusbankInfo from '../../../data/dataBelarusbankInfo.json';
+import dataBelapb from '../../../data/dataBelapb.json';
 import {
   IResultBank, IBelarusbankATM, IBelarusbankInfo, IBelarusbankBranch, IBelapbList,
 } from '../../../types/types';
