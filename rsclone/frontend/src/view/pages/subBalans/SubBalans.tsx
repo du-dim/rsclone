@@ -30,6 +30,7 @@ export const SubBalans = ({ name, setData }:IProps) => {
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
   const [value, setValue] = useState('');
+  const [currency, setCurrency] = useState('BYN');
   const [noteValue, setNoteValue] = useState('');
   const [objRate, setObjRate] = useState<ICurrentRate[]>([]);
   const linkCategory = '../subCategories';
@@ -39,7 +40,7 @@ export const SubBalans = ({ name, setData }:IProps) => {
     day: '2-digit', weekday: 'short', month: 'long',
   });
   const form = {
-    amount: 0, currency: 'USD', date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0,
+    amount: 0, currency, date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0,
   };
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export const SubBalans = ({ name, setData }:IProps) => {
         body: JSON.stringify({
           ...form,
           amount: 0 - Number(value),
-          currency: 'USD',
+          currency,
           date: new Date(time).toISOString(),
           note: noteValue === '' ? '-' : noteValue,
           user_id: userId,
@@ -94,7 +95,7 @@ export const SubBalans = ({ name, setData }:IProps) => {
     <section className='section'>
       <h4>{todayDate}</h4>
       <form className='form-enter' action='' id='form-enter-sum'>
-        <Currency />
+        <Currency setCurrency={setCurrency} />
         <Result str={value} />
         <Note str={noteValue} setStr={setNoteValue} />
         <File />

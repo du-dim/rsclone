@@ -6,14 +6,23 @@
   gap: 0.5rem;
   cursor: pointer;
   z-index: 2;    
-  &-type{      
-    font-size: $fs20;     
+  &-select {          
+    font-size: 16px;     
+    font-family: $fontIndieflower;
     align-self: flex-end;     
-  }
-  &-img {
-    width: 2rem;
-    height: 2rem;
-    background: url('../../../../public/assets/icons/dollars.svg');
-    background-size: cover;      
+    background-color: rgba(216, 233, 250, 0.938);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }   
+  &-option {      
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 16px;     
+    font-family: $fontIndieflower;
+    align-self: flex-end;     
+    background-color: rgb(226, 198, 233);
+    border-radius: 8px;
   }
 }
