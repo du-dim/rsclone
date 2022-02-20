@@ -41,7 +41,7 @@ export const AddBalans = ({ name, setData }:IProps) => {
     day: '2-digit', weekday: 'short', month: 'long',
   });
   const form = {
-    amount: 0, currency, date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0,
+    amount: 0, currency, date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0, BYN: 1,
   };
 
   useEffect(() => {
