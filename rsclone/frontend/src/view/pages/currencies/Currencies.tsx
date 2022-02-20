@@ -12,6 +12,7 @@ const bynObj = {
   Cur_OfficialRate: 1.0,
 };
 export const Currencies = () => {
+  const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN', 'GBP', 'CNY'];
   const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([bynObj]);
   const [classActiv, setClassActiv] = useState([true]);
 
@@ -24,10 +25,11 @@ export const Currencies = () => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
-        setDataCurrency([bynObj, ...data]);
+        const datafilter = data.filter((obj) => arrCurrency.includes(obj.Cur_Abbreviation));
+        setDataCurrency([bynObj, ...datafilter]);
         if (localStorage.getItem('saveCurrency')) {
           const save = localStorage.getItem('saveCurrency');
-          setClassActiv([bynObj, ...data].map((e) => (e.Cur_Abbreviation === save)));
+          setClassActiv([bynObj, ...datafilter].map((e) => (e.Cur_Abbreviation === save)));
         }
       });
   }, []);

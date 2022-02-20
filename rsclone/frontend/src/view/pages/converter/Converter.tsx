@@ -29,7 +29,7 @@ export interface ICurrent {
   }
 
 export const Converter = () => {
-  const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN'];
+  const arrCurrency = ['USD', 'EUR', 'RUB', 'UAH', 'PLN', 'GBP', 'CNY'];
   const [arrRate, setRate] = useState<number[]>([]);
   const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([bynObj]);
   const [currencyFirst, setCurrencyFirst] = useState('BYN');
