@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Today } from '../../components/data/Today';
 import { ICurrent } from '../converter/Converter';
 import './currencies.scss';
 
@@ -13,27 +12,38 @@ const bynObj = {
   Cur_OfficialRate: 1.0,
 };
 export const Currencies = () => {
-  const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([]);
+  const [dataCurrency, setDataCurrency] = useState<ICurrent[]>([bynObj]);
+  const [classActiv, setClassActiv] = useState([true]);
+
+  const storageCurrency = (name: string) => {
+    localStorage.setItem('saveCurrency', name);
+    setClassActiv(dataCurrency.map((e) => (e.Cur_Abbreviation === name)));
+  };
+
   useEffect(() => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
-        setDataCurrency(data);
+        setDataCurrency([bynObj, ...data]);
+        if (localStorage.getItem('saveCurrency')) {
+          const save = localStorage.getItem('saveCurrency');
+          setClassActiv([bynObj, ...data].map((e) => (e.Cur_Abbreviation === save)));
+        }
       });
   }, []);
 
-  const dataCurrencyAll:ICurrent[] = [...dataCurrency];
-  dataCurrencyAll.unshift(bynObj);
-
   return (
     <section className='currencies-page'>
-      <Today />
       <h4 className='currencies-page__title'>Currency</h4>
       <h5 className='instruction-title'>Select default curency</h5>
       <div className='nav-currency'>
         <div className='list-currency'>
-          {dataCurrencyAll.map((val) => (
-            <div className='item-currency' key={val.Cur_ID}>
+          {dataCurrency.map((val, index) => (
+            <div
+              className={classActiv[index] ? 'item-currency active' : 'item-currency'}
+              onClick={() => storageCurrency(val.Cur_Abbreviation)}
+              key={val.Cur_ID}
+            >
               <div className='item-currency__allname'>{val.Cur_Name}</div>
               <div className='item-currency__abbrev'>{val.Cur_Abbreviation}</div>
             </div>
