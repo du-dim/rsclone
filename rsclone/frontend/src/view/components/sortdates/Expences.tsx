@@ -52,7 +52,7 @@ export const Expences = ({
             </div>
             <li className='list-expences__item_title'>{position.category}</li>
             <li className='list-expences__item_amount'>
-              {position.amount}
+              {Number((position.amount).toFixed(2))}
               $
             </li>
           </div>

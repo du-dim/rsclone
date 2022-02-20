@@ -34,7 +34,6 @@ export const All = ({
     return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
       || (((String(item.amount)).includes(valueSearch))));
   });
-
   return (
     <article className='sortes-route sortes__all'>
       <h3 className='sourtes__title'>List of revenues and expenses</h3>
@@ -57,8 +56,8 @@ export const All = ({
               />
             </div>
             <div className=''>{position.category}</div>
-            <div className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
-              {position.amount}
+            <div className={position.amount < 0 ? 'red-active' : 'green-active'}>
+              {Number((position.amount).toFixed(2))}
               $
             </div>
           </div>
