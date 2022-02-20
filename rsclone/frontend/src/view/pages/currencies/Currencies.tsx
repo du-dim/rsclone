@@ -27,28 +27,18 @@ export const Currencies = () => {
 
   return (
     <section className='currencies-page'>
-      <div className='container'>
-        <article className='currencies-content'>
-          <Today />
-          <h4 className='currencies-content__title'>Currency</h4>
-          <h5 className='instruction-title'>Select default curency</h5>
-          {/* <p>
-            The currency symbol for all transactions will be changed
-            from BYN to USD. Howevew, transactions amounts will
-            not be converted based on the exchznge rate.
-
-          </p> */}
-          <nav className='nav-currency'>
-            <div className='list-currency'>
-              {dataCurrencyAll.map((val) => (
-                <ul className='item-currency' key={val.Cur_ID}>
-                  <li className='item-currency__allname'>{val.Cur_Name}</li>
-                  <li className='item-currency__abbrev'>{val.Cur_Abbreviation}</li>
-                </ul>
-              ))}
+      <Today />
+      <h4 className='currencies-page__title'>Currency</h4>
+      <h5 className='instruction-title'>Select default curency</h5>
+      <div className='nav-currency'>
+        <div className='list-currency'>
+          {dataCurrencyAll.map((val) => (
+            <div className='item-currency' key={val.Cur_ID}>
+              <div className='item-currency__allname'>{val.Cur_Name}</div>
+              <div className='item-currency__abbrev'>{val.Cur_Abbreviation}</div>
             </div>
-          </nav>
-        </article>
+          ))}
+        </div>
       </div>
     </section>
   );
