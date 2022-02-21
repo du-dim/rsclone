@@ -6,14 +6,15 @@ import {
 import { CanvasExpense } from '../../components/canvasExpense/CanvasExpense';
 import { CanvasIncome } from '../../components/canvasIncome/CanvasIncome';
 import { CanvasTotal } from '../../components/canvasTotal/CanvasTotal';
-import { IBody } from '../../../types/types';
+import { IBody, TCurrency } from '../../../types/types';
 import './statistics.scss';
 
 type IProps = {
   dataChart: IBody[],
+  currency: TCurrency,
 }
 
-export const Statistics = ({ dataChart }: IProps) => {
+export const Statistics = ({ dataChart, currency }: IProps) => {
   const time = new Date().getTime() + 3 * 60 * 60 * 1000;
   const today = new Date(time).toISOString().split('T')[0];
   const [dateStart, setDateStart] = useState(new Date(time - 604800000).toISOString().split('T')[0]);
@@ -68,6 +69,7 @@ export const Statistics = ({ dataChart }: IProps) => {
               dataChart={dataChart}
               dateStart={dateStart}
               dateEnd={dateEnd}
+              currency={currency}
             />
 )}
         />
@@ -78,6 +80,7 @@ export const Statistics = ({ dataChart }: IProps) => {
               dataChart={dataChart}
               dateStart={dateStart}
               dateEnd={dateEnd}
+              currency={currency}
             />
 )}
         />
@@ -88,6 +91,7 @@ export const Statistics = ({ dataChart }: IProps) => {
               dataChart={dataChart}
               dateStart={dateStart}
               dateEnd={dateEnd}
+              currency={currency}
             />
 )}
         />

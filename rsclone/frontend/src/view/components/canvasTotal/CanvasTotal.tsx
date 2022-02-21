@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
-import { IBody } from '../../../types/types';
+import { IBody, TCurrency } from '../../../types/types';
 import './canvasTotal.scss';
 
 type IProps = {
   dataChart: IBody[],
   dateStart: string,
   dateEnd: string,
+  currency: TCurrency,
 }
 
 export const CanvasTotal = ({
-  dataChart, dateStart, dateEnd,
+  dataChart, dateStart, dateEnd, currency,
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
