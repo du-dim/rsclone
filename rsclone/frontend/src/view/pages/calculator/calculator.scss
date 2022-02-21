@@ -1,15 +1,15 @@
 @import '../../../sass/variables&mixins.scss';
 
 .calculator {
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: $whitecolor;
   font-family: $fontIndieflower;
   height: 80%;
 
-  h3 {
+  &__tittle {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
@@ -38,12 +38,12 @@
   }
 
   /* All things Grid, Flexbox, Box Alignment */
-  .calculator-grid,
+  &__grid,
   .subgrid {
     display: grid;
   }
 
-  .calculator-grid {
+  &__grid {
     grid-template-areas:
       'total total total total'
       'modif modif modif oper'

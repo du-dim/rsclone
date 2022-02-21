@@ -9,11 +9,11 @@ export const Header = () => {
   return (
     <>
       <section className='header'>
-        <div className='header-content'>
-          <h1 className='h1'>wisely</h1>
-          <Link to='/home' className='logo' />
+        <div className='header__content'>
+          <h1 className='header__h1-hidden'>wisely</h1>
+          <Link to='/home' className='header__logo' />
           <Bonus />
-          <nav className='header-nav' onClick={() => { setShow(!show); }} />
+          <nav className='header__nav' onClick={() => { setShow(!show); }} />
         </div>
       </section>
       <Settings active={show} setActive={setShow} />

@@ -17,31 +17,35 @@ export const Categories = ({
 
   return (
     <div className='page-categories'>
-      <div className='categories'>
+      <div className='page-categories__box'>
         <div className='categories__title'>Expense</div>
-        {expenseArr.map((el, index) => (
-          <div
-            className={arrExpense[index] ? 'categories__item active' : 'categories__item'}
-            key={`expense_${el}`}
-            onClick={() => setArrExpense(arrExpense.map((e: boolean, i) => (i === index ? !e : e)))}
-          >
-            <img className='categories__item_img' src={`assets/icons/categories/${el}.svg`} alt='' />
-            <p className='categories__item_text'>{el}</p>
-          </div>
-        ))}
+        <div className='categories'>
+          {expenseArr.map((el, index) => (
+            <div
+              className={arrExpense[index] ? 'categories__item active' : 'categories__item'}
+              key={`expense_${el}`}
+              onClick={() => setArrExpense(arrExpense.map((e: boolean, i) => (i === index ? !e : e)))}
+            >
+              <img className='categories__item_img' src={`assets/icons/categories/${el}.svg`} alt='' />
+              <p className='categories__item_text'>{el}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className='categories'>
+      <div className='page-categories__box'>
         <div className='categories__title'>Income</div>
-        {incomeArr.map((el, index) => (
-          <div
-            className={arrIncome[index] ? 'categories__item active' : 'categories__item'}
-            key={`income_${el}`}
-            onClick={() => setArrIncome(arrIncome.map((e: boolean, i) => (i === index ? !e : e)))}
-          >
-            <img className='categories__item_img' src={`assets/icons/categories/${el}.svg`} alt='' />
-            <p className='categories__item_text'>{el}</p>
-          </div>
-        ))}
+        <div className='categories'>
+          {incomeArr.map((el, index) => (
+            <div
+              className={arrIncome[index] ? 'categories__item active' : 'categories__item'}
+              key={`income_${el}`}
+              onClick={() => setArrIncome(arrIncome.map((e: boolean, i) => (i === index ? !e : e)))}
+            >
+              <img className='categories__item_img' src={`assets/icons/categories/${el}.svg`} alt='' />
+              <p className='categories__item_text'>{el}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

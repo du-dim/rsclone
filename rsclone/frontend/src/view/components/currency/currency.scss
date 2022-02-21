@@ -1,27 +1,27 @@
 @import '../../../sass/variables&mixins.scss';
 
-.currency {        
+.currency {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   cursor: pointer;
-  z-index: 2;    
-  &-select {          
-    font-size: 16px;     
+  z-index: 2;
+  &-select {
+    font-size: 16px;
     font-family: $fontIndieflower;
-    align-self: flex-end;     
+    align-self: flex-end;
     background-color: rgba(216, 233, 250, 0.938);
     border-radius: 8px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-  }   
-  &-option {      
+    margin-bottom: 3px;
+  }
+
+  &-option {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 16px;     
+    font-size: 16px;
     font-family: $fontIndieflower;
-    align-self: flex-end;     
+    align-self: flex-end;
     background-color: rgb(226, 198, 233);
     border-radius: 8px;
   }

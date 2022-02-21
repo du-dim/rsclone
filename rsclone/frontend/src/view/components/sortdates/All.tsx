@@ -36,28 +36,29 @@ export const All = ({
   });
   return (
     <article className='sortes-route sortes__all'>
-      <h3 className='sourtes__title'>List of revenues and expenses</h3>
-      <div className='list-all'>
+      <h3 className='sortes-route__title'>List of revenues and expenses</h3>
+      <div className='list-operation'>
         {filterSearch.map((position) => (
-          <div className='list-all__item' key={dataIntroAllOperations.indexOf(position)}>
+          <div className='item' key={dataIntroAllOperations.indexOf(position)}>
             {/* <li className='list-all__item_number'>{dataIntroAllOperations.indexOf(position) + 1}</li> */}
-            <div className='date-info'>
-              <div className='list-all__item_date'>
+            <div className='item-info'>
+              <div className='item-info__date'>
                 {(position.date.slice(0, 10))
                   .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
 
               </div>
               <div
-                className='list-all__item_btn'
+                className='item-info__btn'
                 onClick={() => {
                   turnModal();
                   setActiveItem(position);
                 }}
               />
             </div>
-            <div className=''>{position.category}</div>
+
+            <div className='item-info__category'>{(position.category).substring(0, 10)}</div>
             <div className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
-              {`${position.amount} ${position.currency}`}
+              {`${Number((position.amount).toFixed(2))} ${position.currency}`}
             </div>
           </div>
         ))}

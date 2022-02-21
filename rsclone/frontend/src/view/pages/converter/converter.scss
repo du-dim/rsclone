@@ -3,6 +3,7 @@
 .converter-page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: $whitecolor;
   font-family: $fontIndieflower;
   text-align: center;
@@ -36,19 +37,35 @@
     border: 0.3rem solid $main-pink-color;
     border-radius: 0.5em;
     font-size: 1.5rem;
-  }
-
-  .currency-select {
-    display: inline-block;
-    height: 100%;
-    margin-left: 0.5rem;
-    margin-bottom: 1rem;
-    border: 0.3rem solid $main-pink-color;
-    border-radius: 0.5rem;
     cursor: pointer;
   }
+  .currency-input:hover {
+    transition: 0.2s ease-in-out;
+    box-shadow: 1px -1px 25px 12px rgba(141, 61, 159, 0.26);
+  }
 
-  .user-convert__box {
+  .currency-input:focus {
+    transition: 0.2s ease-in-out;
+    box-shadow: 1px -1px 25px 12px rgba(141, 61, 159, 0.26);
+  }
+}
+
+.currency-select {
+  display: inline-block;
+  height: 100%;
+  margin-left: 0.5rem;
+  margin-bottom: 1rem;
+  border: 0.3rem solid $main-pink-color;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.user-convert {
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  font-size: 1.5rem;
+
+  &__box {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -57,22 +74,18 @@
     gap: 0.5rem;
   }
 
-  .equals {
+  &__title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__equals {
     font-weight: bold;
     font-size: 2rem;
   }
+}
 
-  .user-convert {
-    margin-bottom: 0.5rem;
-    padding: 0.25rem;
-    font-size: 1.5rem;
-  }
-
-  .live-convert__title,
-  .user-convert__title {
-    margin-bottom: 0.5rem;
-  }
-  .list-curriency {
+.live-convert {
+  &__list {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -80,18 +93,44 @@
     width: 100%;
     gap: 1rem;
   }
+}
 
-  .item-curriency {
-    padding: 0.5rem;
-    border-radius: 1rem;
-    border: 0.2rem solid $main-pink-color;
-  }
+.item-curriency {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 0.2rem solid $main-pink-color;
 
-  .value {
+  &__value {
     font-size: $fs20;
   }
 
-  .symbol {
+  &__symbol {
     color: $main-pink-color;
-  }  
+  }
+}
+
+@media (max-width: 360px) {
+  .item-curriency {
+    padding: 0.5rem;
+    border: 0.2rem solid $main-pink-color;
+
+    &__value {
+      font-size: $fs13;
+    }
+
+    &__symbol {
+      font-size: $fs15;
+    }
+  }
+  .user-convert {
+    &__title {
+      font-size: $fs20;
+    }
+  }
+
+  .live-convert {
+    &__title {
+      font-size: $fs20;
+    }
+  }
 }
