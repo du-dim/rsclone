@@ -23,7 +23,7 @@ export const Info = () => {
                 <br />
                 <b>frontend: </b>
                 {' '}
-                Canvas, Local Storage, Typescript, SCSS, grid, routing, adaptive
+                Canvas, Local Storage, Typescript, SCSS, grid, routing, adaptive, animation
               </p>
             </li>
             <li className='list-authors__item'>
