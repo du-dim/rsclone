@@ -53,7 +53,7 @@ export const Incomes = ({
               />
             </div>
             <div className='item-info__category'>{(position.category).substring(0, 10)}</div>
-            <div className='list-revenue__item_amount'>
+            <div className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
               {`${Number((position.amount).toFixed(2))} ${position.currency}`}
             </div>
           </div>
