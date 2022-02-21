@@ -41,7 +41,7 @@ export const AddBalans = ({ name, setData }:IProps) => {
     day: '2-digit', weekday: 'short', month: 'long',
   });
   const form = {
-    amount: 0, currency, date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0,
+    amount: 0, currency, date: new Date(time).toISOString(), category: '-', note: '', user_id: '-', USD: 0, EUR: 0, RUB: 0, UAH: 0, PLN: 0, GBP: 0, CNY: 0, BYN: 1,
   };
 
   useEffect(() => {
@@ -50,8 +50,8 @@ export const AddBalans = ({ name, setData }:IProps) => {
     const dataStorage = sessionStorage.getItem('dataCurrency');
     const dataCurrency = dataStorage ? JSON.parse(dataStorage) as ICurrent[] : [bynObj];
     const currentRate = dataCurrency.filter((obj) => arrCurrency.includes(obj.Cur_Abbreviation));
-    const map = currentRate.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
-    setObjRate(Object.fromEntries(map));
+    const entries = currentRate.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
+    setObjRate(Object.fromEntries(entries));
     setValue(amountLocal);
     setNoteValue(noteLocal);
   }, []);

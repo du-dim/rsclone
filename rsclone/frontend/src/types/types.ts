@@ -22,7 +22,7 @@ export enum Links {
 }
 
 export interface ICurrent {
-  Cur_Abbreviation: string,
+  Cur_Abbreviation: TCurrency,
   Cur_OfficialRate: number,
   Cur_ID: number,
   Date:string,
@@ -34,7 +34,7 @@ export interface IBody {
   amount: number,
   date: string,
   category: string,
-  currency: string,
+  currency: TCurrency,
   note: string,
   user_id: string,
   _id: string,
@@ -45,7 +45,10 @@ export interface IBody {
   PLN: number,
   GBP: number,
   CNY: number,
+  BYN: number,
 }
+
+export type TCurrency = 'BYN' | 'USD' | 'EUR' | 'RUB' | 'UAH' | 'PLN' | 'GBP' | 'CNY';
 
 export interface ILocal {
   amount: string,

@@ -28,8 +28,8 @@ export const Incomes = ({
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
 
   const filterSearch = dataIntroIncomes.filter((item) => {
-    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
-      || (((String(item.amount)).includes(valueSearch))));
+    const strSearch = (item.category + item.amount + item.currency + item.note).toLocaleLowerCase();
+    return (strSearch.includes(valueSearch.toLocaleLowerCase()));
   });
 
   return (
@@ -53,9 +53,8 @@ export const Incomes = ({
               />
             </div>
             <div className='item-info__category'>{(position.category).substring(0, 10)}</div>
-            <div className={position.amount < 0 ? 'red-active' : 'green-active'}>
-              {Number((position.amount).toFixed(2))}
-              $
+            <div className='list-revenue__item_amount'>
+              {`${Number((position.amount).toFixed(2))} ${position.currency}`}
             </div>
           </div>
         ))}
