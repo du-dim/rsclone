@@ -1,18 +1,19 @@
 @import '../../../sass/variables&mixins.scss';
 .page-categories {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 80%;  
-  padding-left: 10px;
-  padding-right: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5rem;
+  justify-content: center;
+  height: 80%;
+  padding: 1rem;
   background-color: $whitecolor;
   .categories {
-    display: flex;
-    flex-direction: column;    
-    width: 47%;
-    height: 100%;    
-    row-gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
     &__title {
       align-self: center;
       font-size: $fs20;
@@ -22,10 +23,10 @@
       display: flex;
       flex-direction: row;
       justify-content: start;
-      width: 100%;
-      height: 7%;  
+      width: 13rem;
+      height: 5rem;
       border-radius: 1rem;
-      border: 0.2rem solid $main-pink-color;    
+      border: 0.2rem solid $main-pink-color;
       &_img {
         display: block;
         object-fit: cover;
@@ -36,11 +37,51 @@
         display: flex;
         align-items: center;
         font-size: $fs20;
-        font-family: $fontIndieflower;        
+        font-family: $fontIndieflower;
       }
-    }   
-  } 
+    }
+  }
   .active {
     background-color: rgba($color: #81b485, $alpha: 0.5);
+  }
+}
+
+@media (max-width: 600px) {
+  .page-categories {
+    overflow: auto;
+    &__box {
+      height: 100%;
+    }
+    .categories {
+      grid-template-columns: 1fr 1fr;
+      &__item_text {
+        font-size: $fs20;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .page-categories {
+    .categories {
+      grid-template-columns: 1fr;
+
+      &__item {
+        width: 20rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .page-categories {
+    .categories {
+      &__item_text {
+        font-size: $fs20;
+      }
+      &__item {
+        width: 15rem;
+      }
+    }
   }
 }

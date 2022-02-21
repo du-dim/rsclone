@@ -8,8 +8,8 @@ interface IProps {
 export const Rate = ({ name, value }:IProps) => {
   return (
     <div className='item-curriency'>
-      <h3 className='symbol'>{name}</h3>
-      <div className='value'>{value}</div>
+      <h3 className='item-curriency__symbol'>{name}</h3>
+      <div className='item-curriency__value'>{value}</div>
     </div>
   );
 };

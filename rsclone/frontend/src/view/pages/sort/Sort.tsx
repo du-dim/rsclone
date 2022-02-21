@@ -30,19 +30,19 @@ export const Sort = ({ dataInfo }: IProps) => {
   return (
     <section className='sortes'>
       <div className='container'>
-        <div className='page-sortes-date'>
-          <h3 className='sortes-title'>Accounting</h3>
+        <div className='sortes-date'>
+          <h3 className='sortes-date__title'>Accounting</h3>
           <input
             className='info-box__search'
             type='search'
             placeholder='Search'
             onChange={(event) => setValueSearch(event.target.value)}
           />
-          <div className='date-box'>
-            <div className='date-box__start'>
+          <div className='sortes-box'>
+            <div className='box-start'>
               <h3 className='date-box__title'>From</h3>
               <input
-                className='input'
+                className='box-start__input'
                 type='date'
                 name=''
                 id=''
@@ -51,10 +51,10 @@ export const Sort = ({ dataInfo }: IProps) => {
                 onChange={(e) => setDateStart(e.target.value)}
               />
             </div>
-            <div className='date-box__end'>
+            <div className='box-end'>
               <h3 className='date-box__title'>To</h3>
               <input
-                className='date__field_end input'
+                className='box-end__input'
                 type='date'
                 name=''
                 id=''
@@ -66,30 +66,30 @@ export const Sort = ({ dataInfo }: IProps) => {
             </div>
           </div>
           <nav>
-            <ul className='list-links'>
+            <ul className='sort-links'>
               <li>
                 <NavLink
                   to='/sorts/expences'
-                  className='list-links__item list-links__item_expences'
+                  className='sort-links__item sort-links__item_expences'
                 >
-                  <span>Expenses</span>
+                  <span className='sort-links__span'>Expenses</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to='/sorts/all'
-                  className='list-links__item list-links__item_all'
+                  className='sort-links__item sort-links__item_all'
                 >
-                  <span>All</span>
+                  <span className='sort-links__span'>All</span>
                 </NavLink>
 
               </li>
               <li>
                 <NavLink
                   to='/sorts/incomes'
-                  className='list-links__item list-links__item_incomes'
+                  className='sort-links__item sort-links__item_incomes'
                 >
-                  <span>Incomes</span>
+                  <span className='sort-links__span'>Incomes</span>
                 </NavLink>
 
               </li>

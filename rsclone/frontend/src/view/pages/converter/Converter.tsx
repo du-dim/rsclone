@@ -83,7 +83,7 @@ export const Converter = () => {
               setCurrency={setCurrencyFirst}
             />
           </div>
-          <div className='equals'>=</div>
+          <div className='user-convert__equals'>=</div>
           <div className='currency-row'>
             <InputConverter
               amount={amountSecond}
@@ -100,7 +100,7 @@ export const Converter = () => {
       <div className='live-convert'>
         <h2 className='live-convert__title'>Live Exchange Rates</h2>
         <h3 className='live-convert__title'>(BYN)</h3>
-        <div className='list-curriency'>
+        <div className='live-convert__list'>
           {arrCurrency.map((el, i) => <Rate name={el} value={arrRate[i]} key={el} />)}
         </div>
       </div>

@@ -34,26 +34,26 @@ export const Incomes = ({
 
   return (
     <article className='sortes-route sortes__revenue'>
-      <h3 className='sourtes__title'>List of revenues</h3>
-      <div className='list-revenue'>
+      <h3 className='sortes-route__title'>List of revenues</h3>
+      <div className='list-operation'>
         {filterSearch.map((position) => (
-          <div className='list-revenue__item' key={dataIntroIncomes.indexOf(position)}>
+          <div className='item' key={dataIntroIncomes.indexOf(position)}>
             {/* <li className='list-revenue__item_number'>{dataIntroIncomes.indexOf(position) + 1}</li> */}
-            <div className='date-info'>
-              <div className='list-revenue__item_date'>
+            <div className='item-info'>
+              <div className='item-info__date'>
                 {(position.date.slice(0, 10))
                   .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
               </div>
               <div
-                className='list-all__item_btn'
+                className='item-info__btn'
                 onClick={() => {
                   turnModal();
                   setActiveItem(position);
                 }}
               />
             </div>
-            <div className='list-revenue__item_title'>{position.category}</div>
-            <div className='list-revenue__item_amount'>
+            <div className='item-info__category'>{(position.category).substring(0, 10)}</div>
+            <div className={position.amount < 0 ? 'red-active' : 'green-active'}>
               {Number((position.amount).toFixed(2))}
               $
             </div>

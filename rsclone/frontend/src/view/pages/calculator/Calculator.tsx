@@ -31,8 +31,8 @@ export const Calculator = () => {
   return (
     <section className='calculator'>
       <div className='container'>
-        <h3>Calculator</h3>
-        <div className='calculator-grid'>
+        <h3 className='calculator__tittle'>Calculator</h3>
+        <div className='calculator__grid'>
           <div className='show-input'>{data}</div>
           <div className='digits flex'>{calcBtns}</div>
           <div className='modifiers subgrid'>

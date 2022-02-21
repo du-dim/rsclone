@@ -1,66 +1,66 @@
-@import "../../../sass/variables&mixins.scss";
-@import "../../../sass/box.scss";
+@import '../../../sass/variables&mixins.scss';
+@import '../../../sass/box.scss';
 
 .header {
   display: flex;
   height: 10%;
   width: 100%;
   background-color: $main-pink-color;
-}
 
-.header-content {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-self: center;
-  padding: 0 20px 0 20px;  
-}
+  &__content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-self: center;
+    padding: 0 20px 0 20px;
+  }
 
-.logo {
-  height: $hf-icon;  
-  width: $hf-icon;
-  background: url("../../../../public/assets/icons/logo.svg") no-repeat;
-  background-size: cover;
-  cursor: pointer;
-}
+  &__logo {
+    height: $hf-icon;
+    width: $hf-icon;
+    background: url('../../../../public/assets/icons/logo.svg') no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
 
-.header-bonus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  &__h1-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
 
-.header-bonus__img {
-  height: 30px;
-  width: 30px;
-  background: url("../../../../public/assets/icons/star.svg") no-repeat;
-}
+  &__nav {
+    width: $hf-icon;
+    height: $hf-icon;
+    background: url('../../../../public/assets/icons/settings.svg') no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
 
-.header-bonus__count {
-  font-family: $fontIndieflower;
-  font-size: $fs30;
-  line-height: 44px;
-  text-shadow: 1px 1px 2px black, 0 0 1em red;
-  color: $gold;
-}
+  &__bonus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.header-nav {
-  width: $hf-icon;
-  height:$hf-icon;
-  background: url("../../../../public/assets/icons/settings.svg") no-repeat;
-  background-size: cover;
-  cursor: pointer;
-}
+    &__img {
+      height: 30px;
+      width: 30px;
+      background: url('../../../../public/assets/icons/star.svg') no-repeat;
+    }
 
-.h1 {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+    &_count {
+      font-family: $fontIndieflower;
+      font-size: $fs30;
+      line-height: 44px;
+      text-shadow: 1px 1px 2px black, 0 0 1em red;
+      color: $gold;
+    }
+  }
 }
