@@ -3,8 +3,8 @@ import { Links } from '../../../types/types';
 import './info.scss';
 
 export const Info = () => {
-  const date = new Date();
-  const year = date.getFullYear();
+  // const date = new Date();
+  // const year = date.getFullYear();
   return (
     <section className='section'>
       <div className='container'>
@@ -36,7 +36,7 @@ export const Info = () => {
           </div>
           <div className='info'>
             <a className='link-school red' href='https://rs.school/' target='_blank' rel='noreferrer'>RS School</a>
-            <div className='date'>{year}</div>
+            <div className='date'>{2022}</div>
           </div>
         </article>
       </div>

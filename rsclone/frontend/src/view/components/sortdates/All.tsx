@@ -34,7 +34,6 @@ export const All = ({
     const strSearch = (item.category + item.amount + item.currency + item.note).toLocaleLowerCase();
     return (strSearch.includes(valueSearch.toLocaleLowerCase()));
   });
-
   return (
     <article className='sortes-route sortes__all'>
       <h3 className='sourtes__title'>List of revenues and expenses</h3>
