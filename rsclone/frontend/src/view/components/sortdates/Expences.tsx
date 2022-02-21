@@ -50,10 +50,10 @@ export const Expences = ({
                 }}
               />
             </div>
-            <li className='list-expences__item_title'>{position.category}</li>
-            <li className='list-expences__item_amount'>
+            <div className='list-expences__item_title'>{position.category}</div>
+            <div className='list-expences__item_amount'>
               {`${position.amount} ${position.currency}`}
-            </li>
+            </div>
           </div>
         ))}
       </div>
