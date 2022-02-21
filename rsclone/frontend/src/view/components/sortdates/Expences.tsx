@@ -27,8 +27,8 @@ export const Expences = ({
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) <= numDateEnd)
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
   const filterSearch = dataIntroExpences.filter((item) => {
-    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
-    || (((String(item.amount)).includes(valueSearch))));
+    const strSearch = (item.category + item.amount + item.currency + item.note).toLocaleLowerCase();
+    return (strSearch.includes(valueSearch.toLocaleLowerCase()));
   });
   return (
     <article className='sortes-route sortes__expences'>
@@ -52,8 +52,7 @@ export const Expences = ({
             </div>
             <li className='list-expences__item_title'>{position.category}</li>
             <li className='list-expences__item_amount'>
-              {position.amount}
-              $
+              {`${position.amount} ${position.currency}`}
             </li>
           </div>
         ))}

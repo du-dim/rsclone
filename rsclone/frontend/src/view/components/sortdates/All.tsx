@@ -31,8 +31,8 @@ export const All = ({
     .filter((operation) => +(operation.date.split('T')[0].replace(/-/g, '')) >= numDateStart);
 
   const filterSearch = dataIntroAllOperations.filter((item) => {
-    return (item.category.toLocaleLowerCase().includes(valueSearch.toLocaleLowerCase())
-      || (((String(item.amount)).includes(valueSearch))));
+    const strSearch = (item.category + item.amount + item.currency + item.note).toLocaleLowerCase();
+    return (strSearch.includes(valueSearch.toLocaleLowerCase()));
   });
 
   return (
@@ -58,8 +58,7 @@ export const All = ({
             </div>
             <div className=''>{position.category}</div>
             <div className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
-              {position.amount}
-              $
+              {`${position.amount} ${position.currency}`}
             </div>
           </div>
         ))}
