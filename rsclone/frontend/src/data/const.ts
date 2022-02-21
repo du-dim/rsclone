@@ -1,3 +1,5 @@
+import { ICurrent } from '../types/types';
+
 export const bynObj = {
   Cur_ID: 400,
   Date: '2022-02-12T00:00:00',
@@ -5,4 +7,4 @@ export const bynObj = {
   Cur_Scale: 1,
   Cur_Name: 'Беларусский рубль',
   Cur_OfficialRate: 1.0,
-};
+} as ICurrent;
