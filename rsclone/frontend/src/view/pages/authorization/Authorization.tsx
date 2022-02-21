@@ -31,7 +31,7 @@ export const Authorization = ({ setId }: IProps) => {
     const target = event.target as HTMLInputElement;
     setForm({ ...form, [target.name]: target.value });
   };
-
+  localStorage.setItem('email', form.email);
   const navigate = useNavigate();
 
   async function fetchPost() {

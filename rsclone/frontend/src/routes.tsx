@@ -39,6 +39,7 @@ export const useRoutes = (isAuth: boolean) => {
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
     setUserId(user);
+
     if (isAuth && localStorage.getItem('userId')) {
       const requestOptions = {
         method: 'POST',
