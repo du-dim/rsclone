@@ -1,3 +1,196 @@
-.page {
+@import '../../../sass/variables&mixins.scss';
+@import '../../../sass/box.scss';
+@import '../authorization/authorization.scss';
+
+.page-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: $whitecolor;
   height: 80%;
+  width: 100%;
+  padding: 1rem;
+  font-family: $fontIndieflower;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  &__img {
+    background: url('../registration/../../../../public/assets/icons/profile-pink.svg');
+    background-size: cover;
+    align-self: center;
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 2rem;
+    border: 0.5rem solid #e69ba5;
+    border-radius: 10rem;
+  }
+
+  &__name,
+  &__email {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    font-size: $fs30;
+    align-items: center;
+
+    &_title {
+      align-self: start;
+      justify-items: start;
+      color: $main-pink-color;
+    }
+
+    &_user-name,
+    &_user-email {
+      color: #501f6b;
+      font-size: $fs20;
+    }
+  }
+  &__email {
+    border-bottom: 0.2rem solid $main-pink-color;
+  }
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 2rem;
+    font-size: $fs50;
+    color: $main-pink-color;
+  }
+  &__del,
+  &__out {
+    &_btn {
+      margin-bottom: 0.5rem;
+      border: 0.5rem solid #e69ba5;
+      padding: 00.5rem;
+      border-radius: 0.5rem;
+      color: red;
+      cursor: pointer;
+    }
+
+    &_btn:hover {
+      transition: 0.2s ease-in-out;
+      box-shadow: 1px 4px 20px 10px rgba(168, 117, 180, 0.2) inset;
+      background-color: rgb(235, 221, 224);
+    }
+
+    &_btn:not(:hover) {
+      transition: 0.2s ease-in-out;
+    }
+  }
+}
+.animation-message {
+  font-family: $fontIndieflower;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 15px;
+  width: 40ch;
+  margin-bottom: 1rem;
+  border-right: 4px solid $main-pink-color;
+  animation: flash-border 0.75s step-end infinite, print-text 7s steps(40);
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+}
+
+@keyframes flash-border {
+  0% {
+    border-color: $main-pink-color;
+  }
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: $main-pink-color;
+  }
+}
+
+@keyframes print-text {
+  from {
+    width: 0;
+  }
+}
+
+.modal-exit,
+.modal-del {
+  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); // Make sure this color has an opacity of less than 1
+  backdrop-filter: blur(8px); // This be the blur
+  position: fixed;
+  top: 0%;
+  left: 0;
+  // transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.modal-exit.active,
+.modal-del.active {
+  // transform: scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-exit__content,
+.modal-del__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 2rem;
+  width: 35rem;
+  background-color: $main-pink-color;
+  transform: scale(0.5);
+  transition: 0.4s all;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: $fs30;
+
+    &__btn {
+      padding: 0.5rem;
+      background-color: $whitecolor;
+      border-radius: 1rem;
+      border: 2px solid red;
+      color: red;
+      cursor: pointer;
+    }
+  }
+}
+
+.modal-content.active {
+  transform: scale(1);
+}
+
+@media (max-width: 400px) {
+  .user-info {
+    &__name,
+    &__email {
+      font-size: $fs20;
+
+      &_user-name,
+      &_user-email {
+        color: #501f6b;
+      }
+    }
+  }
 }
