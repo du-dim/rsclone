@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
-import { IBody, IData } from '../../../types/types';
+import { IBody, IData, TCurrency } from '../../../types/types';
 import './canvasIncome.scss';
 
 type IProps = {
   dataChart: IBody[],
   dateStart: string,
   dateEnd: string,
+  currency: TCurrency,
 }
 
 export const CanvasIncome = ({
-  dataChart, dateStart, dateEnd,
+  dataChart, dateStart, dateEnd, currency,
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
@@ -20,6 +21,7 @@ export const CanvasIncome = ({
   const [data, setData] = useState<IData[]>([]);
   const width = 320;
   const height = 320;
+
   useEffect(() => {
     const categoriesIncomeEffect = [] as string[];
     const dataEffect = [] as IData[];
@@ -36,7 +38,7 @@ export const CanvasIncome = ({
         if (!categoriesIncomeEffect.includes(obj.category)) categoriesIncomeEffect.push(obj.category);
       });
       setCategoriesIncome(categoriesIncomeEffect);
-      const amountIncome = categoriesIncomeEffect.map((cat) => dataIncome.filter((obj) => obj.category === cat).map((el) => el.amount).reduce((a, b) => a + b));
+      const amountIncome = categoriesIncomeEffect.map((cat) => dataIncome.filter((obj) => obj.category === cat).map((el) => (el.amount * el[el.currency]) / el[currency]).reduce((a, b) => a + b));
       const sumIncome = amountIncome.reduce((a, b) => a + b);
       const percent = amountIncome.map((el) => (100 * el) / sumIncome);
       const percentSum = percent.map((el, i, arr) => Array(i + 1).fill(0).map((_, j) => arr[j]).reduce((a, b) => a + b));
@@ -124,7 +126,7 @@ export const CanvasIncome = ({
             key={`expense_${el}`}
           >
             <p className='category__item_text'>{`${index + 1}. ${el}`}</p>
-            <p className='category__item_text'>{`${Math.round(data[index].percent)}% -> ${data[index].amount} USD`}</p>
+            <p className='category__item_text'>{`${Math.round(data[index].percent)}% -> ${Math.round(data[index].amount * 100) / 100} ${currency}`}</p>
           </div>
         ))}
       </div>
