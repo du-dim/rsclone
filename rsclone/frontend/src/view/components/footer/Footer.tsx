@@ -14,9 +14,9 @@ export const Footer = () => {
           <Link to='converter' className='footer__nav_item img-nav' />
           <Link to='Statistics/expense' className='footer__nav_item img-nav' />
         </div>
-        <div className='footer__info-project'>
+        {/* <div className='footer__info-project'>
           <InfoAuthors />
-        </div>
+        </div> */}
       </div>
     </section>
   );
