@@ -11,6 +11,10 @@ export enum Text {
   Repeat = 'Repeat password',
   Noaccount = 'No Account?',
   Haveaccount = 'Have you account?',
+  Name = 'Name',
+  EmailAddress = 'E-mail address',
+  Exit = 'EXIT',
+  DeleteProfile = 'DELETE PROFILE',
 
 }
 
@@ -25,9 +29,9 @@ export interface ICurrent {
   Cur_Abbreviation: TCurrency,
   Cur_OfficialRate: number,
   Cur_ID: number,
-  Date:string,
-  Cur_Scale:number,
-  Cur_Name:string,
+  Date: string,
+  Cur_Scale: number,
+  Cur_Name: string,
 }
 
 export interface IBody {
@@ -83,7 +87,7 @@ export interface IData {
 }
 
 export interface IApiCurrency {
-  [key: string] : string
+  [key: string]: string
 }
 
 export interface IBelarusbankATM {
