@@ -19,6 +19,7 @@ import { AddBalans } from './view/pages/addBalans/AddBalans';
 import { SubBalans } from './view/pages/subBalans/SubBalans';
 import { AddCategories } from './view/pages/addCategories/AddCategories';
 import { SubCategories } from './view/pages/subCategories/SubCategories';
+import { bynObj } from './data/const';
 import { IBody, ICurrent, TCurrency } from './types/types';
 
 export const useRoutes = (isAuth: boolean) => {
@@ -33,6 +34,7 @@ export const useRoutes = (isAuth: boolean) => {
   const [activExpense, setActivExpense] = useState<boolean[]>(storageExpense ? JSON.parse(storageExpense) as boolean[] : Array(12).fill(true));
   const [activIncome, setActivIncome] = useState<boolean[]>(storageIncome ? JSON.parse(storageIncome) as boolean[] : Array(5).fill(true));
   const [currency, setCurrency] = useState<TCurrency>('BYN');
+  const [todayCurrency, setTodayCurrency] = useState<ICurrent[]>([]);
 
   const dataBalans = async () => {
     const user = localStorage.getItem('userId') as string;
@@ -66,6 +68,7 @@ export const useRoutes = (isAuth: boolean) => {
       .then((res) => res.json())
       .then((data:ICurrent[]) => {
         sessionStorage.setItem('dataCurrency', JSON.stringify(data));
+        setTodayCurrency([bynObj, ...data]);
       });
   }, []);
 
@@ -74,10 +77,22 @@ export const useRoutes = (isAuth: boolean) => {
   }, [userId]);
 
   useEffect(() => {
+    const arrCurrency = [] as TCurrency[];
     setExpense('');
     setIncome('');
-    const sum = dataBase.length > 0 ? dataBase.map((data) => data.amount * (data[data.currency] / data[currency])).reduce((a, b) => a + b) : 0;
-    setCapital(Math.round(sum * 100) / 100);
+    if (dataBase.length > 0) {
+      dataBase.forEach((obj) => {
+        if (!arrCurrency.length) arrCurrency.push(obj.currency);
+        if (!arrCurrency.includes(obj.currency)) arrCurrency.push(obj.currency);
+      });
+      const arrSum = arrCurrency.map((c) => dataBase.filter((obj) => obj.currency === c).map((obj) => obj.amount).reduce((a, b) => a + b));
+      if (todayCurrency.length) {
+        const entries = todayCurrency.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
+        const objCurrensyToday = Object.fromEntries(entries);
+        const sum = arrSum.map((s, i) => (s * objCurrensyToday[arrCurrency[i]]) / objCurrensyToday[currency]).reduce((a, b) => a + b);
+        setCapital(Math.round(sum * 100) / 100);
+      }
+    }
   }, [dataBase, currency]);
 
   useEffect(() => {

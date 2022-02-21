@@ -50,8 +50,8 @@ export const AddBalans = ({ name, setData }:IProps) => {
     const dataStorage = sessionStorage.getItem('dataCurrency');
     const dataCurrency = dataStorage ? JSON.parse(dataStorage) as ICurrent[] : [bynObj];
     const currentRate = dataCurrency.filter((obj) => arrCurrency.includes(obj.Cur_Abbreviation));
-    const map = currentRate.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
-    setObjRate(Object.fromEntries(map));
+    const entries = currentRate.map((obj) => [obj.Cur_Abbreviation, Math.round((obj.Cur_OfficialRate * 10000) / obj.Cur_Scale) / 10000]);
+    setObjRate(Object.fromEntries(entries));
     setValue(amountLocal);
     setNoteValue(noteLocal);
   }, []);
