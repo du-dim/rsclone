@@ -21,15 +21,15 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 10%;  
+  height: 10%;
   margin-bottom: 10px;
 }
-  
-.category-btn {     
+
+.category-btn {
   display: flex;
-  justify-content: start;  
+  justify-content: start;
   align-items: center;
-  width: 65%;  
+  width: 65%;
   height: 100%;
   font-size: $fs20;
   background-color: $main-pink-color;
@@ -46,7 +46,7 @@
     box-shadow: 2px 3px 47px 4px rgba(151, 53, 153, 0.75);
     -webkit-box-shadow: 2px 3px 47px 4px rgba(151, 53, 153, 0.75);
     -moz-box-shadow: 2px 3px 47px 4px rgba(151, 53, 153, 0.75);
-  } 
+  }
 }
 
 .btn-num__add {
@@ -54,7 +54,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 25%;  
+  width: 25%;
   font-size: $fs20;
   background-color: $colorgreen;
   border-radius: 5px;
