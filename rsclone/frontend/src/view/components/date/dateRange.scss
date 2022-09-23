@@ -1,0 +1,46 @@
+@import '../../../sass/variables&mixins.scss';
+.date {   
+  h3 {
+    display: block;
+    position: relative;
+    width: 100%;  
+    align-items: center;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-self: start;    
+  &__field {
+    display: inherit;      
+    flex-direction: row;
+    justify-content: space-between;
+    &_start,
+    &_end {
+      display: flex;  
+      flex-direction: column;      
+      width: 47%;
+      .title {                  
+        align-self: center;         
+        font-size: 16px;
+        margin-bottom: 2px;
+        letter-spacing: 0px;
+        color: #707070;
+      } 
+      .input {      
+        display: flex;        
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 7px;
+        border: 0.2rem solid $main-pink-color;
+        font-size: 18px;
+        background-color: #ffffff;
+      }     
+    }     
+  }
+}

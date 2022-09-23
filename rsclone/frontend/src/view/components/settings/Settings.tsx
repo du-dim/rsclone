@@ -8,7 +8,7 @@ type IRight = {
 }
 
 export const Settings = ({ active, setActive }:IRight) => {
-  const arrSettings = ['Categories', 'Accounts', 'Currency', 'Banks', 'Info'];
+  const arrSettings = ['Categories', 'Currency', 'Accounts', 'Info'];
   const linkIcon = 'assets/icons/settings/';
   return (
     <div className='settings-container' style={{ display: active ? 'block' : 'none' }} onClick={() => setActive(false)}>

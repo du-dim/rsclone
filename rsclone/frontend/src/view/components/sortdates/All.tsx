@@ -35,29 +35,25 @@ export const All = ({
     return (strSearch.includes(valueSearch.toLocaleLowerCase()));
   });
   return (
-    <article className='sortes-route sortes__all'>
-      <h3 className='sortes-route__title'>List of revenues and expenses</h3>
-      <div className='list-operation'>
+    <article className='sortdata'>
+      <h3 className='sortdata__title'>List of incomes and expenses</h3>
+      <div className='sortdata__list'>
         {filterSearch.map((position) => (
-          <div className='item' key={dataIntroAllOperations.indexOf(position)}>
+          <div
+            className='item'
+            key={dataIntroAllOperations.indexOf(position)}
+            onClick={() => {
+              turnModal();
+              setActiveItem(position);
+            }}
+          >
             {/* <li className='list-all__item_number'>{dataIntroAllOperations.indexOf(position) + 1}</li> */}
-            <div className='item-info'>
-              <div className='item-info__date'>
-                {(position.date.slice(0, 10))
-                  .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
-
-              </div>
-              <div
-                className='item-info__btn'
-                onClick={() => {
-                  turnModal();
-                  setActiveItem(position);
-                }}
-              />
+            <div className='item__date'>
+              {(position.date.slice(0, 10))
+                .replace(/^(\d+)-(\d+)-(\d+)$/, '$3.$2.$1')}
             </div>
-
-            <div className='item-info__category'>{(position.category).substring(0, 10)}</div>
-            <div className={(+position.amount) < 0 ? 'red-active' : 'green-active'}>
+            <div className='item__category'>{(position.category).substring(0, 10)}</div>
+            <div className='item__price'>
               {`${Number((position.amount).toFixed(2))} ${position.currency}`}
             </div>
           </div>

@@ -37,7 +37,7 @@
     }
 
     &_item:first-child {
-      background: url('../../../../public/assets/icons/filter.svg') no-repeat;
+      background: url('../../../../public/assets/icons/search.svg') no-repeat;
       background-size: cover;
     }
 
@@ -48,8 +48,9 @@
     }
 
     &_item:nth-child(3) {
-      background: url('../../../../public/assets/icons/map.svg') no-repeat;
+      background: url('../../../../public/assets/icons/home.svg') no-repeat;
       background-size: cover;
+      transform: scale(1.2);
     }
 
     &_item:nth-child(4) {
